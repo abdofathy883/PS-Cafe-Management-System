@@ -5,6 +5,7 @@ using Microsoft.Extensions.Logging;
 using PlayStation.Models;
 using PlayStation.Presentation;
 using PlayStation.Infrastructure.Repos.Repository;
+using Microsoft.EntityFrameworkCore.Design;
 
 namespace PlayStation
 {
@@ -18,6 +19,8 @@ namespace PlayStation
         [STAThread]
         static void Main()
         {
+            ApplicationConfiguration.Initialize();
+
             var builder = new ConfigurationBuilder().SetBasePath(Directory.GetCurrentDirectory()).AddJsonFile("appsettings.json", optional: false, reloadOnChange: true);
 
             IConfiguration Configuration = builder.Build();
@@ -36,7 +39,6 @@ namespace PlayStation
 
             // To customize application configuration such as set high DPI settings or default font,
             // see https://aka.ms/applicationconfiguration.
-            ApplicationConfiguration.Initialize();
             System.Windows.Forms.Application.Run(mainForm);
         }
 

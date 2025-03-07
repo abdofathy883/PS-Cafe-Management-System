@@ -29,7 +29,13 @@ public partial class PSManagementDbContext : DbContext
 
     public virtual DbSet<User> Users { get; set; }
 
-    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) {}
+    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) 
+    {
+        if (!optionsBuilder.IsConfigured)
+        {
+            optionsBuilder.UseSqlServer("Server=ZEZOTAHA\\SQLEXPRESS;Database=PSManagementSystemNew;Trusted_Connection=True;Encrypt=False;");
+        }
+    }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
