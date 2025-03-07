@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PlayStation.Application.Services
+namespace PlayStation.Infrastructure
 {
     internal class UserService
     {

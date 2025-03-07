@@ -2,16 +2,16 @@ using System.Data;
 using System.Data.SqlTypes;
 using System.Linq.Expressions;
 using Microsoft.EntityFrameworkCore;
-using PolyBalance.Models;
+using PlayStation.Models;
 
 namespace PolyBalance.Repository
 {
     public class Repository<T> : IRepository<T> where T : class, IActivatable
     {
-        private readonly PolyBalanceDbContext _dbContext;
+        private readonly PSManagementDbContext _dbContext;
         private readonly DbSet<T> _dbSet;
 
-        public Repository(PolyBalanceDbContext dbContext)
+        public Repository(PSManagementDbContext dbContext)
         {
             _dbContext = dbContext;
             _dbSet = _dbContext.Set<T>();
