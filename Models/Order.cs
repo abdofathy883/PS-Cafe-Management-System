@@ -15,6 +15,8 @@ public partial class Order
 
     public int UserId { get; set; }
 
+    public bool IsDeleted { get; set; } = false;
+
     public virtual ICollection<OrderDetail> OrderDetails { get; set; } = new List<OrderDetail>();
 
     public virtual Session Session { get; set; } = null!;

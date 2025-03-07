@@ -2,16 +2,15 @@ using System.Data;
 using System.Data.SqlTypes;
 using System.Linq.Expressions;
 using Microsoft.EntityFrameworkCore;
-using PolyBalance.Models;
-
-namespace PolyBalance.Repository
+using PlayStation.Models;
+namespace PlayStation.Infrastructure.Repos.Repository
 {
-    public class Repository<T> : IRepository<T> where T : class, IActivatable
+    public class Repository<T> : IRepository<T> where T : class, IDeletable
     {
-        private readonly PolyBalanceDbContext _dbContext;
+        private readonly PSManagementDbContext _dbContext;
         private readonly DbSet<T> _dbSet;
 
-        public Repository(PolyBalanceDbContext dbContext)
+        public Repository(PSManagementDbContext dbContext)
         {
             _dbContext = dbContext;
             _dbSet = _dbContext.Set<T>();
@@ -22,7 +21,7 @@ namespace PolyBalance.Repository
             var entity = await _dbSet.FindAsync(id) ?? throw new SqlNullValueException("This Id Not Found");
 
 
-            if (!entity.IsActive)
+            if (entity.IsDeleted)
             {
                 throw new DeletedRowInaccessibleException("This element has been deleted");
             }
@@ -32,12 +31,12 @@ namespace PolyBalance.Repository
 
         public async Task<ICollection<T>> GetAllAsync()
         {
-            return await _dbSet.Where(e => e.IsActive).AsNoTracking().ToListAsync();
+            return await _dbSet.Where(e => e.IsDeleted==false).AsNoTracking().ToListAsync();
         }
 
         public async Task<ICollection<T>> FindAsync(Expression<Func<T, bool>> predicate)
         {
-            return await _dbSet.Where(e => e.IsActive).Where(predicate).ToListAsync();
+            return await _dbSet.Where(e => e.IsDeleted == false).Where(predicate).ToListAsync();
 
         }
 
@@ -58,19 +57,19 @@ namespace PolyBalance.Repository
         public async Task DeleteByIdAsync(int id)
         {
             var entity = await GetByIdAsync(id) ?? throw new SqlNullValueException("This entity Not Found");
-            entity.IsActive = false;
+            entity.IsDeleted = true;
             await _dbContext.SaveChangesAsync();
         }
 
         public async Task<T> RestoreAsync(Expression<Func<T, bool>> predicate)
         {
             var entity = await _dbSet.SingleOrDefaultAsync(predicate) ?? throw new SqlNullValueException("This entity Not Found");
-            if (entity.IsActive)
+            if (!entity.IsDeleted)
             {
                 throw new Exception("This entity is already active");
             }
 
-            entity.IsActive = true;
+            entity.IsDeleted = false;
             await _dbContext.SaveChangesAsync();
             return entity;
         }

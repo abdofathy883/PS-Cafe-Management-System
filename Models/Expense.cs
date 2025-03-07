@@ -13,6 +13,8 @@ public partial class Expense
 
     public DateOnly Date { get; set; }
 
+    public bool IsDeleted { get; set; } = false;
+
     public int? UserId { get; set; }
 
     public virtual User? User { get; set; }

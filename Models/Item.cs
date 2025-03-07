@@ -13,5 +13,7 @@ public partial class Item
 
     public byte Stock { get; set; }
 
+    public bool IsDeleted { get; set; } = false;
+
     public virtual ICollection<OrderDetail> OrderDetails { get; set; } = new List<OrderDetail>();
 }

@@ -19,6 +19,8 @@ public partial class Session
 
     public int DeviceId { get; set; }
 
+    public bool IsDeleted { get; set; } = false;
+
     public virtual Device Device { get; set; } = null!;
 
     public virtual ICollection<Order> Orders { get; set; } = new List<Order>();

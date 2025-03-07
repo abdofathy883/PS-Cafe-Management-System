@@ -1,4 +1,3 @@
-using PolyBalance.Repository;
 using System.Linq.Expressions;
 
 public interface IRepository<T> where T : class
