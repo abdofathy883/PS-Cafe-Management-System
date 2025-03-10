@@ -16,9 +16,9 @@ namespace PlayStation.Infrastructure.Repos.Repository
             _dbSet = _dbContext.Set<T>();
         }
 
-        public async Task<T> GetByIdAsync(int id)
+        public T GetById(int id)
         {
-            var entity = await _dbSet.FindAsync(id) ?? throw new SqlNullValueException("This Id Not Found");
+            var entity = _dbSet.Find(id) ?? throw new SqlNullValueException("This Id Not Found");
 
 
             if (entity.IsDeleted)
@@ -29,59 +29,59 @@ namespace PlayStation.Infrastructure.Repos.Repository
             return entity;
         }
 
-        public async Task<ICollection<T>> GetAllAsync()
+        public ICollection<T> GetAll()
         {
-            return await _dbSet.Where(e => e.IsDeleted==false).AsNoTracking().ToListAsync();
+            return _dbSet.Where(e => e.IsDeleted == false).ToList();
         }
 
-        public async Task<ICollection<T>> FindAsync(Expression<Func<T, bool>> predicate)
+        public  ICollection<T> Find(Expression<Func<T, bool>> predicate)
         {
-            return await _dbSet.Where(e => e.IsDeleted == false).Where(predicate).ToListAsync();
+            return  _dbSet.Where(e => e.IsDeleted == false).Where(predicate).ToList();
 
         }
 
-        public async Task<T> AddAsync(T entity)
+        public T Add(T entity)
         {
-            await _dbSet.AddAsync(entity);
-            await _dbContext.SaveChangesAsync();
+            _dbSet.Add(entity);
+            _dbContext.SaveChanges();
             return entity;
         }
 
-        public async Task<T> UpdateAsync(T entity)
+        public T Update(T entity)
         {
             _dbSet.Update(entity);
-            await _dbContext.SaveChangesAsync();
+            _dbContext.SaveChanges();
             return entity;
         }
 
-        public async Task DeleteByIdAsync(int id)
+        public void DeleteById(int id)
         {
-            var entity = await GetByIdAsync(id) ?? throw new SqlNullValueException("This entity Not Found");
+            var entity = GetById(id) ?? throw new SqlNullValueException("This entity Not Found");
             entity.IsDeleted = true;
-            await _dbContext.SaveChangesAsync();
+            _dbContext.SaveChanges();
         }
 
-        public async Task<T> RestoreAsync(Expression<Func<T, bool>> predicate)
+        public T Restore(Expression<Func<T, bool>> predicate)
         {
-            var entity = await _dbSet.SingleOrDefaultAsync(predicate) ?? throw new SqlNullValueException("This entity Not Found");
+            var entity = _dbSet.SingleOrDefault(predicate) ?? throw new SqlNullValueException("This entity Not Found");
             if (!entity.IsDeleted)
             {
                 throw new Exception("This entity is already active");
             }
 
             entity.IsDeleted = false;
-            await _dbContext.SaveChangesAsync();
+            _dbContext.SaveChanges();
             return entity;
         }
 
-        public async Task<bool> IsUsedAsync(Expression<Func<T, bool>> predicate)
+        public bool IsUsed(Expression<Func<T, bool>> predicate)
         {
-            return await _dbSet.AnyAsync(predicate);
+            return  _dbSet.Any(predicate);
         }
 
-        public async Task<bool> IsIdValidTypeAsync<Type>(int id) where Type : class
+        public bool IsIdValidType<Type>(int id) where Type : class
         {
-            var entity = await _dbContext.Set<Type>().FindAsync(id);
+            var entity = _dbContext.Set<Type>().Find(id);
             return entity == null ? throw new InvalidOperationException($"This {typeof(Type).Name} is not existed") : true;
         }
     }

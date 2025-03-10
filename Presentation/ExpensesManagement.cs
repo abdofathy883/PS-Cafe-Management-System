@@ -13,10 +13,13 @@ namespace PlayStation.Application.Services
 {
     public partial class ExpensesForm : BaseForm
     {
-        UserService userService = new UserService();
-        ExpensesService expensesService = new ExpensesService();
-        public ExpensesForm()
+        private readonly UserService userService ;
+        private readonly ExpensesService expensesService ;
+        public ExpensesForm(UserService _userService, ExpensesService _expensesService)
         {
+            userService = _userService;
+            expensesService = _expensesService;
+
             // Note: I stopped with bug in connecting the user to the expenses, need to fix this bug first
             // Note: I need to implement Update, Delete for Devices.
             // Note: Then Go forward implementing orders and pilling.

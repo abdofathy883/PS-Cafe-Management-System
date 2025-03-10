@@ -8,20 +8,24 @@ using System.Threading.Tasks;
 
 namespace PlayStation.Application.Services
 {
-    internal class CafeService
+    public class CafeService
     {
-        CafetriaRepo cafetriaRepo = new CafetriaRepo();
+        private readonly IRepository<Item> _itemRepository;
+        public CafeService(IRepository<Item> itemRepository)
+        {
+            _itemRepository = itemRepository;
+        }
         public List<Item> GetCafeItemsFromService()
         {
-            return cafetriaRepo.GetCafeItemsFromRepo();
+            return _itemRepository.GetAll().ToList();
         }
         public void AddCafeItemFromService(Item item)
         {
-            cafetriaRepo.AddCafeItemFromRepo(item);
+            _itemRepository.Add(item);
         }
         public void UpdateCafeItemFromService(Item item)
         {
-            cafetriaRepo.UpdateCafeItemFromRepo(item);
+             _itemRepository.Update(item);
         }
     }
 }

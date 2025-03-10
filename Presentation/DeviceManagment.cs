@@ -15,11 +15,13 @@ namespace PlayStation.Presentation
 {
     public partial class DeviceManagment : BaseForm
     {
-        DeviceService deviceService = new DeviceService();
-        public DeviceManagment()
+        private readonly DeviceService deviceService;
+        public DeviceManagment(DeviceService _deviceService)
         {
+            deviceService = _deviceService;
             InitializeComponent();
-            DevicesTable.DataSource = deviceService.GetAllDevicesFromService();
+            var x = deviceService.GetAllDevicesFromService();
+            DevicesTable.DataSource = x;
             DevicesTable.Columns["ID"].Visible = false;
         }
         private void button1_Click(object sender, EventArgs e)
@@ -51,10 +53,10 @@ namespace PlayStation.Presentation
                     Type = (string)DevicesTable.Rows[e.RowIndex].Cells["DeviceType"].Value,
                     HourlyRate = Convert.ToByte(DevicesTable.Rows[e.RowIndex].Cells["HourlyRate"].Value)
                 };
-                UpdateDevice updateDevice = new UpdateDevice(device);
+                UpdateDevice updateDevice = new UpdateDevice(device, deviceService);
                 updateDevice.ShowDialog();
             }
-            else if(ColumnName == "DeleteCellButton")
+            else if (ColumnName == "DeleteCellButton")
             {
                 Device device = new()
                 {
@@ -67,6 +69,11 @@ namespace PlayStation.Presentation
                 DevicesTable.DataSource = null;
                 DevicesTable.DataSource = deviceService.GetAllDevicesFromService();
             }
+
+        }
+
+        private void DeviceManagment_Load(object sender, EventArgs e)
+        {
 
         }
     }

@@ -14,10 +14,11 @@ namespace PlayStation.Presentation
 {
     public partial class UpdateItem : BaseForm
     {
-        CafeService cafeService = new CafeService();
+        private readonly  CafeService cafeService ;
         Item UpdatedItem;
-        public UpdateItem()
+        public UpdateItem(CafeService _cafeService)
         {
+            cafeService = _cafeService;
             InitializeComponent();
         }
         public UpdateItem(Item _UpdatedItem)

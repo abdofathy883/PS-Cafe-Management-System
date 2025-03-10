@@ -6,6 +6,7 @@ using PlayStation.Models;
 using PlayStation.Presentation;
 using PlayStation.Infrastructure.Repos.Repository;
 using Microsoft.EntityFrameworkCore.Design;
+using PlayStation.Application.Services;
 
 namespace PlayStation
 {
@@ -25,10 +26,31 @@ namespace PlayStation
 
             IConfiguration Configuration = builder.Build();
             var services = new ServiceCollection();
-
+            
+            // Register DbContext
             services.AddDbContext<PSManagementDbContext>(o=>o.UseSqlServer(Configuration.GetConnectionString("ZezoSqlServer")).UseLazyLoadingProxies());
-            services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
+            
+            // Register Repository
+            services.AddTransient(typeof(IRepository<>), typeof(Repository<>));
+
+            //Register services
+            services.AddTransient<CafeService>();
+            services.AddTransient<DeviceService>();
+            services.AddTransient<ExpensesService>();
+            services.AddTransient<UserService>();
+
+            // Register Presentation
+            services.AddTransient<BaseForm>();
+            services.AddTransient<Cafetria>();
+            services.AddTransient<DeviceManagment>();
+            services.AddTransient<ExpensesForm>();
             services.AddTransient<Home>();
+            services.AddTransient<LogIn>();
+            services.AddTransient<UpdateDevice>();
+            services.AddTransient<UpdateItem>();
+            services.AddTransient<UpdateUser>();
+            services.AddTransient<UserManagement>();
+
 
             ServiceProvider serviceProvider = services.BuildServiceProvider();
 

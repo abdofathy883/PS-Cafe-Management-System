@@ -14,9 +14,10 @@ namespace PlayStation.Presentation
 {
     public partial class Cafetria : BaseForm
     {
-        CafeService cafeService = new CafeService();
-        public Cafetria()
+        private readonly CafeService cafeService;
+        public Cafetria(CafeService _cafeService)
         {
+            cafeService = _cafeService;
             InitializeComponent();
             ProductsGrid.DataSource = cafeService.GetCafeItemsFromService();
             ProductsGrid.Columns["ID"].Visible = false;

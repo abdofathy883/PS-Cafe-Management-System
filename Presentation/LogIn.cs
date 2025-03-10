@@ -14,9 +14,10 @@ namespace PlayStation.Presentation
 {
     public partial class LogIn : BaseForm
     {
-        UserService userService = new UserService();
-        public LogIn()
+        private readonly UserService userService ;
+        public LogIn(UserService _userService)
         {
+            userService = _userService;
             InitializeComponent();
         }
         /// <summary>
@@ -39,12 +40,12 @@ namespace PlayStation.Presentation
                 User user = new User();
                 user.Id = int.Parse(PasswordInput.Text);
                 user.Name = NameInput.Text;
-                var isExisted = userService.GetAllUsersFromService().Contains(user);
+                var isExisted =userService.GetAllUsersFromService().Contains(user);  
                 if (isExisted)
                 {
-                    Home home = new Home();
-                    home.Show();
-                    this.Hide();
+                    //Home home = new Home();
+                    //home.Show();
+                    //this.Hide();
                 }
                 else
                 {

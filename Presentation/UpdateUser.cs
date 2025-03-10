@@ -15,13 +15,15 @@ namespace PlayStation.Presentation
     public partial class UpdateUser : BaseForm
     {
         User UpdatedUser = new User();
-        UserService userService = new UserService();
-        public UpdateUser()
+        private readonly UserService userService ;
+        public UpdateUser(UserService _userService)
         {
+            userService = _userService;
             InitializeComponent();
         }
-        public UpdateUser(User user)
+        public UpdateUser(User user , UserService _userService)
         {
+            userService = _userService;
             InitializeComponent();
             UpdatedUser = user;
             NewUserNameInput.Text = UpdatedUser.Name;

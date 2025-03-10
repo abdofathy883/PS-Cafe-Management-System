@@ -148,6 +148,7 @@
             Margin = new Padding(4);
             Name = "DeviceManagment";
             Text = "ادارة الاجهزة";
+            Load += DeviceManagment_Load;
             ((System.ComponentModel.ISupportInitialize)DevicesTable).EndInit();
             ((System.ComponentModel.ISupportInitialize)HourlyRateInput).EndInit();
             ResumeLayout(false);

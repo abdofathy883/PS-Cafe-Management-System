@@ -14,14 +14,16 @@ namespace PlayStation.Presentation
 {
     public partial class UpdateDevice : BaseForm
     {
-        DeviceService deviceService = new DeviceService();
+        private readonly DeviceService deviceService ;
         Device UpdatedDevice;
-        public UpdateDevice()
+        public UpdateDevice(DeviceService _deviceService)
         {
+            deviceService = _deviceService;
             InitializeComponent();
         }
-        public UpdateDevice(Device device)
+        public UpdateDevice(Device device, DeviceService _deviceService)
         {
+            deviceService = _deviceService;
             InitializeComponent();
             UpdatedDevice = device;
             NewDeviceNameInput.Text = device.Name;

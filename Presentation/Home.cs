@@ -1,4 +1,7 @@
-﻿using PlayStation.Application.Services;
+﻿using Microsoft.Extensions.DependencyInjection;
+using PlayStation.Application.Services;
+using PlayStation.Infrastructure.Repos.Repository;
+using PlayStation.Models;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -13,14 +16,16 @@ namespace PlayStation.Presentation
 {
     public partial class Home : BaseForm
     {
-        public Home()
+        private readonly IServiceProvider _serviceProvider;
+        public Home(IServiceProvider serviceProvider)
         {
             InitializeComponent();
-
+            _serviceProvider = serviceProvider;
         }
-        public void ShowFormInPanel(Form form)
+        public void ShowFormInPanel<T>() where T : Form
         {
             MainContainer.Controls.Clear();
+            Form form = _serviceProvider.GetRequiredService<T>();
             form.TopLevel = false;
             form.FormBorderStyle = FormBorderStyle.None;
             form.Dock = DockStyle.None;
@@ -35,23 +40,23 @@ namespace PlayStation.Presentation
         }
         private void UserManagementBtn_Click(object sender, EventArgs e)
         {
-            ShowFormInPanel(new UserManagement());
+            ShowFormInPanel<UserManagement>();
         }
         private void DeviceManagementBtn_Click(object sender, EventArgs e)
         {
-            ShowFormInPanel(new DeviceManagment());
+            ShowFormInPanel<DeviceManagment>();
         }
         private void UserManagementBtn_DragEnter(object sender, DragEventArgs e)
         {
-            ShowFormInPanel(new UserManagement());
+            ShowFormInPanel<UserManagement>();
         }
         private void CafetriaBtn_Click(object sender, EventArgs e)
         {
-            ShowFormInPanel(new Cafetria());
+            ShowFormInPanel<Cafetria>();
         }
         private void ExpensesBtn_Click(object sender, EventArgs e)
         {
-            ShowFormInPanel(new ExpensesForm());
+            ShowFormInPanel<ExpensesForm>();
         }
         private void Home_Load(object sender, EventArgs e)
         {

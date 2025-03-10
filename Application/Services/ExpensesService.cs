@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace PlayStation.Application.Services
 {
-    internal class ExpensesService
+    public class ExpensesService
     {
         //ExpensesRepo expensesRepo = new ExpensesRepo();
         //public List<Domain.Models.Expenses> GetAllExpensesFromService()
