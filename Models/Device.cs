@@ -15,7 +15,7 @@ public partial class Device : IDeletable
     [Display(Name = "سعر الساعة")]
     public byte HourlyRate { get; set; }
 
-    public DevaisStatus status { get; set; }
+    public DevaisStatus status { get; set; } = DevaisStatus.Available;
 
     public bool IsDeleted { get; set; } = false;
     public virtual ICollection<Session> Sessions { get; set; } = new List<Session>();
