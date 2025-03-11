@@ -18,6 +18,7 @@ namespace PlayStation.Presentation
         public Home(IServiceProvider serviceProvider)
         {
             InitializeComponent();
+            ApplyGlobalStyles(this);
             _serviceProvider = serviceProvider;
         }
         public void ShowFormInPanel<T>() where T : Form

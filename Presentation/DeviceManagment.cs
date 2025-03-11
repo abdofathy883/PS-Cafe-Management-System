@@ -20,6 +20,7 @@ namespace PlayStation.Presentation
         {
             deviceService = _deviceService;
             InitializeComponent();
+            ApplyGlobalStyles(this);
             DevicesTable.DataSource = deviceService.GetAllDevicesFromService();
             DevicesTable.Columns["ID"].Visible = false;
             DevicesTable.Columns["Name"].HeaderText = "الاسم";
@@ -52,11 +53,11 @@ namespace PlayStation.Presentation
                 Device device = new()
                 {
                     Id = Convert.ToInt32(DevicesTable.Rows[e.RowIndex].Cells["ID"].Value),
-                    Name = DevicesTable.Rows[e.RowIndex].Cells["DeviceName"].Value?.ToString() ?? "غير محدد",
-                    Type = (string)DevicesTable.Rows[e.RowIndex].Cells["DeviceType"].Value,
+                    Name = DevicesTable.Rows[e.RowIndex].Cells["Name"].Value?.ToString() ?? "غير محدد",
+                    Type = (string)DevicesTable.Rows[e.RowIndex].Cells["Type"].Value,
                     HourlyRate = Convert.ToByte(DevicesTable.Rows[e.RowIndex].Cells["HourlyRate"].Value)
                 };
-                UpdateDevice updateDevice = new UpdateDevice(device);
+                UpdateDevice updateDevice = new UpdateDevice(device,deviceService);
                 updateDevice.ShowDialog();
             }
             else if(ColumnName == "DeleteCellButton")
@@ -64,8 +65,8 @@ namespace PlayStation.Presentation
                 Device device = new()
                 {
                     Id = Convert.ToInt32(DevicesTable.Rows[e.RowIndex].Cells["ID"].Value),
-                    Name = DevicesTable.Rows[e.RowIndex].Cells["DeviceName"].Value?.ToString() ?? "غير محدد",
-                    Type = (string)DevicesTable.Rows[e.RowIndex].Cells["DeviceType"].Value,
+                    Name = DevicesTable.Rows[e.RowIndex].Cells["Name"].Value?.ToString() ?? "غير محدد",
+                    Type = (string)DevicesTable.Rows[e.RowIndex].Cells["Type"].Value,
                     HourlyRate = Convert.ToByte(DevicesTable.Rows[e.RowIndex].Cells["HourlyRate"].Value)
                 };
                 deviceService.RemoveDeviceFromService(device);

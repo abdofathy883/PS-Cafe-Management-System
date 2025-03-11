@@ -19,6 +19,7 @@ namespace PlayStation.Presentation
         {
             userService = _userService;
             InitializeComponent();
+            ApplyGlobalStyles(this);
             UsersTableGrid.DataSource = userService.GetAllUsersFromService();
             UsersTableGrid.Columns["ID"].Visible = false;
             UsersTableGrid.Columns["Password"].Visible = false;

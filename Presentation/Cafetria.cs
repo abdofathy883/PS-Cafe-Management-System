@@ -19,6 +19,7 @@ namespace PlayStation.Presentation
         {
             cafeService = _cafeService;
             InitializeComponent();
+            ApplyGlobalStyles(this);
             ProductsGrid.DataSource = cafeService.GetCafeItemsFromService();
             ProductsGrid.Columns["ID"].Visible = false;
             ProductsGrid.Columns["OrderDetails"].Visible = false;

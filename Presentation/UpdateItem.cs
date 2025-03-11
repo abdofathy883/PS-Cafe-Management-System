@@ -20,10 +20,12 @@ namespace PlayStation.Presentation
         {
             cafeService = _cafeService;
             InitializeComponent();
+            ApplyGlobalStyles(this);
         }
         public UpdateItem(Item _UpdatedItem)
         {
             InitializeComponent();
+            ApplyGlobalStyles(this);
             UpdatedItem = _UpdatedItem;
             NewNameInput.Text = UpdatedItem.Name;
             NewPriceInput.Value = UpdatedItem.Price;

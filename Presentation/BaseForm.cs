@@ -23,7 +23,7 @@ namespace PlayStation.Presentation
             ApplyGlobalStyles(this);
         }
 
-        private void ApplyGlobalStyles(Form parent)
+        protected void ApplyGlobalStyles(Form parent)
         {
             foreach (Control ctrl in parent.Controls)
             {

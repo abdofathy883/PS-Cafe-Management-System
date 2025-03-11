@@ -20,11 +20,13 @@ namespace PlayStation.Presentation
         {
             userService = _userService;
             InitializeComponent();
+            ApplyGlobalStyles(this);
         }
         public UpdateUser(User user , UserService _userService)
         {
             userService = _userService;
             InitializeComponent();
+            ApplyGlobalStyles(this);
             UpdatedUser = user;
             NewUserNameInput.Text = UpdatedUser.Name;
             NewUserPassInput.Text = UpdatedUser.Password;

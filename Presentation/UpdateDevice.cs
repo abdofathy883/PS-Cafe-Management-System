@@ -20,11 +20,13 @@ namespace PlayStation.Presentation
         {
             deviceService = _deviceService;
             InitializeComponent();
+            ApplyGlobalStyles(this);
         }
         public UpdateDevice(Device device, DeviceService _deviceService)
         {
             deviceService = _deviceService;
             InitializeComponent();
+            ApplyGlobalStyles(this);
             UpdatedDevice = device;
             NewDeviceNameInput.Text = device.Name;
             NewDevicePriceInput.Value = device.HourlyRate;

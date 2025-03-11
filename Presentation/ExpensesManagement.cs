@@ -21,6 +21,7 @@ namespace PlayStation.Application.Services
             // Note: I stopped with bug in connecting the user to the expenses, need to fix this bug first
             InitializeComponent();            
             PopulateExpensesGrid();
+            ApplyGlobalStyles(this);
             ExpensesUser.DisplayMember = "UserName";
             ExpensesUser.ValueMember = "ID";
             ExpensesGrid.Columns["Id"].Visible = false;

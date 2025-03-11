@@ -15,10 +15,13 @@ namespace PlayStation.Presentation
     public partial class LogIn : BaseForm
     {
         private readonly UserService userService ;
-        public LogIn(UserService _userService)
+        private readonly Home _home;
+        public LogIn(UserService _userService,Home home)
         {
             userService = _userService;
+            _home = home;
             InitializeComponent();
+            ApplyGlobalStyles(this);
         }
         /// <summary>
         /// Click Event Of Log In Button
@@ -43,8 +46,8 @@ namespace PlayStation.Presentation
                 var isExisted = userService.GetAllUsersFromService().Contains(user);
                 if (isExisted)
                 {
-                    Home home = new Home();
-                    home.Show();
+                    
+                    _home.Show();
                     this.Hide();
                 }
                 else

@@ -1,5 +1,6 @@
 ﻿//using PlayStation.Domain.Models;
 using PlayStation.Infrastructure.Repos;
+using PlayStation.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,19 +11,25 @@ namespace PlayStation.Application.Services
 {
     public class ExpensesService
     {
-        //ExpensesRepo expensesRepo = new ExpensesRepo();
-        //public List<Domain.Models.Expenses> GetAllExpensesFromService()
-        //{
-        //    return expensesRepo.GetAllExpensesFromRepo();
-        //}
-        //public void AddExpensesFromService(Domain.Models.Expenses expenses)
-        //{
-        //    expensesRepo.AddExpensesFromRepo(expenses);
+        private readonly IRepository<Expense> _expenseRepository;
+        private readonly IRepository<User> _userRepository;
+        public ExpensesService(IRepository<Expense> expenseRepository, IRepository<User> userRepository)
+        {
+            _expenseRepository = expenseRepository;
+            _userRepository = userRepository;
+        }
+        public List<Expense> GetAllExpensesFromService()
+        {
+            return _expenseRepository.GetAll().ToList();
+        }
+        public void AddExpensesFromService(Expense expense)
+        {
+            _expenseRepository.Add(expense);
 
-        //}
-        //public User FindUUser(int id)
-        //{
-        //    return expensesRepo.FindUser(id);
-        //}
+        }
+        public User FindUUser(int id)
+        {
+            return _userRepository.GetById(id);
+        }
     }
 }
