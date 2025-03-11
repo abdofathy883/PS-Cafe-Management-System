@@ -36,6 +36,7 @@ namespace PlayStation.Presentation
             UpdatedDevice.Name = NewDeviceNameInput.Text;
             UpdatedDevice.HourlyRate = (byte)NewDevicePriceInput.Value;
             deviceService.UpdateDeviceFromService(UpdatedDevice);
+            this.Close();
         }
     }
 }

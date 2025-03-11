@@ -31,7 +31,7 @@ namespace PlayStation.Infrastructure.Repos.Repository
 
         public ICollection<T> GetAll()
         {
-            return _dbSet.Where(e => e.IsDeleted == false).ToList();
+            return _dbSet.Where(e => e.IsDeleted == false).AsNoTracking().ToList();
         }
 
         public  ICollection<T> Find(Expression<Func<T, bool>> predicate)

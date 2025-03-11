@@ -51,7 +51,7 @@
             panel1.Location = new Point(0, 0);
             panel1.Margin = new Padding(4);
             panel1.Name = "panel1";
-            panel1.Size = new Size(893, 95);
+            panel1.Size = new Size(895, 95);
             panel1.TabIndex = 0;
             // 
             // label2
@@ -59,7 +59,7 @@
             label2.AutoSize = true;
             label2.Dock = DockStyle.Right;
             label2.Font = new Font("Comic Sans MS", 21.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label2.Location = new Point(712, 0);
+            label2.Location = new Point(714, 0);
             label2.Margin = new Padding(4, 0, 4, 0);
             label2.Name = "label2";
             label2.Padding = new Padding(0, 20, 0, 0);
@@ -114,6 +114,7 @@
             // 
             // DeviceManagementBtn
             // 
+            DeviceManagementBtn.ForeColor = Color.Black;
             DeviceManagementBtn.Location = new Point(1, 44);
             DeviceManagementBtn.Margin = new Padding(4);
             DeviceManagementBtn.Name = "DeviceManagementBtn";
@@ -149,7 +150,7 @@
             // MainContainer
             // 
             MainContainer.Dock = DockStyle.Right;
-            MainContainer.Location = new Point(195, 95);
+            MainContainer.Location = new Point(197, 95);
             MainContainer.Name = "MainContainer";
             MainContainer.Size = new Size(698, 418);
             MainContainer.TabIndex = 3;
@@ -158,12 +159,13 @@
             // 
             AutoScaleDimensions = new SizeF(10F, 19F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(893, 513);
+            ClientSize = new Size(895, 513);
             Controls.Add(MainContainer);
             Controls.Add(EmployeePanel);
             Controls.Add(panel2);
             Controls.Add(panel1);
             Font = new Font("Arial", 12F, FontStyle.Bold, GraphicsUnit.Point, 178);
+            ForeColor = Color.Black;
             FormBorderStyle = FormBorderStyle.FixedSingle;
             Margin = new Padding(4);
             MaximizeBox = false;
