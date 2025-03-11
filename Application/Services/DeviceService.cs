@@ -9,24 +9,28 @@ using System.Threading.Tasks;
 
 namespace PlayStation.Application.Services
 {
-    internal class DeviceService
+    public class DeviceService
     {
-        DeviceRepo deviceRepo = new DeviceRepo();
+        private readonly IRepository<Device> _deviceRepository;
+        public DeviceService(IRepository<Device> deviceRepository)
+        {
+            _deviceRepository = deviceRepository;
+        }
         public List<Device> GetAllDevicesFromService()
         {
-            return deviceRepo.GetAllDevicesFromRepo();
+            return _deviceRepository.GetAll().ToList();
         }
         public void AddDeviceFromService(Device device)
         {
-            deviceRepo.AddDeviceFromRepo(device);
+            _deviceRepository.Add(device);
         }
         public void UpdateDeviceFromService(Device device)
         {
-            deviceRepo.UpdateDeviceFromRepo(device);
+            _deviceRepository.Update(device);
         }
         public void RemoveDeviceFromService(Device device)
         {
-            deviceRepo.RemoveDeviceFromRepo(device);
+            _deviceRepository.DeleteById(device.Id);
         }
     }
 }

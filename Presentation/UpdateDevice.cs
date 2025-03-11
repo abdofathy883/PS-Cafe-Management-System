@@ -14,15 +14,19 @@ namespace PlayStation.Presentation
 {
     public partial class UpdateDevice : BaseForm
     {
-        DeviceService deviceService = new DeviceService();
+        private readonly DeviceService deviceService ;
         Device UpdatedDevice;
-        public UpdateDevice()
+        public UpdateDevice(DeviceService _deviceService)
         {
+            deviceService = _deviceService;
             InitializeComponent();
+            ApplyGlobalStyles(this);
         }
-        public UpdateDevice(Device device)
+        public UpdateDevice(Device device, DeviceService _deviceService)
         {
+            deviceService = _deviceService;
             InitializeComponent();
+            ApplyGlobalStyles(this);
             UpdatedDevice = device;
             NewDeviceNameInput.Text = device.Name;
             NewDevicePriceInput.Value = device.HourlyRate;
@@ -34,6 +38,7 @@ namespace PlayStation.Presentation
             UpdatedDevice.Name = NewDeviceNameInput.Text;
             UpdatedDevice.HourlyRate = (byte)NewDevicePriceInput.Value;
             deviceService.UpdateDeviceFromService(UpdatedDevice);
+            this.Close();
         }
     }
 }

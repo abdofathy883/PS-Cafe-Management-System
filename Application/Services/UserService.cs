@@ -9,24 +9,28 @@ using System.Threading.Tasks;
 
 namespace PlayStation.Application.Services
 {
-    internal class UserService
+    public class UserService
     {
-        private UserRepo UserRepo = new UserRepo();
+        private readonly IRepository<User> _userRepository;
+        public UserService(IRepository<User> userRepository)
+        {
+            _userRepository = userRepository;
+        }
         public List<User> GetAllUsersFromService()
         {
-            return UserRepo.GetAllUsersFromRepo();
+            return _userRepository.GetAll().ToList();
         }
         public void AddUserFromService(User user)
         {
-            UserRepo.AddUserFromRepo(user);
+            _userRepository.Add(user);
         }
         public void UpdateUserFromService(User user)
         {
-            UserRepo.UpdateUserFromRepo(user);
+            _userRepository.Update(user);
         }
         public void DeleteUserFromService(User user)
         {
-            UserRepo.DeleteUserFromRepo(user);
+            _userRepository.DeleteById(user.Id);
         }
     }
 }

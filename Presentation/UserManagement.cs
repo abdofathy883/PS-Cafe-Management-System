@@ -14,11 +14,13 @@ namespace PlayStation.Presentation
 {
     public partial class UserManagement : BaseForm
     {
-        UserService UserService = new UserService();
-        public UserManagement()
+        private readonly UserService userService;
+        public UserManagement(UserService _userService)
         {
+            userService = _userService;
             InitializeComponent();
-            UsersTableGrid.DataSource = UserService.GetAllUsersFromService();
+            ApplyGlobalStyles(this);
+            UsersTableGrid.DataSource = userService.GetAllUsersFromService();
             UsersTableGrid.Columns["ID"].Visible = false;
             UsersTableGrid.Columns["Password"].Visible = false;
         }
@@ -38,9 +40,9 @@ namespace PlayStation.Presentation
                     Role = (string)RolesCombo.SelectedItem ?? "موظف"
                 };
                 
-                UserService.AddUserFromService(user);
+                userService.AddUserFromService(user);
                 UsersTableGrid.DataSource = null;
-                UsersTableGrid.DataSource = UserService.GetAllUsersFromService();
+                UsersTableGrid.DataSource = userService.GetAllUsersFromService();
             }
         }
         private void UsersTableGrid_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -55,7 +57,8 @@ namespace PlayStation.Presentation
                     Password = UsersTableGrid.Rows[e.RowIndex].Cells["Password"].Value?.ToString() ?? string.Empty,
                     Role = (string)UsersTableGrid.Rows[e.RowIndex].Cells["Role"].Value
                 };
-                UpdateUser updatedUser = new(UpdatedUser);
+
+                UpdateUser updatedUser = new UpdateUser(UpdatedUser, userService);
                 updatedUser.ShowDialog();
             }
             else if (ColumnName == "DeleteUser")
@@ -67,7 +70,7 @@ namespace PlayStation.Presentation
                     Password = UsersTableGrid.Rows[e.RowIndex].Cells["Password"].Value?.ToString() ?? string.Empty,
                     Role = (string)UsersTableGrid.Rows[e.RowIndex].Cells["Role"].Value
                 };
-                UserService.DeleteUserFromService(UpdatedUser);
+                userService.DeleteUserFromService(UpdatedUser);  
                 UsersTableGrid.Refresh();
             }
         }

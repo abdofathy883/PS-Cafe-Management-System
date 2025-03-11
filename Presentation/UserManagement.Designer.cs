@@ -45,7 +45,7 @@
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(450, 43);
+            label1.Location = new Point(894, 135);
             label1.Margin = new Padding(4, 0, 4, 0);
             label1.Name = "label1";
             label1.Size = new Size(37, 19);
@@ -54,16 +54,16 @@
             // 
             // NameInput
             // 
-            NameInput.Location = new Point(347, 70);
+            NameInput.Location = new Point(605, 158);
             NameInput.Margin = new Padding(4);
             NameInput.Name = "NameInput";
-            NameInput.Size = new Size(140, 26);
+            NameInput.Size = new Size(326, 26);
             NameInput.TabIndex = 1;
             // 
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new Point(413, 107);
+            label2.Location = new Point(523, 135);
             label2.Margin = new Padding(4, 0, 4, 0);
             label2.Name = "label2";
             label2.Size = new Size(74, 19);
@@ -72,16 +72,16 @@
             // 
             // PasswordInput
             // 
-            PasswordInput.Location = new Point(345, 134);
+            PasswordInput.Location = new Point(386, 158);
             PasswordInput.Margin = new Padding(4);
             PasswordInput.Name = "PasswordInput";
-            PasswordInput.Size = new Size(142, 26);
+            PasswordInput.Size = new Size(211, 26);
             PasswordInput.TabIndex = 3;
             // 
             // label3
             // 
             label3.AutoSize = true;
-            label3.Location = new Point(249, 42);
+            label3.Location = new Point(309, 133);
             label3.Margin = new Padding(4, 0, 4, 0);
             label3.Name = "label3";
             label3.Size = new Size(73, 19);
@@ -92,18 +92,18 @@
             // 
             RolesCombo.FormattingEnabled = true;
             RolesCombo.Items.AddRange(new object[] { "ادمن", "موظف" });
-            RolesCombo.Location = new Point(206, 69);
+            RolesCombo.Location = new Point(178, 157);
             RolesCombo.Margin = new Padding(4);
             RolesCombo.Name = "RolesCombo";
-            RolesCombo.Size = new Size(116, 27);
+            RolesCombo.Size = new Size(204, 27);
             RolesCombo.TabIndex = 5;
             // 
             // AddUserBtn
             // 
-            AddUserBtn.Location = new Point(206, 133);
+            AddUserBtn.Location = new Point(13, 156);
             AddUserBtn.Margin = new Padding(4);
             AddUserBtn.Name = "AddUserBtn";
-            AddUserBtn.Size = new Size(116, 30);
+            AddUserBtn.Size = new Size(157, 30);
             AddUserBtn.TabIndex = 6;
             AddUserBtn.Text = "اضافة حساب";
             AddUserBtn.UseVisualStyleBackColor = true;
@@ -112,7 +112,7 @@
             // label4
             // 
             label4.AutoSize = true;
-            label4.Location = new Point(386, 17);
+            label4.Location = new Point(828, 105);
             label4.Margin = new Padding(4, 0, 4, 0);
             label4.Name = "label4";
             label4.Size = new Size(103, 19);
@@ -126,7 +126,7 @@
             UsersTableGrid.Location = new Point(13, 203);
             UsersTableGrid.Margin = new Padding(4);
             UsersTableGrid.Name = "UsersTableGrid";
-            UsersTableGrid.Size = new Size(476, 220);
+            UsersTableGrid.Size = new Size(918, 220);
             UsersTableGrid.TabIndex = 8;
             UsersTableGrid.CellContentClick += UsersTableGrid_CellContentClick;
             // 
@@ -148,7 +148,7 @@
             // 
             AutoScaleDimensions = new SizeF(10F, 19F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(507, 438);
+            ClientSize = new Size(982, 438);
             Controls.Add(UsersTableGrid);
             Controls.Add(label4);
             Controls.Add(AddUserBtn);

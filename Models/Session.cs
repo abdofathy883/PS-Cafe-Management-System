@@ -1,9 +1,10 @@
-﻿using System;
+﻿using PlayStation.Infrastructure.Repos.Repository;
+using System;
 using System.Collections.Generic;
 
 namespace PlayStation.Models;
 
-public partial class Session
+public partial class Session : IDeletable
 {
     public int Id { get; set; }
 

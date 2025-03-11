@@ -45,25 +45,25 @@
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new Point(273, 14);
+            label2.Location = new Point(639, 9);
             label2.Name = "label2";
-            label2.Size = new Size(59, 15);
+            label2.Size = new Size(65, 19);
             label2.TabIndex = 1;
             label2.Text = "اسم المنتج";
             // 
             // ProductNameInput
             // 
-            ProductNameInput.Location = new Point(203, 42);
+            ProductNameInput.Location = new Point(514, 40);
             ProductNameInput.Name = "ProductNameInput";
-            ProductNameInput.Size = new Size(129, 23);
+            ProductNameInput.Size = new Size(190, 26);
             ProductNameInput.TabIndex = 2;
             // 
             // label3
             // 
             label3.AutoSize = true;
-            label3.Location = new Point(148, 14);
+            label3.Location = new Point(664, 75);
             label3.Name = "label3";
-            label3.Size = new Size(36, 15);
+            label3.Size = new Size(40, 19);
             label3.TabIndex = 3;
             label3.Text = "السعر";
             // 
@@ -71,9 +71,9 @@
             // 
             ProductPriceInput.BorderStyle = BorderStyle.FixedSingle;
             ProductPriceInput.DecimalPlaces = 2;
-            ProductPriceInput.Location = new Point(106, 42);
+            ProductPriceInput.Location = new Point(514, 97);
             ProductPriceInput.Name = "ProductPriceInput";
-            ProductPriceInput.Size = new Size(78, 23);
+            ProductPriceInput.Size = new Size(190, 26);
             ProductPriceInput.TabIndex = 4;
             ProductPriceInput.TextAlign = HorizontalAlignment.Right;
             ProductPriceInput.UpDownAlign = LeftRightAlignment.Left;
@@ -81,26 +81,26 @@
             // label4
             // 
             label4.AutoSize = true;
-            label4.Location = new Point(43, 14);
+            label4.Location = new Point(453, 9);
             label4.Name = "label4";
-            label4.Size = new Size(46, 15);
+            label4.Size = new Size(55, 19);
             label4.TabIndex = 5;
             label4.Text = "المخزون";
             // 
             // ProductStockInput
             // 
-            ProductStockInput.Location = new Point(12, 42);
+            ProductStockInput.Location = new Point(286, 40);
             ProductStockInput.Name = "ProductStockInput";
-            ProductStockInput.Size = new Size(77, 23);
+            ProductStockInput.Size = new Size(222, 26);
             ProductStockInput.TabIndex = 6;
             ProductStockInput.TextAlign = HorizontalAlignment.Right;
             ProductStockInput.UpDownAlign = LeftRightAlignment.Left;
             // 
             // AddItemBtn
             // 
-            AddItemBtn.Location = new Point(12, 81);
+            AddItemBtn.Location = new Point(286, 94);
             AddItemBtn.Name = "AddItemBtn";
-            AddItemBtn.Size = new Size(320, 29);
+            AddItemBtn.Size = new Size(222, 29);
             AddItemBtn.TabIndex = 7;
             AddItemBtn.Text = "اضافة";
             AddItemBtn.UseVisualStyleBackColor = true;
@@ -110,11 +110,10 @@
             // 
             ProductsGrid.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             ProductsGrid.Columns.AddRange(new DataGridViewColumn[] { UpdateItemBtn });
-            ProductsGrid.Dock = DockStyle.Bottom;
-            ProductsGrid.Location = new Point(0, 150);
+            ProductsGrid.Location = new Point(286, 129);
             ProductsGrid.Name = "ProductsGrid";
             ProductsGrid.RightToLeft = RightToLeft.Yes;
-            ProductsGrid.Size = new Size(568, 237);
+            ProductsGrid.Size = new Size(418, 237);
             ProductsGrid.TabIndex = 8;
             ProductsGrid.CellContentClick += ProductsGrid_CellContentClick;
             // 
@@ -130,7 +129,7 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(568, 387);
+            ClientSize = new Size(832, 387);
             Controls.Add(ProductsGrid);
             Controls.Add(AddItemBtn);
             Controls.Add(ProductStockInput);

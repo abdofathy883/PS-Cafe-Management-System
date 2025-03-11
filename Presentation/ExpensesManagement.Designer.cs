@@ -46,18 +46,18 @@
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new Point(313, 45);
+            label2.Location = new Point(418, 54);
             label2.Name = "label2";
-            label2.Size = new Size(36, 15);
+            label2.Size = new Size(40, 19);
             label2.TabIndex = 1;
             label2.Text = "المبلغ";
             // 
             // ExpensesAmountInput
             // 
             ExpensesAmountInput.DecimalPlaces = 2;
-            ExpensesAmountInput.Location = new Point(267, 72);
+            ExpensesAmountInput.Location = new Point(376, 86);
             ExpensesAmountInput.Name = "ExpensesAmountInput";
-            ExpensesAmountInput.Size = new Size(82, 23);
+            ExpensesAmountInput.Size = new Size(82, 26);
             ExpensesAmountInput.TabIndex = 2;
             ExpensesAmountInput.TextAlign = HorizontalAlignment.Right;
             ExpensesAmountInput.UpDownAlign = LeftRightAlignment.Left;
@@ -65,59 +65,59 @@
             // label3
             // 
             label3.AutoSize = true;
-            label3.Location = new Point(217, 44);
+            label3.Location = new Point(322, 58);
             label3.Name = "label3";
-            label3.Size = new Size(44, 15);
+            label3.Size = new Size(48, 19);
             label3.TabIndex = 3;
             label3.Text = "الوصف";
             // 
             // ExpensesDescInput
             // 
-            ExpensesDescInput.Location = new Point(118, 72);
+            ExpensesDescInput.Location = new Point(140, 86);
             ExpensesDescInput.Name = "ExpensesDescInput";
-            ExpensesDescInput.Size = new Size(143, 23);
+            ExpensesDescInput.Size = new Size(230, 26);
             ExpensesDescInput.TabIndex = 4;
             // 
             // label4
             // 
             label4.AutoSize = true;
-            label4.Location = new Point(57, 44);
+            label4.Location = new Point(77, 58);
             label4.Name = "label4";
-            label4.Size = new Size(55, 15);
+            label4.Size = new Size(57, 19);
             label4.TabIndex = 5;
             label4.Text = "المستخدم";
             // 
             // ExpensesUser
             // 
             ExpensesUser.FormattingEnabled = true;
-            ExpensesUser.Location = new Point(15, 71);
+            ExpensesUser.Location = new Point(12, 85);
             ExpensesUser.Name = "ExpensesUser";
-            ExpensesUser.Size = new Size(97, 23);
+            ExpensesUser.Size = new Size(122, 27);
             ExpensesUser.TabIndex = 6;
             // 
             // label5
             // 
             label5.AutoSize = true;
-            label5.Location = new Point(312, 107);
+            label5.Location = new Point(421, 120);
             label5.Name = "label5";
-            label5.Size = new Size(37, 15);
+            label5.Size = new Size(39, 19);
             label5.TabIndex = 7;
             label5.Text = "الوقت";
             // 
             // ExpensesDateTime
             // 
-            ExpensesDateTime.Location = new Point(118, 129);
+            ExpensesDateTime.Location = new Point(171, 142);
             ExpensesDateTime.MaxDate = new DateTime(2049, 12, 31, 0, 0, 0, 0);
             ExpensesDateTime.MinDate = new DateTime(2025, 1, 1, 0, 0, 0, 0);
             ExpensesDateTime.Name = "ExpensesDateTime";
-            ExpensesDateTime.Size = new Size(231, 23);
+            ExpensesDateTime.Size = new Size(287, 26);
             ExpensesDateTime.TabIndex = 8;
             // 
             // AddExpensesBtn
             // 
-            AddExpensesBtn.Location = new Point(15, 125);
+            AddExpensesBtn.Location = new Point(12, 141);
             AddExpensesBtn.Name = "AddExpensesBtn";
-            AddExpensesBtn.Size = new Size(97, 27);
+            AddExpensesBtn.Size = new Size(153, 27);
             AddExpensesBtn.TabIndex = 9;
             AddExpensesBtn.Text = "اضافة";
             AddExpensesBtn.UseVisualStyleBackColor = true;
@@ -128,15 +128,15 @@
             ExpensesGrid.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             ExpensesGrid.Location = new Point(12, 174);
             ExpensesGrid.Name = "ExpensesGrid";
-            ExpensesGrid.Size = new Size(343, 176);
+            ExpensesGrid.Size = new Size(446, 176);
             ExpensesGrid.TabIndex = 10;
             // 
             // label6
             // 
             label6.AutoSize = true;
-            label6.Location = new Point(267, 4);
+            label6.Location = new Point(361, 23);
             label6.Name = "label6";
-            label6.Size = new Size(88, 15);
+            label6.Size = new Size(97, 19);
             label6.TabIndex = 11;
             label6.Text = "اضافة مصروفات";
             // 
@@ -144,7 +144,7 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(373, 357);
+            ClientSize = new Size(795, 357);
             Controls.Add(label6);
             Controls.Add(ExpensesGrid);
             Controls.Add(AddExpensesBtn);

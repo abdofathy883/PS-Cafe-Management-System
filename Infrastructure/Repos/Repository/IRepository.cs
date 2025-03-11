@@ -2,14 +2,14 @@ using System.Linq.Expressions;
 
 public interface IRepository<T> where T : class
 {
-    Task<T> GetByIdAsync(int id);
-    Task<ICollection<T>> GetAllAsync();
-    Task<ICollection<T>> FindAsync(Expression<Func<T, bool>> predicate);
-    Task<T> AddAsync(T entity);
-    Task<T> UpdateAsync(T entity);
-    Task DeleteByIdAsync(int id);
-    Task<T> RestoreAsync(Expression<Func<T, bool>> predicate);
-    Task<bool> IsUsedAsync(Expression<Func<T, bool>> predicate);
-    Task<bool> IsIdValidTypeAsync<Type>(int id) where Type : class;
+    T GetById(int id);
+    ICollection<T> GetAll();
+    ICollection<T> Find(Expression<Func<T, bool>> predicate);
+    T Add(T entity);
+    T Update(T entity);
+    void DeleteById(int id);
+    T Restore(Expression<Func<T, bool>> predicate);
+    bool IsUsed(Expression<Func<T, bool>> predicate);
+    bool IsIdValidType<Type>(int id) where Type : class;
 
 }

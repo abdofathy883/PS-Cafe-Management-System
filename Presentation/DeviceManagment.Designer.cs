@@ -45,7 +45,7 @@
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new Point(777, 15);
+            label2.Location = new Point(862, 79);
             label2.Margin = new Padding(4, 0, 4, 0);
             label2.Name = "label2";
             label2.Size = new Size(67, 19);
@@ -55,7 +55,7 @@
             // label3
             // 
             label3.AutoSize = true;
-            label3.Location = new Point(552, 14);
+            label3.Location = new Point(500, 79);
             label3.Margin = new Padding(4, 0, 4, 0);
             label3.Name = "label3";
             label3.Size = new Size(74, 19);
@@ -65,7 +65,7 @@
             // label4
             // 
             label4.AutoSize = true;
-            label4.Location = new Point(777, 81);
+            label4.Location = new Point(662, 80);
             label4.Margin = new Padding(4, 0, 4, 0);
             label4.Name = "label4";
             label4.Size = new Size(67, 19);
@@ -74,7 +74,7 @@
             // 
             // button1
             // 
-            button1.Location = new Point(497, 104);
+            button1.Location = new Point(309, 105);
             button1.Margin = new Padding(4);
             button1.Name = "button1";
             button1.Size = new Size(129, 31);
@@ -90,7 +90,7 @@
             DevicesTable.Location = new Point(13, 153);
             DevicesTable.Margin = new Padding(4);
             DevicesTable.Name = "DevicesTable";
-            DevicesTable.Size = new Size(880, 190);
+            DevicesTable.Size = new Size(916, 190);
             DevicesTable.TabIndex = 8;
             DevicesTable.CellContentClick += DevicesTable_CellContentClick;
             // 
@@ -110,14 +110,14 @@
             // 
             // DeNameInput
             // 
-            DeNameInput.Location = new Point(650, 42);
+            DeNameInput.Location = new Point(735, 106);
             DeNameInput.Name = "DeNameInput";
             DeNameInput.Size = new Size(194, 26);
             DeNameInput.TabIndex = 9;
             // 
             // HourlyRateInput
             // 
-            HourlyRateInput.Location = new Point(497, 42);
+            HourlyRateInput.Location = new Point(445, 107);
             HourlyRateInput.Name = "HourlyRateInput";
             HourlyRateInput.Size = new Size(127, 26);
             HourlyRateInput.TabIndex = 10;
@@ -126,16 +126,16 @@
             // 
             DeTypeCombo.FormattingEnabled = true;
             DeTypeCombo.Items.AddRange(new object[] { "PS4", "PS5" });
-            DeTypeCombo.Location = new Point(650, 107);
+            DeTypeCombo.Location = new Point(578, 106);
             DeTypeCombo.Name = "DeTypeCombo";
-            DeTypeCombo.Size = new Size(194, 27);
+            DeTypeCombo.Size = new Size(151, 27);
             DeTypeCombo.TabIndex = 11;
             // 
             // DeviceManagment
             // 
             AutoScaleDimensions = new SizeF(10F, 19F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(906, 354);
+            ClientSize = new Size(967, 379);
             Controls.Add(DeTypeCombo);
             Controls.Add(HourlyRateInput);
             Controls.Add(DeNameInput);

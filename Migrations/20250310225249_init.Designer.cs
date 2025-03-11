@@ -12,7 +12,7 @@ using PlayStation.Models;
 namespace PlayStation.Migrations
 {
     [DbContext(typeof(PSManagementDbContext))]
-    [Migration("20250307123943_init")]
+    [Migration("20250310225249_init")]
     partial class init
     {
         /// <inheritdoc />
@@ -49,6 +49,9 @@ namespace PlayStation.Migrations
                         .IsRequired()
                         .HasMaxLength(30)
                         .HasColumnType("nvarchar(30)");
+
+                    b.Property<int>("status")
+                        .HasColumnType("int");
 
                     b.HasKey("Id")
                         .HasName("PK__Device__3214EC27833622CA");

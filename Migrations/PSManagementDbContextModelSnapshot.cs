@@ -47,6 +47,9 @@ namespace PlayStation.Migrations
                         .HasMaxLength(30)
                         .HasColumnType("nvarchar(30)");
 
+                    b.Property<int>("status")
+                        .HasColumnType("int");
+
                     b.HasKey("Id")
                         .HasName("PK__Device__3214EC27833622CA");
 
