@@ -20,9 +20,12 @@ namespace PlayStation.Presentation
         {
             deviceService = _deviceService;
             InitializeComponent();
-            var x = deviceService.GetAllDevicesFromService();
-            DevicesTable.DataSource = x;
+            DevicesTable.DataSource = deviceService.GetAllDevicesFromService();
             DevicesTable.Columns["ID"].Visible = false;
+            DevicesTable.Columns["Name"].HeaderText = "الاسم";
+            DevicesTable.Columns["Type"].HeaderText = "النوع";
+            DevicesTable.Columns["HourlyRate"].HeaderText = "سعر الساعة";
+            DevicesTable.Columns["Sessions"].HeaderText = "نشاط الجهاز";
         }
         private void button1_Click(object sender, EventArgs e)
         {
@@ -49,14 +52,14 @@ namespace PlayStation.Presentation
                 Device device = new()
                 {
                     Id = Convert.ToInt32(DevicesTable.Rows[e.RowIndex].Cells["ID"].Value),
-                    Name = DevicesTable.Rows[e.RowIndex].Cells["Name"].Value?.ToString() ?? "غير محدد",
-                    Type = (string)DevicesTable.Rows[e.RowIndex].Cells["Type"].Value,
+                    Name = DevicesTable.Rows[e.RowIndex].Cells["DeviceName"].Value?.ToString() ?? "غير محدد",
+                    Type = (string)DevicesTable.Rows[e.RowIndex].Cells["DeviceType"].Value,
                     HourlyRate = Convert.ToByte(DevicesTable.Rows[e.RowIndex].Cells["HourlyRate"].Value)
                 };
-                UpdateDevice updateDevice = new UpdateDevice(device, deviceService);
+                UpdateDevice updateDevice = new UpdateDevice(device);
                 updateDevice.ShowDialog();
             }
-            else if (ColumnName == "DeleteCellButton")
+            else if(ColumnName == "DeleteCellButton")
             {
                 Device device = new()
                 {
@@ -69,11 +72,6 @@ namespace PlayStation.Presentation
                 DevicesTable.DataSource = null;
                 DevicesTable.DataSource = deviceService.GetAllDevicesFromService();
             }
-
-        }
-
-        private void DeviceManagment_Load(object sender, EventArgs e)
-        {
 
         }
     }

@@ -1,7 +1,5 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using PlayStation.Application.Services;
-using PlayStation.Infrastructure.Repos.Repository;
-using PlayStation.Models;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -29,11 +27,20 @@ namespace PlayStation.Presentation
             form.TopLevel = false;
             form.FormBorderStyle = FormBorderStyle.None;
             form.Dock = DockStyle.None;
+            form.AutoSize = false;
+            form.AutoScaleMode = AutoScaleMode.None;
+            form.StartPosition = FormStartPosition.Manual;
+            MainContainer.Dock = DockStyle.Fill;
+            MainContainer.AutoScroll = false;
+            MainContainer.Padding = new Padding(0);
+            MainContainer.Margin = new Padding(0);
             form.Load += (s, e) =>
             {
                 int x = (MainContainer.Width - form.Width) / 2;
                 int y = (MainContainer.Height - form.Height) / 2;
-                form.Location = new Point(x, y);
+                form.Location = new Point(Math.Max(0, x), Math.Max(0, y));
+                form.Size = new Size(Math.Min(MainContainer.Width, form.Width),
+                                     Math.Min(MainContainer.Height, form.Height));
             };
             MainContainer.Controls.Add(form);
             form.Show();

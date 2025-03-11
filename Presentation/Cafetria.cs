@@ -14,13 +14,17 @@ namespace PlayStation.Presentation
 {
     public partial class Cafetria : BaseForm
     {
-        private readonly CafeService cafeService;
+        private readonly CafeService cafeService ;
         public Cafetria(CafeService _cafeService)
         {
             cafeService = _cafeService;
             InitializeComponent();
             ProductsGrid.DataSource = cafeService.GetCafeItemsFromService();
             ProductsGrid.Columns["ID"].Visible = false;
+            ProductsGrid.Columns["OrderDetails"].Visible = false;
+            ProductsGrid.Columns["Name"].HeaderText = "الاسم";
+            ProductsGrid.Columns["Price"].HeaderText = "السعر";
+            ProductsGrid.Columns["Stock"].HeaderText = "المخزون";
         }
         private void AddItemBtn_Click(object sender, EventArgs e)
         {
