@@ -26,6 +26,7 @@ namespace PlayStation.Presentation
             ProductsGrid.Columns["Name"].HeaderText = "الاسم";
             ProductsGrid.Columns["Price"].HeaderText = "السعر";
             ProductsGrid.Columns["Stock"].HeaderText = "المخزون";
+            ProductsGrid.Columns["IsDeleted"].Visible = false;
         }
         private void AddItemBtn_Click(object sender, EventArgs e)
         {

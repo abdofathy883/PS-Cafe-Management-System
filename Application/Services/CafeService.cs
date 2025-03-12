@@ -27,5 +27,9 @@ namespace PlayStation.Application.Services
         {
              _itemRepository.Update(item);
         }
+        public Item GetItemByID(int id)
+        {
+            return _itemRepository.GetById(id);
+        }
     }
 }

@@ -74,10 +74,10 @@
             // 
             // button1
             // 
-            button1.Location = new Point(309, 105);
+            button1.Location = new Point(309, 94);
             button1.Margin = new Padding(4);
             button1.Name = "button1";
-            button1.Size = new Size(129, 31);
+            button1.Size = new Size(129, 42);
             button1.TabIndex = 7;
             button1.Text = "اضافة جهاز";
             button1.UseVisualStyleBackColor = true;
