@@ -28,7 +28,7 @@ namespace PlayStation
             var services = new ServiceCollection();
             
             // Register DbContext
-            services.AddDbContext<PSManagementDbContext>(o=>o.UseSqlServer(Configuration.GetConnectionString("ZezoSqlServer")).UseLazyLoadingProxies());
+            services.AddDbContext<PSManagementDbContext>(o=>o.UseSqlServer(Configuration.GetConnectionString("AbdoSqlServer")).UseLazyLoadingProxies());
             
             // Register Repository
             services.AddTransient(typeof(IRepository<>), typeof(Repository<>));
@@ -50,6 +50,7 @@ namespace PlayStation
             services.AddTransient<UpdateItem>();
             services.AddTransient<UpdateUser>();
             services.AddTransient<UserManagement>();
+            services.AddTransient<AllDevices>();
 
 
             ServiceProvider serviceProvider = services.BuildServiceProvider();

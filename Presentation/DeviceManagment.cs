@@ -16,6 +16,7 @@ namespace PlayStation.Presentation
     public partial class DeviceManagment : BaseForm
     {
         private readonly DeviceService deviceService;
+        private AllDevices AllDevices;
         public DeviceManagment(DeviceService _deviceService)
         {
             deviceService = _deviceService;
@@ -27,6 +28,8 @@ namespace PlayStation.Presentation
             DevicesTable.Columns["Type"].HeaderText = "النوع";
             DevicesTable.Columns["HourlyRate"].HeaderText = "سعر الساعة";
             DevicesTable.Columns["Sessions"].HeaderText = "نشاط الجهاز";
+            DevicesTable.Columns["Status"].Visible = false;
+            DevicesTable.Columns["IsDeleted"].Visible = false;
         }
         private void button1_Click(object sender, EventArgs e)
         {
@@ -43,6 +46,57 @@ namespace PlayStation.Presentation
                 device.HourlyRate = (byte)HourlyRateInput.Value;
                 deviceService.AddDeviceFromService(device);
                 DevicesTable.Refresh();
+
+                //Create a new panel for the new device and add it to the All Devices Form
+                Panel DevicePanel = new Panel()
+                {
+                    Size = new Size(350, 200),
+                    //Will be setted dynamically
+                    //Location = new Point(),
+                    BorderStyle = BorderStyle.FixedSingle,
+                    BackColor = Color.White
+                };
+
+                Label DeviceName = new Label()
+                {
+                    Text = device.Name,
+                    Location = new Point(10, 10)
+                };
+                PictureBox DeviceImage = new PictureBox()
+                {
+                    Size = new Size(100, 100),
+                    Location = new Point(10, 40),
+                    Image = Image.FromFile("C:\\Users\\iTi\\Documents\\GitHub\\PS-Cafe-Management-System\\DeviceImage.jpg"), // image path
+                    SizeMode = PictureBoxSizeMode.StretchImage
+                };
+                Label DeviceStatus = new Label()
+                {
+                    Text = device.status.ToString(),
+                    Location = new Point(120, 40)
+                };
+                Button ManageBtn = new Button()
+                {
+                    Text = "ادارة",
+                    Location = new Point(120, 80)
+                };
+                ManageBtn.Click += (s, e) =>
+                {
+                    SingleDevice singleDevice = new SingleDevice(device);
+                    singleDevice.Show();
+                };
+
+                //Add the controls to the panel
+                DevicePanel.Controls.Add(DeviceName);
+                DevicePanel.Controls.Add(DeviceImage);
+                DevicePanel.Controls.Add(DeviceStatus);
+                DevicePanel.Controls.Add(ManageBtn);
+
+                if (AllDevices == null || AllDevices.IsDisposed)
+                {
+                    AllDevices = new AllDevices();
+                    AllDevices.Show();
+                }
+                AllDevices.AddDeviceToLayout(DevicePanel);
             }
         }
         private void DevicesTable_CellContentClick(object sender, DataGridViewCellEventArgs e)

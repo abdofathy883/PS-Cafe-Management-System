@@ -69,5 +69,10 @@ namespace PlayStation.Presentation
         private void Home_Load(object sender, EventArgs e)
         {
         }
+
+        private void AllDevicesBtn_Click(object sender, EventArgs e)
+        {
+            ShowFormInPanel<AllDevices>();
+        }
     }
 }

@@ -32,6 +32,7 @@
             label2 = new Label();
             label1 = new Label();
             panel2 = new Panel();
+            AllDevicesBtn = new Button();
             ExpensesBtn = new Button();
             CafetriaBtn = new Button();
             DeviceManagementBtn = new Button();
@@ -84,6 +85,7 @@
             // 
             // panel2
             // 
+            panel2.Controls.Add(AllDevicesBtn);
             panel2.Controls.Add(ExpensesBtn);
             panel2.Controls.Add(CafetriaBtn);
             panel2.Controls.Add(DeviceManagementBtn);
@@ -93,6 +95,16 @@
             panel2.Name = "panel2";
             panel2.Size = new Size(189, 418);
             panel2.TabIndex = 1;
+            // 
+            // AllDevicesBtn
+            // 
+            AllDevicesBtn.Location = new Point(3, 7);
+            AllDevicesBtn.Name = "AllDevicesBtn";
+            AllDevicesBtn.Size = new Size(183, 30);
+            AllDevicesBtn.TabIndex = 4;
+            AllDevicesBtn.Text = "الرئيسية";
+            AllDevicesBtn.UseVisualStyleBackColor = true;
+            AllDevicesBtn.Click += AllDevicesBtn_Click;
             // 
             // ExpensesBtn
             // 
@@ -221,5 +233,6 @@
         private Button CafetriaBtn;
         private Button ExpensesBtn;
         private Panel MainContainer;
+        private Button AllDevicesBtn;
     }
 }
