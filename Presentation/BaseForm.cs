@@ -27,13 +27,13 @@ namespace PlayStation.Presentation
         protected void ApplyGlobalStyles(Form parent)
         {
             this.BackColor = SecondaryColor;
-            this.ForeColor = Color.White;
+            this.ForeColor = Color.Black;
             foreach (Control ctrl in parent.Controls)
             {
                 if (ctrl is Button btn)
                 {
                     btn.BackColor = PrimaryColor;
-                    btn.ForeColor = Color.White;
+                    btn.ForeColor = Color.Black;
                     //btn.ClientSize = new Size(2500, 1500);
                     
                     btn.FlatStyle = FlatStyle.Flat;

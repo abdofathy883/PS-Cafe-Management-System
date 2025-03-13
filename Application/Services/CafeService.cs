@@ -15,6 +15,10 @@ namespace PlayStation.Application.Services
         {
             _itemRepository = itemRepository;
         }
+        public Item GetCafeItemByIdFromService(int id)
+        {
+            return _itemRepository.GetById(id);
+        }
         public List<Item> GetCafeItemsFromService()
         {
             return _itemRepository.GetAll().ToList();

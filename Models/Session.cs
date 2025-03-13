@@ -8,9 +8,9 @@ public partial class Session : IDeletable
 {
     public int Id { get; set; }
 
-    public TimeOnly StartTime { get; set; }
+    public DateTime StartTime { get; set; }
 
-    public TimeOnly EndTime { get; set; }
+    public DateTime? EndTime { get; set; }
 
     public string Status { get; set; } = null!;
 
@@ -24,5 +24,5 @@ public partial class Session : IDeletable
 
     public virtual Device Device { get; set; } = null!;
 
-    public virtual ICollection<Order> Orders { get; set; } = new List<Order>();
+    public virtual ICollection<OrderDetail> OrderDetails { get; set; } = new List<OrderDetail>();
 }

@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PlayStation.Models;
 
@@ -11,9 +12,11 @@ using PlayStation.Models;
 namespace PlayStation.Migrations
 {
     [DbContext(typeof(PSManagementDbContext))]
-    partial class PSManagementDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250313055941_changeSessionAndDeleteOrder")]
+    partial class changeSessionAndDeleteOrder
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -177,14 +180,14 @@ namespace PlayStation.Migrations
                     b.Property<decimal>("Duration")
                         .HasColumnType("decimal(18, 0)");
 
-                    b.Property<DateTime?>("EndTime")
-                        .HasColumnType("datetime2");
+                    b.Property<TimeOnly>("EndTime")
+                        .HasColumnType("time");
 
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
-                    b.Property<DateTime>("StartTime")
-                        .HasColumnType("datetime2");
+                    b.Property<TimeOnly>("StartTime")
+                        .HasColumnType("time");
 
                     b.Property<string>("Status")
                         .IsRequired()
@@ -279,7 +282,7 @@ namespace PlayStation.Migrations
                         .HasConstraintName("FK_Session_Console");
 
                     b.HasOne("PlayStation.Models.User", null)
-                        .WithMany("Session")
+                        .WithMany("Orders")
                         .HasForeignKey("UserId");
 
                     b.Navigation("Device");
@@ -304,7 +307,7 @@ namespace PlayStation.Migrations
                 {
                     b.Navigation("Expenses");
 
-                    b.Navigation("Session");
+                    b.Navigation("Orders");
                 });
 #pragma warning restore 612, 618
         }

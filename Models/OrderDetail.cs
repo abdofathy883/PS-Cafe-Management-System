@@ -16,11 +16,11 @@ public partial class OrderDetail : IDeletable
 
     public decimal? TotalPrice { get; set; }
 
-    public int OrderId { get; set; }
+    public int SessionId { get; set; }
 
     public bool IsDeleted { get; set; } = false;
 
     public virtual Item Item { get; set; } = null!;
 
-    public virtual Order Order { get; set; } = null!;
+    public virtual Session Session { get; set; } = null!;
 }

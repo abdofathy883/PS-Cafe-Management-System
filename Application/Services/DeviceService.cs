@@ -16,6 +16,11 @@ namespace PlayStation.Application.Services
         {
             _deviceRepository = deviceRepository;
         }
+
+        public Device GetDeviceByIdFromService(int id)
+        {
+            return _deviceRepository.GetById(id);
+        }
         public List<Device> GetAllDevicesFromService()
         {
             return _deviceRepository.GetAll().ToList();

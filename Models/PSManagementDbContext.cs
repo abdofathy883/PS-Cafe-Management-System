@@ -21,8 +21,6 @@ public partial class PSManagementDbContext : DbContext
 
     public virtual DbSet<Item> Items { get; set; }
 
-    public virtual DbSet<Order> Orders { get; set; }
-
     public virtual DbSet<OrderDetail> OrderDetails { get; set; }
 
     public virtual DbSet<Session> Sessions { get; set; }
@@ -33,7 +31,7 @@ public partial class PSManagementDbContext : DbContext
     {
         if (!optionsBuilder.IsConfigured)
         {
-            optionsBuilder.UseSqlServer("Server=.;Database=PSManagementSystemNeww;Trusted_Connection=True;Encrypt=False;");
+            optionsBuilder.UseSqlServer("Server=ZEZOTAHA\\SQLEXPRESS;Database=PSManagementSystemNew;Trusted_Connection=True;Encrypt=False;MultipleActiveResultSets=True;");
         }
     }
 
@@ -73,29 +71,6 @@ public partial class PSManagementDbContext : DbContext
             entity.Property(e => e.Price).HasColumnType("decimal(18, 0)");
         });
 
-        modelBuilder.Entity<Order>(entity =>
-        {
-            entity.HasKey(e => e.Id).HasName("PK__Order__3214EC2730DE2E8E");
-
-            entity.ToTable("Order");
-
-            entity.Property(e => e.Id).HasColumnName("ID");
-            entity.Property(e => e.Amount).HasColumnType("decimal(18, 0)");
-            entity.Property(e => e.SessionId).HasColumnName("SessionID");
-            entity.Property(e => e.Time).HasColumnType("datetime");
-            entity.Property(e => e.UserId).HasColumnName("USerID");
-
-            entity.HasOne(d => d.Session).WithMany(p => p.Orders)
-                .HasForeignKey(d => d.SessionId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK_Order_Session");
-
-            entity.HasOne(d => d.User).WithMany(p => p.Orders)
-                .HasForeignKey(d => d.UserId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK_Order_User");
-        });
-
         modelBuilder.Entity<OrderDetail>(entity =>
         {
             entity.HasKey(e => e.Id).HasName("PK__OrderDet__3214EC278AE97305");
@@ -104,7 +79,7 @@ public partial class PSManagementDbContext : DbContext
 
             entity.Property(e => e.Id).HasColumnName("ID");
             entity.Property(e => e.ItemId).HasColumnName("ItemID");
-            entity.Property(e => e.OrderId).HasColumnName("OrderID");
+            entity.Property(e => e.SessionId).HasColumnName("SessionId");
             entity.Property(e => e.TotalPrice)
                 .HasComputedColumnSql("([Quantity]*[UnitPrice])", true)
                 .HasColumnType("decimal(29, 0)");
@@ -115,8 +90,8 @@ public partial class PSManagementDbContext : DbContext
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_OrderDetails_Items");
 
-            entity.HasOne(d => d.Order).WithMany(p => p.OrderDetails)
-                .HasForeignKey(d => d.OrderId)
+            entity.HasOne(d => d.Session).WithMany(p => p.OrderDetails)
+                .HasForeignKey(d => d.SessionId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_OrderDetails_Order");
         });
