@@ -19,7 +19,8 @@ namespace PlayStation.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: false),
                     Type = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: false),
-                    HourlyRate = table.Column<byte>(type: "tinyint", nullable: false),
+                    HourlyRate = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    HourlyRateForMulti = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     status = table.Column<int>(type: "int", nullable: false),
                     IsDeleted = table.Column<bool>(type: "bit", nullable: false)
                 },
@@ -35,8 +36,8 @@ namespace PlayStation.Migrations
                     ID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: false),
-                    Price = table.Column<decimal>(type: "decimal(18,0)", nullable: false),
-                    Stock = table.Column<byte>(type: "tinyint", nullable: false),
+                    Price = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    Stock = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     IsDeleted = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
@@ -61,37 +62,13 @@ namespace PlayStation.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Session",
-                columns: table => new
-                {
-                    ID = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    StartTime = table.Column<TimeOnly>(type: "time", nullable: false),
-                    EndTime = table.Column<TimeOnly>(type: "time", nullable: false),
-                    Status = table.Column<string>(type: "varchar(10)", unicode: false, maxLength: 10, nullable: false),
-                    TotalCost = table.Column<decimal>(type: "decimal(18,0)", nullable: false),
-                    Duration = table.Column<decimal>(type: "decimal(18,0)", nullable: false),
-                    DeviceID = table.Column<int>(type: "int", nullable: false),
-                    IsDeleted = table.Column<bool>(type: "bit", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK__Session__3214EC27A578C9FC", x => x.ID);
-                    table.ForeignKey(
-                        name: "FK_Session_Console",
-                        column: x => x.DeviceID,
-                        principalTable: "Device",
-                        principalColumn: "ID");
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Expenses",
                 columns: table => new
                 {
                     ID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Description = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    Amount = table.Column<decimal>(type: "decimal(18,0)", nullable: false),
+                    Amount = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     Date = table.Column<DateOnly>(type: "date", nullable: false),
                     IsDeleted = table.Column<bool>(type: "bit", nullable: false),
                     UserID = table.Column<int>(type: "int", nullable: true)
@@ -107,28 +84,31 @@ namespace PlayStation.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Order",
+                name: "Session",
                 columns: table => new
                 {
                     ID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Amount = table.Column<decimal>(type: "decimal(18,0)", nullable: false),
-                    Time = table.Column<DateTime>(type: "datetime", nullable: false),
-                    SessionID = table.Column<int>(type: "int", nullable: false),
-                    USerID = table.Column<int>(type: "int", nullable: false),
-                    IsDeleted = table.Column<bool>(type: "bit", nullable: false)
+                    StartTime = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    EndTime = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    Status = table.Column<string>(type: "varchar(10)", unicode: false, maxLength: 10, nullable: false),
+                    TotalCost = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    Duration = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    DeviceID = table.Column<int>(type: "int", nullable: false),
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: false),
+                    UserId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK__Order__3214EC2730DE2E8E", x => x.ID);
+                    table.PrimaryKey("PK__Session__3214EC27A578C9FC", x => x.ID);
                     table.ForeignKey(
-                        name: "FK_Order_Session",
-                        column: x => x.SessionID,
-                        principalTable: "Session",
+                        name: "FK_Session_Console",
+                        column: x => x.DeviceID,
+                        principalTable: "Device",
                         principalColumn: "ID");
                     table.ForeignKey(
-                        name: "FK_Order_User",
-                        column: x => x.USerID,
+                        name: "FK_Session_User_UserId",
+                        column: x => x.UserId,
                         principalTable: "User",
                         principalColumn: "ID");
                 });
@@ -141,9 +121,9 @@ namespace PlayStation.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     ItemID = table.Column<int>(type: "int", nullable: false),
                     Quantity = table.Column<int>(type: "int", nullable: false),
-                    UnitPrice = table.Column<decimal>(type: "decimal(18,0)", nullable: false),
+                    UnitPrice = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     TotalPrice = table.Column<decimal>(type: "decimal(29,0)", nullable: true, computedColumnSql: "([Quantity]*[UnitPrice])", stored: true),
-                    OrderID = table.Column<int>(type: "int", nullable: false),
+                    SessionId = table.Column<int>(type: "int", nullable: false),
                     IsDeleted = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
@@ -156,10 +136,16 @@ namespace PlayStation.Migrations
                         principalColumn: "ID");
                     table.ForeignKey(
                         name: "FK_OrderDetails_Order",
-                        column: x => x.OrderID,
-                        principalTable: "Order",
+                        column: x => x.SessionId,
+                        principalTable: "Session",
                         principalColumn: "ID");
                 });
+
+            migrationBuilder.CreateIndex(
+                name: "UQ__Device__737584F6D3A3D3A3",
+                table: "Device",
+                column: "Name",
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_Expenses_UserID",
@@ -167,14 +153,10 @@ namespace PlayStation.Migrations
                 column: "UserID");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Order_SessionID",
-                table: "Order",
-                column: "SessionID");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Order_USerID",
-                table: "Order",
-                column: "USerID");
+                name: "UQ__Items__737584F6D3A3D3A3",
+                table: "Items",
+                column: "Name",
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_OrderDetail_ItemID",
@@ -182,14 +164,25 @@ namespace PlayStation.Migrations
                 column: "ItemID");
 
             migrationBuilder.CreateIndex(
-                name: "IX_OrderDetail_OrderID",
+                name: "IX_OrderDetail_SessionId",
                 table: "OrderDetail",
-                column: "OrderID");
+                column: "SessionId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Session_DeviceID",
                 table: "Session",
                 column: "DeviceID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Session_UserId",
+                table: "Session",
+                column: "UserId");
+
+            migrationBuilder.CreateIndex(
+                name: "UQ__User__737584F6D3A3D3A3",
+                table: "User",
+                column: "Name",
+                unique: true);
         }
 
         /// <inheritdoc />
@@ -205,16 +198,13 @@ namespace PlayStation.Migrations
                 name: "Items");
 
             migrationBuilder.DropTable(
-                name: "Order");
-
-            migrationBuilder.DropTable(
                 name: "Session");
 
             migrationBuilder.DropTable(
-                name: "User");
+                name: "Device");
 
             migrationBuilder.DropTable(
-                name: "Device");
+                name: "User");
         }
     }
 }

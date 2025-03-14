@@ -12,7 +12,7 @@ public partial class Item : IDeletable
 
     public decimal Price { get; set; }
 
-    public byte Stock { get; set; }
+    public decimal Stock { get; set; }
 
     public bool IsDeleted { get; set; } = false;
 

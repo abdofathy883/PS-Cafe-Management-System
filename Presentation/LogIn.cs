@@ -14,14 +14,26 @@ namespace PlayStation.Presentation
 {
     public partial class LogIn : BaseForm
     {
-        private readonly UserService userService ;
+        private readonly UserService userService;
+        private readonly LoginSessionService loginSessionService;
         private readonly Home _home;
-        public LogIn(UserService _userService,Home home)
+        public LogIn(UserService _userService, Home home, LoginSessionService _loginSessionService)
         {
             userService = _userService;
             _home = home;
             InitializeComponent();
             ApplyGlobalStyles(this);
+            loginSessionService = _loginSessionService;
+            var session = loginSessionService.GetLastLoginSessionFromService();
+            if(session != null && !session.IsLoggedOut)
+            {
+                this.Hide();
+                _home.ShowDialog();
+                session.LogoutTime = DateTime.Now;
+                session.IsLoggedOut = true;
+                loginSessionService.UpdateLoginSessionFromService(session);
+                this.Show();
+            }
         }
         /// <summary>
         /// Click Event Of Log In Button
@@ -40,15 +52,27 @@ namespace PlayStation.Presentation
             }
             else
             {
-                User user = new User();
-                user.Id = int.Parse(PasswordInput.Text);
-                user.Name = NameInput.Text;
-                var isExisted = userService.GetAllUsersFromService().Contains(user);
-                if (isExisted)
+                User? user = userService.GetUserByUserFromService(NameInput.Text);
+                if (user != null)
                 {
-                    
-                    _home.Show();
+                    if (user.Password != PasswordInput.Text)
+                    {
+                        MessageBox.Show("الرقم السري خطا - برجاء ادخال بيانات صحيحة", "فشل تسجيل الدخول", MessageBoxButtons.OKCancel, MessageBoxIcon.Error);
+                        return;
+                    }
+                    var session = new LoginSession()
+                    {
+                        UserId = user.Id,
+                        LoginTime = DateTime.Now
+                    };
+                    loginSessionService.AddLoginSessionFromService(session);
                     this.Hide();
+                    _home.ShowDialog();
+
+                    session.LogoutTime = DateTime.Now;
+                    session.IsLoggedOut = true;
+                    loginSessionService.UpdateLoginSessionFromService(session);
+                    this.Show();
                 }
                 else
                 {

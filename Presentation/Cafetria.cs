@@ -20,13 +20,16 @@ namespace PlayStation.Presentation
             cafeService = _cafeService;
             InitializeComponent();
             ApplyGlobalStyles(this);
-            ProductsGrid.DataSource = cafeService.GetCafeItemsFromService();
+            DisplayProductsGrid();
+        }
+        private void DisplayProductsGrid()
+        {
+            ProductsGrid.DataSource = null;
+            ProductsGrid.DataSource = cafeService.GetCafeItemsFromService().Select(p=>new {p.Id,p.Name,p.Price,p.Stock }).ToList();
             ProductsGrid.Columns["ID"].Visible = false;
-            ProductsGrid.Columns["OrderDetails"].Visible = false;
             ProductsGrid.Columns["Name"].HeaderText = "الاسم";
             ProductsGrid.Columns["Price"].HeaderText = "السعر";
             ProductsGrid.Columns["Stock"].HeaderText = "المخزون";
-            ProductsGrid.Columns["IsDeleted"].Visible = false;
         }
         private void AddItemBtn_Click(object sender, EventArgs e)
         {
@@ -40,31 +43,26 @@ namespace PlayStation.Presentation
                 Item newCafeteriaItem = new Item()
                 {
                     Name = ProductNameInput.Text,
-                    Stock = (byte)ProductStockInput.Value,
+                    Stock = ProductStockInput.Value,
                     Price = ProductPriceInput.Value,
                 };
 
                 //Check for already existing product
-                if (cafeService.GetCafeItemsFromService().Any(x => x.Name == newCafeteriaItem.Name))
+                if (cafeService.IsItemNameIsUsed(newCafeteriaItem.Name))
                 {
                     MessageBox.Show("هذا المنتج موجود بالفعل", "فشل اضافة منتج", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
                 cafeService.AddCafeItemFromService(newCafeteriaItem);
-                ProductsGrid.Refresh();
+                DisplayProductsGrid();
             }
         }
         private void ProductsGrid_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            Item UpdatedItem = new()
-            {
-                Id = Convert.ToInt32(ProductsGrid.Rows[e.RowIndex].Cells["ID"].Value),
-                Name = ProductsGrid.Rows[e.RowIndex].Cells["Name"].Value.ToString() ?? "اسم الجهاز غير محدد",
-                Price = Convert.ToDecimal(ProductsGrid.Rows[e.RowIndex].Cells["Price"].Value),
-                Stock = Convert.ToByte(ProductsGrid.Rows[e.RowIndex].Cells["Stock"].Value)
-            };
-            UpdateItem updateItem = new UpdateItem(UpdatedItem, cafeService);
+            var Id = Convert.ToInt32(ProductsGrid.Rows[e.RowIndex].Cells["ID"].Value);
+            UpdateItem updateItem = new UpdateItem(Id, cafeService);
             updateItem.ShowDialog();
+            DisplayProductsGrid();
         }
     }
 }

@@ -14,31 +14,31 @@ namespace PlayStation.Presentation
 {
     public partial class UpdateDevice : BaseForm
     {
-        private readonly DeviceService deviceService ;
+        private readonly DeviceService deviceService;
         Device UpdatedDevice;
-        public UpdateDevice(DeviceService _deviceService)
+        public UpdateDevice(int deviceId, DeviceService _deviceService)
         {
             deviceService = _deviceService;
             InitializeComponent();
             ApplyGlobalStyles(this);
-        }
-        public UpdateDevice(Device device, DeviceService _deviceService)
-        {
-            deviceService = _deviceService;
-            InitializeComponent();
-            ApplyGlobalStyles(this);
-            UpdatedDevice = device;
-            NewDeviceNameInput.Text = device.Name;
-            NewDevicePriceInput.Value = device.HourlyRate;
+            UpdatedDevice = deviceService.GetDeviceByIdFromService(deviceId);
+            NewDeviceNameInput.Text = UpdatedDevice.Name;
+            NewDevicePriceInput.Value = UpdatedDevice.HourlyRate;
 
         }
 
         private void UpdateDeviceBtn_Click(object sender, EventArgs e)
         {
+            if (UpdatedDevice.Name != NewDeviceNameInput.Text && deviceService.IsDeviceNameIsUsed(NewDeviceNameInput.Text))
+            {
+                MessageBox.Show("هذا الجهاز موجود بالفعل", "فشل اضافة جهاز", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
             UpdatedDevice.Name = NewDeviceNameInput.Text;
-            UpdatedDevice.HourlyRate = (byte)NewDevicePriceInput.Value;
+            UpdatedDevice.HourlyRate = NewDevicePriceInput.Value;
             deviceService.UpdateDeviceFromService(UpdatedDevice);
             this.Close();
         }
+
     }
 }
