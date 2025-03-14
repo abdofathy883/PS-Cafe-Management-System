@@ -80,7 +80,9 @@
             // 
             // UserTypeCombo
             // 
+            UserTypeCombo.AutoCompleteCustomSource.AddRange(new string[] { "أدمن", "موظف" });
             UserTypeCombo.FormattingEnabled = true;
+            UserTypeCombo.Items.AddRange(new object[] { "ادمن", "موظف" });
             UserTypeCombo.Location = new Point(166, 125);
             UserTypeCombo.Name = "UserTypeCombo";
             UserTypeCombo.Size = new Size(117, 23);
@@ -109,7 +111,8 @@
             Controls.Add(NewUserNameInput);
             Controls.Add(label1);
             Name = "UpdateUser";
-            Text = "UpdateUser";
+            StartPosition = FormStartPosition.CenterScreen;
+            Text = "تحديث الحساب";
             ResumeLayout(false);
             PerformLayout();
         }

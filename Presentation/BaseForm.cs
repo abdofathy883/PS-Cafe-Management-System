@@ -32,17 +32,17 @@ namespace PlayStation.Presentation
             {
                 if (ctrl is Button btn)
                 {
-                    btn.BackColor = PrimaryColor;
-                    btn.ForeColor = Color.Black;
-                    //btn.ClientSize = new Size(2500, 1500);
-                    
-                    btn.FlatStyle = FlatStyle.Flat;
-                    btn.FlatAppearance.BorderSize = 0;
-                    btn.Font = new Font("Segoe UI", 10, FontStyle.Bold);
-                    btn.Cursor = Cursors.Hand;
-                    btn.Padding = new Padding(8);
-                    btn.FlatAppearance.MouseOverBackColor = SecondaryColor; // Hover effect
-                    btn.FlatAppearance.MouseDownBackColor = AccentColor; // Click effect
+                    //btn.BackColor = PrimaryColor;
+                    //btn.ForeColor = Color.White;
+                    //btn.AutoSize = true;
+                    ////btn.ClientSize = new Size(100, 45);
+
+                    //btn.FlatStyle = FlatStyle.Flat;
+                    //btn.FlatAppearance.BorderSize = 0;
+                    ////btn.Font = new Font("Segoe UI", 10, FontStyle.Bold);
+                    //btn.Cursor = Cursors.Hand;
+                    ////btn.Padding = new Padding(5);
+
                 }
                 else if (ctrl is TextBox txt)
                 {
@@ -60,8 +60,8 @@ namespace PlayStation.Presentation
                     num.ForeColor = PrimaryColor;
                     num.BorderStyle = BorderStyle.None; // Flat style
                     num.Font = new Font("Segoe UI", 12, FontStyle.Bold);
-                    num.AutoSize = false;
-                    num.Height = 25;
+                    //num.AutoSize = false;
+                    num.Height = 15;
                 }
                 else if (ctrl is ComboBox cmb)
                 {
@@ -69,13 +69,13 @@ namespace PlayStation.Presentation
                     cmb.ForeColor = PrimaryColor;
                     cmb.FlatStyle = FlatStyle.Flat; // Flat style
                     cmb.Font = new Font("Segoe UI", 12);
-                    cmb.Padding = new Padding(4);
-                    cmb.Height = 20;
+                    //cmb.Padding = new Padding(4);
+                    cmb.Height = 10;
                 }
                 else if (ctrl is Label lbl)
                 {
-                    lbl.ForeColor = Color.White;
-                    lbl.Font = new Font("Segoe UI", 12, FontStyle.Bold);
+                    //lbl.ForeColor = Color.White;
+                    //lbl.Font = new Font("Segoe UI", 10, FontStyle.Bold);
                 }
                 else if (ctrl is Panel pnl)
                 {
@@ -95,11 +95,12 @@ namespace PlayStation.Presentation
                     grid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
                     grid.RowHeadersVisible = false;
                     grid.GridColor = Color.FromArgb(200, 200, 200);
+                    //grid.Height = 10000;
 
                     grid.DefaultCellStyle.BackColor = Color.White;
                     grid.DefaultCellStyle.ForeColor = PrimaryColor; 
-                    grid.DefaultCellStyle.SelectionBackColor = Color.FromArgb(92, 184, 92);
-                    grid.DefaultCellStyle.SelectionForeColor = Color.White;
+                    //grid.DefaultCellStyle.SelectionBackColor = Color.FromArgb(92, 184, 92);
+                    //grid.DefaultCellStyle.SelectionForeColor = Color.White;
                     grid.DefaultCellStyle.Padding = new Padding(5);
 
                     grid.ColumnHeadersDefaultCellStyle.BackColor = PrimaryColor; 
@@ -113,6 +114,22 @@ namespace PlayStation.Presentation
                     grid.CellBorderStyle = DataGridViewCellBorderStyle.SingleHorizontal;
                     grid.AlternatingRowsDefaultCellStyle.BackColor = AccentColor; 
                     grid.ColumnHeadersHeight = 40;
+                    grid.RowTemplate.Height = 40;
+
+                    if (grid.Columns["DeleteCellButton"] is DataGridViewButtonColumn c)
+                    {
+                        c.FlatStyle = FlatStyle.Flat;
+                        c.DefaultCellStyle.ForeColor = Color.White;
+                        //c.DefaultCellStyle.BackColor = PrimaryColor;
+                    }
+                    if (grid.Columns["UpdateCellButton"] is DataGridViewButtonColumn u)
+                    {
+                        u.FlatStyle = FlatStyle.Flat;
+                        u.DefaultCellStyle.ForeColor = Color.White;
+                        //c.DefaultCellStyle.BackColor = PrimaryColor;
+                    }
+                    
+                    
                 }
                 //else if (ctrl is DateTimePicker DTP)
                 //{
@@ -131,23 +148,8 @@ namespace PlayStation.Presentation
                 //    DTP.Width = 500;
 
                 //    // Custom Border - Use Panel Trick (since DateTimePicker does not allow border changes)
-                    
                 //}
             }
         }
-        
-
-    // Button Events
-    //private void ButtonHoverEnter(object sender, EventArgs e)
-    //    => ((Button)sender).BackColor = Color.FromArgb(50, 100, 200);
-
-    //    private void ButtonHoverLeave(object sender, EventArgs e)
-    //        => ((Button)sender).BackColor = Color.FromArgb(66, 133, 244);
-
-    //    private void ButtonMouseDown(object sender, MouseEventArgs e)
-    //        => ((Button)sender).BackColor = Color.FromArgb(30, 90, 160);
-
-    //    private void ButtonMouseUp(object sender, MouseEventArgs e)
-    //        => ((Button)sender).BackColor = Color.FromArgb(66, 133, 244);
     }
 }

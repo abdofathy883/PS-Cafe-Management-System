@@ -30,8 +30,9 @@ namespace PlayStation.Presentation
         /// </summary>
         private void InitializeComponent()
         {
+            components = new System.ComponentModel.Container();
             panelHead = new Panel();
-            Timer = new Label();
+            TimerLbl = new Label();
             panel1 = new Panel();
             TotalPriceLbl = new Label();
             label2 = new Label();
@@ -43,34 +44,26 @@ namespace PlayStation.Presentation
             label1 = new Label();
             ItemsCombo = new ComboBox();
             OrderGrid = new DataGridView();
-            panelFooter = new Panel();
-            LeaveBtn = new Button();
-            CloseBtn = new Button();
             panelDevice = new Panel();
-            panel4 = new Panel();
-            dateTimePicker1 = new DateTimePicker();
-            numericUpDown2 = new NumericUpDown();
-            numericUpDown1 = new NumericUpDown();
             panel3 = new Panel();
+            dateTimePickerEnd = new DateTimePicker();
             EndBtn = new Button();
+            dateTimePicker1 = new DateTimePicker();
             StartBtn = new Button();
+            timer = new System.Windows.Forms.Timer(components);
             panelHead.SuspendLayout();
             panel1.SuspendLayout();
             panelCafe.SuspendLayout();
             panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)ItemsCounter).BeginInit();
             ((System.ComponentModel.ISupportInitialize)OrderGrid).BeginInit();
-            panelFooter.SuspendLayout();
             panelDevice.SuspendLayout();
-            panel4.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)numericUpDown2).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)numericUpDown1).BeginInit();
             panel3.SuspendLayout();
             SuspendLayout();
             // 
             // panelHead
             // 
-            panelHead.Controls.Add(Timer);
+            panelHead.Controls.Add(TimerLbl);
             panelHead.Controls.Add(panel1);
             panelHead.Controls.Add(DeviceNameLbl);
             panelHead.Dock = DockStyle.Top;
@@ -80,22 +73,25 @@ namespace PlayStation.Presentation
             panelHead.Size = new Size(1186, 113);
             panelHead.TabIndex = 0;
             // 
-            // Timer
+            // TimerLbl
             // 
-            Timer.AutoSize = true;
-            Timer.Location = new Point(81, 75);
-            Timer.Margin = new Padding(4, 0, 4, 0);
-            Timer.Name = "Timer";
-            Timer.Size = new Size(58, 17);
-            Timer.TabIndex = 2;
-            Timer.Text = "00:00:00";
+            TimerLbl.AutoSize = true;
+            TimerLbl.Font = new Font("Segoe UI", 18F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            TimerLbl.ForeColor = Color.White;
+            TimerLbl.Location = new Point(1000, 42);
+            TimerLbl.Margin = new Padding(4, 0, 4, 0);
+            TimerLbl.Name = "TimerLbl";
+            TimerLbl.Size = new Size(112, 32);
+            TimerLbl.TabIndex = 2;
+            TimerLbl.Text = "00:00:00";
             // 
             // panel1
             // 
             panel1.BackColor = Color.FromArgb(80, 121, 125);
+            panel1.BorderStyle = BorderStyle.FixedSingle;
             panel1.Controls.Add(TotalPriceLbl);
             panel1.Controls.Add(label2);
-            panel1.Location = new Point(1033, 12);
+            panel1.Location = new Point(704, 12);
             panel1.Margin = new Padding(4, 3, 4, 3);
             panel1.Name = "panel1";
             panel1.Size = new Size(140, 93);
@@ -105,17 +101,18 @@ namespace PlayStation.Presentation
             // TotalPriceLbl
             // 
             TotalPriceLbl.AutoSize = true;
-            TotalPriceLbl.Location = new Point(42, 45);
+            TotalPriceLbl.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            TotalPriceLbl.Location = new Point(49, 48);
             TotalPriceLbl.Margin = new Padding(4, 0, 4, 0);
             TotalPriceLbl.Name = "TotalPriceLbl";
-            TotalPriceLbl.Size = new Size(33, 17);
+            TotalPriceLbl.Size = new Size(50, 25);
             TotalPriceLbl.TabIndex = 1;
             TotalPriceLbl.Text = "0.00";
             // 
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new Point(23, 13);
+            label2.Location = new Point(22, 15);
             label2.Margin = new Padding(4, 0, 4, 0);
             label2.Name = "label2";
             label2.Size = new Size(90, 17);
@@ -208,93 +205,21 @@ namespace PlayStation.Presentation
             OrderGrid.TabIndex = 1;
             OrderGrid.CellContentClick += OrderGrid_CellContentClick;
             // 
-            // panelFooter
-            // 
-            panelFooter.Controls.Add(LeaveBtn);
-            panelFooter.Controls.Add(CloseBtn);
-            panelFooter.Dock = DockStyle.Bottom;
-            panelFooter.Location = new Point(0, 489);
-            panelFooter.Margin = new Padding(4, 3, 4, 3);
-            panelFooter.Name = "panelFooter";
-            panelFooter.Size = new Size(1186, 76);
-            panelFooter.TabIndex = 1;
-            // 
-            // LeaveBtn
-            // 
-            LeaveBtn.BackColor = Color.Red;
-            LeaveBtn.FlatAppearance.BorderSize = 0;
-            LeaveBtn.FlatStyle = FlatStyle.Flat;
-            LeaveBtn.Location = new Point(164, 18);
-            LeaveBtn.Margin = new Padding(4, 3, 4, 3);
-            LeaveBtn.Name = "LeaveBtn";
-            LeaveBtn.Size = new Size(242, 37);
-            LeaveBtn.TabIndex = 1;
-            LeaveBtn.Text = "المغادرة";
-            LeaveBtn.UseVisualStyleBackColor = false;
-            // 
-            // CloseBtn
-            // 
-            CloseBtn.Location = new Point(530, 18);
-            CloseBtn.Margin = new Padding(4, 3, 4, 3);
-            CloseBtn.Name = "CloseBtn";
-            CloseBtn.Size = new Size(266, 37);
-            CloseBtn.TabIndex = 0;
-            CloseBtn.Text = "اغلاق";
-            CloseBtn.UseVisualStyleBackColor = true;
-            // 
             // panelDevice
             // 
-            panelDevice.Controls.Add(panel4);
             panelDevice.Controls.Add(panel3);
             panelDevice.Dock = DockStyle.Left;
             panelDevice.Location = new Point(0, 113);
             panelDevice.Margin = new Padding(4, 3, 4, 3);
             panelDevice.Name = "panelDevice";
-            panelDevice.Size = new Size(505, 376);
+            panelDevice.Size = new Size(505, 452);
             panelDevice.TabIndex = 3;
-            // 
-            // panel4
-            // 
-            panel4.Controls.Add(dateTimePicker1);
-            panel4.Controls.Add(numericUpDown2);
-            panel4.Controls.Add(numericUpDown1);
-            panel4.Location = new Point(35, 156);
-            panel4.Margin = new Padding(4, 3, 4, 3);
-            panel4.Name = "panel4";
-            panel4.Size = new Size(430, 113);
-            panel4.TabIndex = 1;
-            // 
-            // dateTimePicker1
-            // 
-            dateTimePicker1.Format = DateTimePickerFormat.Custom;
-            dateTimePicker1.Location = new Point(13, 10);
-            dateTimePicker1.Name = "dateTimePicker1";
-            dateTimePicker1.ShowCheckBox = true;
-            dateTimePicker1.ShowUpDown = true;
-            dateTimePicker1.CustomFormat = "yyyy-MM-dd hh:mm tt";
-            dateTimePicker1.Size = new Size(385, 25);
-            dateTimePicker1.TabIndex = 2;
-            dateTimePicker1.UseWaitCursor = true;
-            // 
-            // numericUpDown2
-            // 
-            numericUpDown2.Location = new Point(104, 79);
-            numericUpDown2.Margin = new Padding(4, 3, 4, 3);
-            numericUpDown2.Name = "numericUpDown2";
-            numericUpDown2.Size = new Size(68, 25);
-            numericUpDown2.TabIndex = 1;
-            // 
-            // numericUpDown1
-            // 
-            numericUpDown1.Location = new Point(104, 41);
-            numericUpDown1.Margin = new Padding(4, 3, 4, 3);
-            numericUpDown1.Name = "numericUpDown1";
-            numericUpDown1.Size = new Size(68, 25);
-            numericUpDown1.TabIndex = 0;
             // 
             // panel3
             // 
+            panel3.Controls.Add(dateTimePickerEnd);
             panel3.Controls.Add(EndBtn);
+            panel3.Controls.Add(dateTimePicker1);
             panel3.Controls.Add(StartBtn);
             panel3.Location = new Point(35, 37);
             panel3.Margin = new Padding(4, 3, 4, 3);
@@ -302,27 +227,60 @@ namespace PlayStation.Presentation
             panel3.Size = new Size(430, 113);
             panel3.TabIndex = 0;
             // 
+            // dateTimePickerEnd
+            // 
+            dateTimePickerEnd.CustomFormat = "hh:mm tt";
+            dateTimePickerEnd.Format = DateTimePickerFormat.Time;
+            dateTimePickerEnd.Location = new Point(4, 35);
+            dateTimePickerEnd.Name = "dateTimePickerEnd";
+            dateTimePickerEnd.ShowCheckBox = true;
+            dateTimePickerEnd.ShowUpDown = true;
+            dateTimePickerEnd.Size = new Size(169, 25);
+            dateTimePickerEnd.TabIndex = 3;
+            dateTimePickerEnd.ValueChanged += dateTimePickerEnd_ValueChanged;
+            // 
             // EndBtn
             // 
-            EndBtn.Location = new Point(118, 18);
+            EndBtn.Location = new Point(4, 3);
             EndBtn.Margin = new Padding(4, 3, 4, 3);
             EndBtn.Name = "EndBtn";
-            EndBtn.Size = new Size(86, 26);
+            EndBtn.Size = new Size(169, 26);
             EndBtn.TabIndex = 1;
-            EndBtn.Text = "End";
+            EndBtn.Text = "نهاية";
             EndBtn.UseVisualStyleBackColor = true;
             EndBtn.Click += EndBtn_Click;
             // 
+            // dateTimePicker1
+            // 
+            dateTimePicker1.CalendarForeColor = SystemColors.MenuHighlight;
+            dateTimePicker1.Checked = false;
+            dateTimePicker1.CustomFormat = "hh:mm tt";
+            dateTimePicker1.DropDownAlign = LeftRightAlignment.Right;
+            dateTimePicker1.Format = DateTimePickerFormat.Time;
+            dateTimePicker1.Location = new Point(257, 35);
+            dateTimePicker1.Name = "dateTimePicker1";
+            dateTimePicker1.RightToLeft = RightToLeft.No;
+            dateTimePicker1.ShowCheckBox = true;
+            dateTimePicker1.ShowUpDown = true;
+            dateTimePicker1.Size = new Size(169, 25);
+            dateTimePicker1.TabIndex = 2;
+            dateTimePicker1.ValueChanged += dateTimePicker1_ValueChanged;
+            // 
             // StartBtn
             // 
-            StartBtn.Location = new Point(222, 18);
+            StartBtn.Location = new Point(257, 3);
             StartBtn.Margin = new Padding(4, 3, 4, 3);
             StartBtn.Name = "StartBtn";
-            StartBtn.Size = new Size(86, 26);
+            StartBtn.Size = new Size(169, 26);
             StartBtn.TabIndex = 0;
-            StartBtn.Text = "Start";
+            StartBtn.Text = "ابدا";
             StartBtn.UseVisualStyleBackColor = true;
             StartBtn.Click += StartBtn_Click;
+            // 
+            // timer
+            // 
+            timer.Interval = 1000;
+            timer.Tick += timer_Tick;
             // 
             // SingleDevice
             // 
@@ -331,12 +289,13 @@ namespace PlayStation.Presentation
             ClientSize = new Size(1186, 565);
             Controls.Add(panelDevice);
             Controls.Add(panelCafe);
-            Controls.Add(panelFooter);
             Controls.Add(panelHead);
             Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
             Margin = new Padding(4, 3, 4, 3);
             Name = "SingleDevice";
-            Text = "SingleDevice";
+            StartPosition = FormStartPosition.CenterScreen;
+            Text = "ادارة الجهاز";
+            FormClosing += SingleDevice_FormClosing;
             Load += SingleDevice_Load;
             panelHead.ResumeLayout(false);
             panelHead.PerformLayout();
@@ -347,11 +306,7 @@ namespace PlayStation.Presentation
             panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)ItemsCounter).EndInit();
             ((System.ComponentModel.ISupportInitialize)OrderGrid).EndInit();
-            panelFooter.ResumeLayout(false);
             panelDevice.ResumeLayout(false);
-            panel4.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)numericUpDown2).EndInit();
-            ((System.ComponentModel.ISupportInitialize)numericUpDown1).EndInit();
             panel3.ResumeLayout(false);
             ResumeLayout(false);
         }
@@ -363,24 +318,20 @@ namespace PlayStation.Presentation
         private Panel panel1;
         private Label TotalPriceLbl;
         private Label label2;
-        private Label Timer;
-        private Panel panelFooter;
+        private Label TimerLbl;
         private Panel panelCafe;
         private Panel panelDevice;
         private Panel panel2;
         private DataGridView OrderGrid;
-        private Button LeaveBtn;
-        private Button CloseBtn;
         private Button AddItemBtn;
         private NumericUpDown ItemsCounter;
         private ComboBox ItemsCombo;
         private Label label1;
-        private Panel panel4;
         private Panel panel3;
         private Button StartBtn;
         private Button EndBtn;
-        private NumericUpDown numericUpDown2;
-        private NumericUpDown numericUpDown1;
         private DateTimePicker dateTimePicker1;
+        private System.Windows.Forms.Timer timer;
+        private DateTimePicker dateTimePickerEnd;
     }
 }

@@ -14,7 +14,7 @@ namespace PlayStation.Presentation
 {
     public partial class AllDevices: BaseForm
     {
-        FlowLayoutPanel layoutPanel;
+        static FlowLayoutPanel layoutPanel;
         private  readonly CafeService cafeService;
         private  readonly SessionService sessionService;
         private readonly DeviceService deviceService;
@@ -39,7 +39,7 @@ namespace PlayStation.Presentation
             }
         }
         
-        public void AddDeviceToLayout(Panel DevicePanel)
+        public static void AddDeviceToLayout(Panel DevicePanel)
         {
             layoutPanel.Controls.Add(DevicePanel);
             layoutPanel.Refresh();
@@ -50,11 +50,11 @@ namespace PlayStation.Presentation
             //Create a new panel for the new device and add it to the All Devices Form
             Panel DevicePanel = new Panel()
             {
-                Size = new Size(120, 200),
+                Size = new Size(250, 300),
                 //Will be setted dynamically
                 //Location = new Point(),
                 BorderStyle = BorderStyle.FixedSingle,
-                BackColor = Color.White,
+                //BackColor = Color.White,
                 ForeColor = Color.Black
             };
 
@@ -67,15 +67,15 @@ namespace PlayStation.Presentation
             };
             PictureBox DeviceImage = new PictureBox()
             {
-                Size = new Size(100, 100),
-                Location = new Point(10, 35),
+                Size = new Size(225, 180),
+                Location = new Point(12, 45),
                 Image = Image.FromFile("DeviceImage.jpg"), // image path
                 SizeMode = PictureBoxSizeMode.StretchImage
             };
             Label DeviceStatus = new Label()
             {
                 Text = device.status.ToString(),
-                Location = new Point(0, 145),
+                Location = new Point(0, 230),
                 Width = 120,
                 TextAlign = ContentAlignment.MiddleCenter
             };
@@ -83,12 +83,12 @@ namespace PlayStation.Presentation
             {
                 Text = "ادارة",
                 Width = DevicePanel.Width - 20,
-                Location = new Point(10, 170)
+                Location = new Point(10, 260)
             };
             ManageBtn.Click += (s, e) =>
             {
-                SingleDevice singleDevice = new SingleDevice(device.Id,cafeService,sessionService,deviceService);
-                singleDevice.Show();
+                SingleDevice singleDevice = new SingleDevice(device.Id,cafeService,sessionService,deviceService, this);
+                singleDevice.ShowDialog();
             };
 
             //Add the controls to the panel

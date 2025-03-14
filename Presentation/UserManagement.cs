@@ -23,6 +23,7 @@ namespace PlayStation.Presentation
             UsersTableGrid.DataSource = userService.GetAllUsersFromService();
             UsersTableGrid.Columns["ID"].Visible = false;
             UsersTableGrid.Columns["Password"].Visible = false;
+            UsersTableGrid.Columns["IsDeleted"].Visible = false;
         }
         private void AddUserBtn_Click(object sender, EventArgs e)
         {
@@ -39,7 +40,14 @@ namespace PlayStation.Presentation
                     Password = PasswordInput.Text,
                     Role = (string)RolesCombo.SelectedItem ?? "موظف"
                 };
-                
+
+                //Check for already existing user
+                if (userService.GetAllUsersFromService().Any(x => x.Name == user.Name))
+                {
+                    MessageBox.Show("هذا الحساب موجود بالفعل", "فشل اضافة حساب", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+
                 userService.AddUserFromService(user);
                 UsersTableGrid.DataSource = null;
                 UsersTableGrid.DataSource = userService.GetAllUsersFromService();
@@ -53,7 +61,7 @@ namespace PlayStation.Presentation
                 User UpdatedUser = new()
                 {
                     Id = Convert.ToInt32(UsersTableGrid.Rows[e.RowIndex].Cells["ID"].Value),
-                    Name = UsersTableGrid.Rows[e.RowIndex].Cells["UserName"].Value?.ToString() ?? string.Empty,
+                    Name = UsersTableGrid.Rows[e.RowIndex].Cells["Name"].Value?.ToString() ?? string.Empty,
                     Password = UsersTableGrid.Rows[e.RowIndex].Cells["Password"].Value?.ToString() ?? string.Empty,
                     Role = (string)UsersTableGrid.Rows[e.RowIndex].Cells["Role"].Value
                 };
@@ -63,15 +71,19 @@ namespace PlayStation.Presentation
             }
             else if (ColumnName == "DeleteUser")
             {
-                User UpdatedUser = new()
+                DialogResult DeleteDialog = MessageBox.Show("تأكيد حذف الحساب! سيتم حذف الحساب نهائيا واي بيانات متلعقة به", "حذف حساب", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
+                if (DeleteDialog == DialogResult.OK)
                 {
-                    Id = Convert.ToInt32(UsersTableGrid.Rows[e.RowIndex].Cells["ID"].Value),
-                    Name = UsersTableGrid.Rows[e.RowIndex].Cells["UserName"].Value?.ToString() ?? string.Empty,
-                    Password = UsersTableGrid.Rows[e.RowIndex].Cells["Password"].Value?.ToString() ?? string.Empty,
-                    Role = (string)UsersTableGrid.Rows[e.RowIndex].Cells["Role"].Value
-                };
-                userService.DeleteUserFromService(UpdatedUser);  
-                UsersTableGrid.Refresh();
+                    User UpdatedUser = new()
+                    {
+                        Id = Convert.ToInt32(UsersTableGrid.Rows[e.RowIndex].Cells["ID"].Value),
+                        Name = UsersTableGrid.Rows[e.RowIndex].Cells["UserName"].Value?.ToString() ?? string.Empty,
+                        Password = UsersTableGrid.Rows[e.RowIndex].Cells["Password"].Value?.ToString() ?? string.Empty,
+                        Role = (string)UsersTableGrid.Rows[e.RowIndex].Cells["Role"].Value
+                    };
+                    userService.DeleteUserFromService(UpdatedUser);
+                    UsersTableGrid.Refresh();
+                }
             }
         }
     }

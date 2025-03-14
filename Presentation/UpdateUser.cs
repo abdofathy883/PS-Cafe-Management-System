@@ -37,7 +37,7 @@ namespace PlayStation.Presentation
         {
             UpdatedUser.Name = NewUserNameInput.Text;
             UpdatedUser.Password = NewUserPassInput.Text;
-            UpdatedUser.Role = (string)UserTypeCombo.SelectedItem;
+            UpdatedUser.Role = UserTypeCombo.SelectedItem as string ?? string.Empty;
             userService.UpdateUserFromService(UpdatedUser);
         }
     }
