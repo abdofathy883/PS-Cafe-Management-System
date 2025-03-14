@@ -45,6 +45,7 @@
             // label1
             // 
             label1.AutoSize = true;
+            label1.ForeColor = Color.White;
             label1.Location = new Point(894, 135);
             label1.Margin = new Padding(4, 0, 4, 0);
             label1.Name = "label1";
@@ -63,6 +64,7 @@
             // label2
             // 
             label2.AutoSize = true;
+            label2.ForeColor = Color.White;
             label2.Location = new Point(523, 135);
             label2.Margin = new Padding(4, 0, 4, 0);
             label2.Name = "label2";
@@ -81,6 +83,7 @@
             // label3
             // 
             label3.AutoSize = true;
+            label3.ForeColor = Color.White;
             label3.Location = new Point(309, 133);
             label3.Margin = new Padding(4, 0, 4, 0);
             label3.Name = "label3";
@@ -100,22 +103,28 @@
             // 
             // AddUserBtn
             // 
+            AddUserBtn.BackColor = Color.FromArgb(32, 87, 129);
+            AddUserBtn.FlatAppearance.BorderSize = 0;
+            AddUserBtn.FlatStyle = FlatStyle.Flat;
+            AddUserBtn.ForeColor = Color.White;
             AddUserBtn.Location = new Point(13, 156);
             AddUserBtn.Margin = new Padding(4);
             AddUserBtn.Name = "AddUserBtn";
-            AddUserBtn.Size = new Size(157, 30);
+            AddUserBtn.Size = new Size(157, 39);
             AddUserBtn.TabIndex = 6;
             AddUserBtn.Text = "اضافة حساب";
-            AddUserBtn.UseVisualStyleBackColor = true;
+            AddUserBtn.UseVisualStyleBackColor = false;
             AddUserBtn.Click += AddUserBtn_Click;
             // 
             // label4
             // 
             label4.AutoSize = true;
-            label4.Location = new Point(828, 105);
+            label4.Font = new Font("Arial", 18F, FontStyle.Bold, GraphicsUnit.Point, 178);
+            label4.ForeColor = Color.White;
+            label4.Location = new Point(771, 72);
             label4.Margin = new Padding(4, 0, 4, 0);
             label4.Name = "label4";
-            label4.Size = new Size(103, 19);
+            label4.Size = new Size(160, 29);
             label4.TabIndex = 7;
             label4.Text = "اضافة حساب جديد";
             // 

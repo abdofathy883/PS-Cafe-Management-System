@@ -45,7 +45,8 @@
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new Point(833, 68);
+            label2.ForeColor = Color.White;
+            label2.Location = new Point(862, 76);
             label2.Margin = new Padding(4, 0, 4, 0);
             label2.Name = "label2";
             label2.Size = new Size(67, 19);
@@ -55,7 +56,8 @@
             // label3
             // 
             label3.AutoSize = true;
-            label3.Location = new Point(346, 68);
+            label3.ForeColor = Color.White;
+            label3.Location = new Point(443, 76);
             label3.Margin = new Padding(4, 0, 4, 0);
             label3.Name = "label3";
             label3.Size = new Size(74, 19);
@@ -65,7 +67,8 @@
             // label4
             // 
             label4.AutoSize = true;
-            label4.Location = new Point(572, 68);
+            label4.ForeColor = Color.White;
+            label4.Location = new Point(634, 76);
             label4.Margin = new Padding(4, 0, 4, 0);
             label4.Name = "label4";
             label4.Size = new Size(67, 19);
@@ -74,13 +77,17 @@
             // 
             // button1
             // 
-            button1.Location = new Point(97, 90);
+            button1.BackColor = Color.FromArgb(32, 87, 129);
+            button1.FlatAppearance.BorderSize = 0;
+            button1.FlatStyle = FlatStyle.Flat;
+            button1.ForeColor = Color.White;
+            button1.Location = new Point(228, 100);
             button1.Margin = new Padding(4);
             button1.Name = "button1";
-            button1.Size = new Size(129, 42);
+            button1.Size = new Size(153, 41);
             button1.TabIndex = 7;
             button1.Text = "اضافة جهاز";
-            button1.UseVisualStyleBackColor = true;
+            button1.UseVisualStyleBackColor = false;
             button1.Click += button1_Click;
             // 
             // DevicesTable
@@ -110,23 +117,23 @@
             // 
             // DeNameInput
             // 
-            DeNameInput.Location = new Point(685, 107);
+            DeNameInput.Location = new Point(707, 107);
             DeNameInput.Name = "DeNameInput";
-            DeNameInput.Size = new Size(244, 26);
+            DeNameInput.Size = new Size(222, 26);
             DeNameInput.TabIndex = 9;
             // 
             // HourlyRateInput
             // 
-            HourlyRateInput.Location = new Point(278, 105);
+            HourlyRateInput.Location = new Point(388, 104);
             HourlyRateInput.Name = "HourlyRateInput";
-            HourlyRateInput.Size = new Size(170, 26);
+            HourlyRateInput.Size = new Size(129, 26);
             HourlyRateInput.TabIndex = 10;
             // 
             // DeTypeCombo
             // 
             DeTypeCombo.FormattingEnabled = true;
             DeTypeCombo.Items.AddRange(new object[] { "PS4", "PS5" });
-            DeTypeCombo.Location = new Point(483, 105);
+            DeTypeCombo.Location = new Point(523, 105);
             DeTypeCombo.Name = "DeTypeCombo";
             DeTypeCombo.Size = new Size(178, 27);
             DeTypeCombo.TabIndex = 11;

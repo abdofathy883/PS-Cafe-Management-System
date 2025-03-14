@@ -9,6 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace PlayStation.Presentation
 {
@@ -51,8 +52,6 @@ namespace PlayStation.Presentation
             Panel DevicePanel = new Panel()
             {
                 Size = new Size(250, 300),
-                //Will be setted dynamically
-                //Location = new Point(),
                 BorderStyle = BorderStyle.FixedSingle,
                 //BackColor = Color.White,
                 ForeColor = Color.Black
@@ -61,9 +60,11 @@ namespace PlayStation.Presentation
             Label DeviceName = new Label()
             {
                 Text = device.Name,
-                Location = new Point(0, 10),
+                Location = new Point(65, 10),
                 Width = 120,
-                TextAlign = ContentAlignment.MiddleCenter
+                TextAlign = ContentAlignment.MiddleCenter,
+                ForeColor = Color.White,
+                Font = new Font("Arial", 16, FontStyle.Bold)
             };
             PictureBox DeviceImage = new PictureBox()
             {
@@ -75,15 +76,22 @@ namespace PlayStation.Presentation
             Label DeviceStatus = new Label()
             {
                 Text = device.status.ToString(),
-                Location = new Point(0, 230),
+                Location = new Point(65, 230),
                 Width = 120,
-                TextAlign = ContentAlignment.MiddleCenter
+                TextAlign = ContentAlignment.MiddleCenter, 
+                ForeColor = Color.White,
+                Font = new Font("Arial", 16, FontStyle.Bold)
             };
             Button ManageBtn = new Button()
             {
                 Text = "ادارة",
                 Width = DevicePanel.Width - 20,
-                Location = new Point(10, 260)
+                Location = new Point(10, 260),
+                FlatStyle = FlatStyle.Flat,
+                ForeColor = Color.White,
+                BackColor = ColorTranslator.FromHtml("#205781"),
+                Font = new Font("Arial", 12, FontStyle.Bold),
+                Height = 30
             };
             ManageBtn.Click += (s, e) =>
             {

@@ -118,11 +118,17 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="label1.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Arial, 12pt, style=Bold</value>
+  </data>
   <data name="label1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>336, 52</value>
+    <value>335, 71</value>
+  </data>
+  <data name="label1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>37, 19</value>
   </data>
   <data name="NameInput.Location" type="System.Drawing.Point, System.Drawing">
-    <value>66, 49</value>
+    <value>65, 64</value>
   </data>
   <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="NameInput.MaxLength" type="System.Int32, mscorlib">
@@ -135,11 +141,17 @@
   <data name="NameInput.TextAlign" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
     <value>Left</value>
   </data>
+  <data name="label2.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Arial, 12pt, style=Bold</value>
+  </data>
   <data name="label2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>336, 120</value>
+    <value>298, 115</value>
+  </data>
+  <data name="label2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>74, 19</value>
   </data>
   <data name="PasswordInput.Location" type="System.Drawing.Point, System.Drawing">
-    <value>66, 116</value>
+    <value>65, 109</value>
   </data>
   <data name="PasswordInput.MaxLength" type="System.Int32, mscorlib">
     <value>50</value>
@@ -150,17 +162,26 @@
   <data name="PasswordInput.PlaceholderText" xml:space="preserve">
     <value>اكتب الرقم السري</value>
   </data>
+  <data name="PasswordInput.Size" type="System.Drawing.Size, System.Drawing">
+    <value>221, 29</value>
+  </data>
   <data name="PasswordInput.TextAlign" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
     <value>Right</value>
   </data>
   <data name="LogInBtn.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
     <value>Flat</value>
   </data>
+  <data name="LogInBtn.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Arial, 12pt, style=Bold</value>
+  </data>
   <data name="LogInBtn.Location" type="System.Drawing.Point, System.Drawing">
-    <value>66, 182</value>
+    <value>65, 175</value>
+  </data>
+  <data name="LogInBtn.Size" type="System.Drawing.Size, System.Drawing">
+    <value>307, 37</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>541, 303</value>
+    <value>461, 280</value>
   </data>
   <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
     <value>CenterScreen</value>

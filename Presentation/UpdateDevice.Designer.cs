@@ -39,15 +39,17 @@
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(201, 32);
+            label1.Font = new Font("Arial", 12F, FontStyle.Bold);
+            label1.ForeColor = Color.White;
+            label1.Location = new Point(214, 45);
             label1.Name = "label1";
-            label1.Size = new Size(58, 15);
+            label1.Size = new Size(67, 19);
             label1.TabIndex = 0;
             label1.Text = "اسم الجهاز";
             // 
             // NewDeviceNameInput
             // 
-            NewDeviceNameInput.Location = new Point(123, 60);
+            NewDeviceNameInput.Location = new Point(145, 73);
             NewDeviceNameInput.Name = "NewDeviceNameInput";
             NewDeviceNameInput.Size = new Size(136, 23);
             NewDeviceNameInput.TabIndex = 1;
@@ -55,35 +57,42 @@
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new Point(38, 32);
+            label2.Font = new Font("Arial", 12F, FontStyle.Bold);
+            label2.ForeColor = Color.White;
+            label2.Location = new Point(51, 45);
             label2.Name = "label2";
-            label2.Size = new Size(65, 15);
+            label2.Size = new Size(74, 19);
             label2.TabIndex = 2;
             label2.Text = "سعر الساعة";
             // 
             // NewDevicePriceInput
             // 
-            NewDevicePriceInput.Location = new Point(22, 60);
+            NewDevicePriceInput.Location = new Point(32, 73);
             NewDevicePriceInput.Name = "NewDevicePriceInput";
-            NewDevicePriceInput.Size = new Size(81, 23);
+            NewDevicePriceInput.Size = new Size(93, 23);
             NewDevicePriceInput.TabIndex = 3;
             // 
             // UpdateDeviceBtn
             // 
-            UpdateDeviceBtn.Location = new Point(22, 105);
+            UpdateDeviceBtn.BackColor = Color.FromArgb(32, 87, 129);
+            UpdateDeviceBtn.FlatAppearance.BorderSize = 0;
+            UpdateDeviceBtn.FlatStyle = FlatStyle.Flat;
+            UpdateDeviceBtn.Font = new Font("Arial", 12F, FontStyle.Bold);
+            UpdateDeviceBtn.ForeColor = Color.White;
+            UpdateDeviceBtn.Location = new Point(32, 118);
             UpdateDeviceBtn.Margin = new Padding(0);
             UpdateDeviceBtn.Name = "UpdateDeviceBtn";
-            UpdateDeviceBtn.Size = new Size(237, 26);
+            UpdateDeviceBtn.Size = new Size(249, 26);
             UpdateDeviceBtn.TabIndex = 4;
             UpdateDeviceBtn.Text = "تحديث";
-            UpdateDeviceBtn.UseVisualStyleBackColor = true;
+            UpdateDeviceBtn.UseVisualStyleBackColor = false;
             UpdateDeviceBtn.Click += UpdateDeviceBtn_Click;
             // 
             // UpdateDevice
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(285, 158);
+            ClientSize = new Size(337, 195);
             Controls.Add(UpdateDeviceBtn);
             Controls.Add(NewDevicePriceInput);
             Controls.Add(label2);

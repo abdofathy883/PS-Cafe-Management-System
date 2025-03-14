@@ -46,7 +46,9 @@
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new Point(418, 54);
+            label2.Font = new Font("Arial", 12F, FontStyle.Bold);
+            label2.ForeColor = Color.White;
+            label2.Location = new Point(418, 58);
             label2.Name = "label2";
             label2.Size = new Size(40, 19);
             label2.TabIndex = 1;
@@ -57,7 +59,7 @@
             ExpensesAmountInput.DecimalPlaces = 2;
             ExpensesAmountInput.Location = new Point(376, 86);
             ExpensesAmountInput.Name = "ExpensesAmountInput";
-            ExpensesAmountInput.Size = new Size(82, 26);
+            ExpensesAmountInput.Size = new Size(82, 23);
             ExpensesAmountInput.TabIndex = 2;
             ExpensesAmountInput.TextAlign = HorizontalAlignment.Right;
             ExpensesAmountInput.UpDownAlign = LeftRightAlignment.Left;
@@ -65,6 +67,8 @@
             // label3
             // 
             label3.AutoSize = true;
+            label3.Font = new Font("Arial", 12F, FontStyle.Bold);
+            label3.ForeColor = Color.White;
             label3.Location = new Point(322, 58);
             label3.Name = "label3";
             label3.Size = new Size(48, 19);
@@ -75,12 +79,14 @@
             // 
             ExpensesDescInput.Location = new Point(140, 86);
             ExpensesDescInput.Name = "ExpensesDescInput";
-            ExpensesDescInput.Size = new Size(230, 26);
+            ExpensesDescInput.Size = new Size(230, 23);
             ExpensesDescInput.TabIndex = 4;
             // 
             // label4
             // 
             label4.AutoSize = true;
+            label4.Font = new Font("Arial", 12F, FontStyle.Bold);
+            label4.ForeColor = Color.White;
             label4.Location = new Point(77, 58);
             label4.Name = "label4";
             label4.Size = new Size(57, 19);
@@ -92,13 +98,15 @@
             ExpensesUser.FormattingEnabled = true;
             ExpensesUser.Location = new Point(12, 85);
             ExpensesUser.Name = "ExpensesUser";
-            ExpensesUser.Size = new Size(122, 27);
+            ExpensesUser.Size = new Size(122, 23);
             ExpensesUser.TabIndex = 6;
             // 
             // label5
             // 
             label5.AutoSize = true;
-            label5.Location = new Point(421, 120);
+            label5.Font = new Font("Arial", 12F, FontStyle.Bold);
+            label5.ForeColor = Color.White;
+            label5.Location = new Point(419, 120);
             label5.Name = "label5";
             label5.Size = new Size(39, 19);
             label5.TabIndex = 7;
@@ -110,17 +118,22 @@
             ExpensesDateTime.MaxDate = new DateTime(2049, 12, 31, 0, 0, 0, 0);
             ExpensesDateTime.MinDate = new DateTime(2025, 1, 1, 0, 0, 0, 0);
             ExpensesDateTime.Name = "ExpensesDateTime";
-            ExpensesDateTime.Size = new Size(287, 26);
+            ExpensesDateTime.Size = new Size(287, 23);
             ExpensesDateTime.TabIndex = 8;
             // 
             // AddExpensesBtn
             // 
+            AddExpensesBtn.BackColor = Color.FromArgb(32, 87, 129);
+            AddExpensesBtn.FlatAppearance.BorderSize = 0;
+            AddExpensesBtn.FlatStyle = FlatStyle.Flat;
+            AddExpensesBtn.Font = new Font("Arial", 12F, FontStyle.Bold);
+            AddExpensesBtn.ForeColor = Color.White;
             AddExpensesBtn.Location = new Point(12, 141);
             AddExpensesBtn.Name = "AddExpensesBtn";
             AddExpensesBtn.Size = new Size(153, 27);
             AddExpensesBtn.TabIndex = 9;
             AddExpensesBtn.Text = "اضافة";
-            AddExpensesBtn.UseVisualStyleBackColor = true;
+            AddExpensesBtn.UseVisualStyleBackColor = false;
             AddExpensesBtn.Click += AddExpensesBtn_Click;
             // 
             // ExpensesGrid
@@ -134,9 +147,11 @@
             // label6
             // 
             label6.AutoSize = true;
-            label6.Location = new Point(361, 23);
+            label6.Font = new Font("Arial", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label6.ForeColor = Color.White;
+            label6.Location = new Point(333, 20);
             label6.Name = "label6";
-            label6.Size = new Size(97, 19);
+            label6.Size = new Size(125, 24);
             label6.TabIndex = 11;
             label6.Text = "اضافة مصروفات";
             // 
@@ -144,7 +159,7 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(795, 357);
+            ClientSize = new Size(500, 368);
             Controls.Add(label6);
             Controls.Add(ExpensesGrid);
             Controls.Add(AddExpensesBtn);

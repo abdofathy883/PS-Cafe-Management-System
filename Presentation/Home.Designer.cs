@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             panel1 = new Panel();
+            label3 = new Label();
             label2 = new Label();
             label1 = new Label();
             panel2 = new Panel();
@@ -39,7 +40,6 @@
             UserManagementBtn = new Button();
             EmployeePanel = new Panel();
             MainContainer = new Panel();
-            label3 = new Label();
             panel1.SuspendLayout();
             panel2.SuspendLayout();
             EmployeePanel.SuspendLayout();
@@ -56,6 +56,15 @@
             panel1.Name = "panel1";
             panel1.Size = new Size(893, 95);
             panel1.TabIndex = 0;
+            // 
+            // label3
+            // 
+            label3.AutoSize = true;
+            label3.Location = new Point(754, 73);
+            label3.Name = "label3";
+            label3.Size = new Size(116, 19);
+            label3.TabIndex = 2;
+            label3.Text = "الدعم الفني: واتساب";
             // 
             // label2
             // 
@@ -118,11 +127,11 @@
             ExpensesBtn.FlatStyle = FlatStyle.Flat;
             ExpensesBtn.Font = new Font("Segoe UI", 10F);
             ExpensesBtn.ForeColor = Color.White;
-            ExpensesBtn.Location = new Point(4, 188);
+            ExpensesBtn.Location = new Point(0, 185);
             ExpensesBtn.Margin = new Padding(4);
             ExpensesBtn.Name = "ExpensesBtn";
             ExpensesBtn.Padding = new Padding(8, 4, 8, 4);
-            ExpensesBtn.Size = new Size(277, 65);
+            ExpensesBtn.Size = new Size(281, 60);
             ExpensesBtn.TabIndex = 3;
             ExpensesBtn.Tag = "Styled";
             ExpensesBtn.Text = "ادارة المصروفات";
@@ -140,7 +149,7 @@
             CafetriaBtn.Margin = new Padding(4);
             CafetriaBtn.Name = "CafetriaBtn";
             CafetriaBtn.Padding = new Padding(8, 4, 8, 4);
-            CafetriaBtn.Size = new Size(280, 64);
+            CafetriaBtn.Size = new Size(280, 59);
             CafetriaBtn.TabIndex = 2;
             CafetriaBtn.Tag = "Styled";
             CafetriaBtn.Text = "ادارة الكافيتريا";
@@ -187,10 +196,10 @@
             // EmployeePanel
             // 
             EmployeePanel.Controls.Add(UserManagementBtn);
-            EmployeePanel.Location = new Point(2, 347);
+            EmployeePanel.Location = new Point(2, 382);
             EmployeePanel.Margin = new Padding(4);
             EmployeePanel.Name = "EmployeePanel";
-            EmployeePanel.Size = new Size(279, 153);
+            EmployeePanel.Size = new Size(279, 118);
             EmployeePanel.TabIndex = 2;
             // 
             // MainContainer
@@ -200,15 +209,6 @@
             MainContainer.Name = "MainContainer";
             MainContainer.Size = new Size(601, 418);
             MainContainer.TabIndex = 3;
-            // 
-            // label3
-            // 
-            label3.AutoSize = true;
-            label3.Location = new Point(754, 73);
-            label3.Name = "label3";
-            label3.Size = new Size(116, 19);
-            label3.TabIndex = 2;
-            label3.Text = "الدعم الفني: واتساب";
             // 
             // Home
             // 

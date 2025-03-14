@@ -132,7 +132,7 @@ namespace PlayStation.Presentation
             {
                 Id = 0,
                 DeviceId = CurrentDevice.Id,
-                StartTime = DateTime.Now,
+                StartTime = dateTimePicker1.Value, //DateTime.Now,
                 EndTime = null,
                 Status = "Active",
                 TotalCost = 0,
@@ -152,7 +152,7 @@ namespace PlayStation.Presentation
                 MessageBox.Show("يرجي بدا الجلسه قبل اضافة منتج", "فشل في انهاء الجلسه", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-            CurrentSession.EndTime = DateTime.Now;
+            CurrentSession.EndTime = dateTimePickerEnd.Value; //DateTime.Now;
             CurrentSession.Status = "Closed";
             if (CurrentSession.EndTime.HasValue)
             {

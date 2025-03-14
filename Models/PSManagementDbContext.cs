@@ -32,7 +32,7 @@ public partial class PSManagementDbContext : DbContext
         if (!optionsBuilder.IsConfigured)
         {
             //optionsBuilder.UseSqlServer("Server=.;Database=PSManagementSystemNeww;Trusted_Connection=True;Encrypt=False;");
-            optionsBuilder.UseSqlServer("Server=ZEZOTAHA\\SQLEXPRESS;Database=PSManagementSystemNew;Trusted_Connection=True;Encrypt=False;MultipleActiveResultSets=True;");
+            optionsBuilder.UseSqlServer("Server=.;Database=PSManagementSystemNeww;Trusted_Connection=True;Encrypt=False;");
         }
     }
 

@@ -40,41 +40,47 @@
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(216, 34);
+            label1.Font = new Font("Arial", 12F, FontStyle.Bold);
+            label1.ForeColor = Color.White;
+            label1.Location = new Point(273, 44);
             label1.Name = "label1";
-            label1.Size = new Size(67, 15);
+            label1.Size = new Size(71, 19);
             label1.TabIndex = 0;
             label1.Text = "الاسم الجديد";
             // 
             // NewUserNameInput
             // 
-            NewUserNameInput.Location = new Point(166, 62);
+            NewUserNameInput.Location = new Point(189, 72);
             NewUserNameInput.Name = "NewUserNameInput";
-            NewUserNameInput.Size = new Size(117, 23);
+            NewUserNameInput.Size = new Size(155, 23);
             NewUserNameInput.TabIndex = 1;
             // 
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new Point(42, 34);
+            label2.Font = new Font("Arial", 12F, FontStyle.Bold);
+            label2.ForeColor = Color.White;
+            label2.Location = new Point(75, 44);
             label2.Name = "label2";
-            label2.Size = new Size(96, 15);
+            label2.Size = new Size(108, 19);
             label2.TabIndex = 2;
             label2.Text = "الرقم السري الجديد";
             // 
             // NewUserPassInput
             // 
-            NewUserPassInput.Location = new Point(23, 62);
+            NewUserPassInput.Location = new Point(27, 72);
             NewUserPassInput.Name = "NewUserPassInput";
-            NewUserPassInput.Size = new Size(115, 23);
+            NewUserPassInput.Size = new Size(156, 23);
             NewUserPassInput.TabIndex = 3;
             // 
             // label3
             // 
             label3.AutoSize = true;
-            label3.Location = new Point(218, 98);
+            label3.Font = new Font("Arial", 12F, FontStyle.Bold);
+            label3.ForeColor = Color.White;
+            label3.Location = new Point(271, 107);
             label3.Name = "label3";
-            label3.Size = new Size(65, 15);
+            label3.Size = new Size(73, 19);
             label3.TabIndex = 4;
             label3.Text = "نوع الحساب";
             // 
@@ -83,26 +89,31 @@
             UserTypeCombo.AutoCompleteCustomSource.AddRange(new string[] { "أدمن", "موظف" });
             UserTypeCombo.FormattingEnabled = true;
             UserTypeCombo.Items.AddRange(new object[] { "ادمن", "موظف" });
-            UserTypeCombo.Location = new Point(166, 125);
+            UserTypeCombo.Location = new Point(189, 139);
             UserTypeCombo.Name = "UserTypeCombo";
-            UserTypeCombo.Size = new Size(117, 23);
+            UserTypeCombo.Size = new Size(155, 23);
             UserTypeCombo.TabIndex = 5;
             // 
             // UpdateUserBtn
             // 
-            UpdateUserBtn.Location = new Point(23, 125);
+            UpdateUserBtn.BackColor = Color.FromArgb(32, 87, 129);
+            UpdateUserBtn.FlatAppearance.BorderSize = 0;
+            UpdateUserBtn.FlatStyle = FlatStyle.Flat;
+            UpdateUserBtn.Font = new Font("Arial", 12F, FontStyle.Bold);
+            UpdateUserBtn.ForeColor = Color.White;
+            UpdateUserBtn.Location = new Point(27, 137);
             UpdateUserBtn.Name = "UpdateUserBtn";
-            UpdateUserBtn.Size = new Size(115, 23);
+            UpdateUserBtn.Size = new Size(156, 27);
             UpdateUserBtn.TabIndex = 6;
             UpdateUserBtn.Text = "تحديث";
-            UpdateUserBtn.UseVisualStyleBackColor = true;
+            UpdateUserBtn.UseVisualStyleBackColor = false;
             UpdateUserBtn.Click += UpdateUserBtn_Click;
             // 
             // UpdateUser
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(305, 167);
+            ClientSize = new Size(387, 212);
             Controls.Add(UpdateUserBtn);
             Controls.Add(UserTypeCombo);
             Controls.Add(label3);
@@ -110,6 +121,7 @@
             Controls.Add(label2);
             Controls.Add(NewUserNameInput);
             Controls.Add(label1);
+            MaximizeBox = false;
             Name = "UpdateUser";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "تحديث الحساب";

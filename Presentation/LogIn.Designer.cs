@@ -63,8 +63,9 @@
             // LogInBtn
             // 
             resources.ApplyResources(LogInBtn, "LogInBtn");
-            LogInBtn.BackColor = Color.White;
+            LogInBtn.BackColor = Color.FromArgb(32, 87, 129);
             LogInBtn.FlatAppearance.BorderSize = 0;
+            LogInBtn.ForeColor = Color.White;
             LogInBtn.Name = "LogInBtn";
             LogInBtn.UseVisualStyleBackColor = false;
             LogInBtn.Click += LogInBtn_Click;
