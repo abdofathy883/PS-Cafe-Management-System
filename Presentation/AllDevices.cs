@@ -89,6 +89,7 @@ namespace PlayStation.Presentation
             {
                 SingleDevice singleDevice = new SingleDevice(device.Id,cafeService,sessionService,deviceService, this);
                 singleDevice.ShowDialog();
+                DeviceStatus.Text = deviceService.GetDeviceByIdFromService(device.Id).status.ToString();
             };
 
             //Add the controls to the panel
