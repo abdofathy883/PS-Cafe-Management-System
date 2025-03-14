@@ -33,6 +33,7 @@ namespace PlayStation.Presentation
         }
         private void button1_Click(object sender, EventArgs e)
         {
+            
             if (string.IsNullOrWhiteSpace(DeNameInput.Text))
             {
                 MessageBox.Show("برجاء ادخال اسم الجهاز", "فشل ادخال جهاز جديد", MessageBoxButtons.OKCancel, MessageBoxIcon.Error);
@@ -44,6 +45,13 @@ namespace PlayStation.Presentation
                 device.Name = DeNameInput.Text;
                 device.Type = (string)DeTypeCombo.SelectedItem;
                 device.HourlyRate = (byte)HourlyRateInput.Value;
+
+                //Check for already existing device
+                if (deviceService.GetAllDevicesFromService().Contains(device))
+                {
+                    MessageBox.Show("هذا الجهاز موجود بالفعل", "فشل اضافة جهاز", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
                 deviceService.AddDeviceFromService(device);
                 DevicesTable.Refresh();
             }
@@ -65,18 +73,21 @@ namespace PlayStation.Presentation
             }
             else if(ColumnName == "DeleteCellButton")
             {
-                Device device = new()
+                DialogResult DeleteDialog = MessageBox.Show("تأكيد حذف الجهاز! سيتم حذف الجهاز نهائيا واي بيانات متلعقة به", "حذف جهاز", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
+                if (DeleteDialog == DialogResult.OK)
                 {
-                    Id = Convert.ToInt32(DevicesTable.Rows[e.RowIndex].Cells["ID"].Value),
-                    Name = DevicesTable.Rows[e.RowIndex].Cells["Name"].Value?.ToString() ?? "غير محدد",
-                    Type = (string)DevicesTable.Rows[e.RowIndex].Cells["Type"].Value,
-                    HourlyRate = Convert.ToByte(DevicesTable.Rows[e.RowIndex].Cells["HourlyRate"].Value)
-                };
-                deviceService.RemoveDeviceFromService(device);
-                DevicesTable.DataSource = null;
-                DevicesTable.DataSource = deviceService.GetAllDevicesFromService();
+                    Device device = new()
+                    {
+                        Id = Convert.ToInt32(DevicesTable.Rows[e.RowIndex].Cells["ID"].Value),
+                        Name = DevicesTable.Rows[e.RowIndex].Cells["Name"].Value?.ToString() ?? "غير محدد",
+                        Type = (string)DevicesTable.Rows[e.RowIndex].Cells["Type"].Value,
+                        HourlyRate = Convert.ToByte(DevicesTable.Rows[e.RowIndex].Cells["HourlyRate"].Value)
+                    };
+                    deviceService.RemoveDeviceFromService(device);
+                    DevicesTable.DataSource = null;
+                    DevicesTable.DataSource = deviceService.GetAllDevicesFromService();
+                }
             }
-
         }
     }
 }

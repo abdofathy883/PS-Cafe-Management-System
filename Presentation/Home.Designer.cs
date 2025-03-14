@@ -39,6 +39,7 @@
             UserManagementBtn = new Button();
             EmployeePanel = new Panel();
             MainContainer = new Panel();
+            label3 = new Label();
             panel1.SuspendLayout();
             panel2.SuspendLayout();
             EmployeePanel.SuspendLayout();
@@ -46,6 +47,7 @@
             // 
             // panel1
             // 
+            panel1.Controls.Add(label3);
             panel1.Controls.Add(label2);
             panel1.Controls.Add(label1);
             panel1.Dock = DockStyle.Top;
@@ -58,14 +60,12 @@
             // label2
             // 
             label2.AutoSize = true;
-            label2.Dock = DockStyle.Right;
-            label2.Font = new Font("Arial", 12F, FontStyle.Bold);
+            label2.Font = new Font("Comic Sans MS", 26.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
             label2.ForeColor = Color.White;
-            label2.Location = new Point(796, 0);
-            label2.Margin = new Padding(4, 0, 4, 0);
+            label2.Location = new Point(666, 22);
+            label2.Margin = new Padding(0);
             label2.Name = "label2";
-            label2.Padding = new Padding(0, 20, 0, 0);
-            label2.Size = new Size(97, 39);
+            label2.Size = new Size(218, 49);
             label2.TabIndex = 1;
             label2.Tag = "Styled";
             label2.Text = "Abdo Fathy";
@@ -73,12 +73,12 @@
             // label1
             // 
             label1.AutoSize = true;
-            label1.Font = new Font("Arial", 12F, FontStyle.Bold);
+            label1.Font = new Font("Comic Sans MS", 26.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
             label1.ForeColor = Color.White;
-            label1.Location = new Point(12, 23);
+            label1.Location = new Point(55, 22);
             label1.Margin = new Padding(4, 0, 4, 0);
             label1.Name = "label1";
-            label1.Size = new Size(89, 19);
+            label1.Size = new Size(194, 49);
             label1.TabIndex = 0;
             label1.Tag = "Styled";
             label1.Text = "GameOver";
@@ -93,31 +93,36 @@
             panel2.Location = new Point(0, 95);
             panel2.Margin = new Padding(4);
             panel2.Name = "panel2";
-            panel2.Size = new Size(189, 418);
+            panel2.Size = new Size(285, 418);
             panel2.TabIndex = 1;
             // 
             // AllDevicesBtn
             // 
-            AllDevicesBtn.Location = new Point(3, 7);
+            AllDevicesBtn.BackColor = Color.FromArgb(32, 87, 129);
+            AllDevicesBtn.FlatAppearance.BorderSize = 0;
+            AllDevicesBtn.FlatStyle = FlatStyle.Flat;
+            AllDevicesBtn.ForeColor = Color.White;
+            AllDevicesBtn.Location = new Point(3, 3);
+            AllDevicesBtn.Margin = new Padding(0);
             AllDevicesBtn.Name = "AllDevicesBtn";
-            AllDevicesBtn.Size = new Size(183, 30);
+            AllDevicesBtn.Size = new Size(279, 52);
             AllDevicesBtn.TabIndex = 4;
             AllDevicesBtn.Text = "الرئيسية";
-            AllDevicesBtn.UseVisualStyleBackColor = true;
+            AllDevicesBtn.UseVisualStyleBackColor = false;
             AllDevicesBtn.Click += AllDevicesBtn_Click;
             // 
             // ExpensesBtn
             // 
-            ExpensesBtn.BackColor = Color.FromArgb(66, 133, 244);
+            ExpensesBtn.BackColor = Color.FromArgb(32, 87, 129);
             ExpensesBtn.FlatAppearance.BorderSize = 0;
             ExpensesBtn.FlatStyle = FlatStyle.Flat;
             ExpensesBtn.Font = new Font("Segoe UI", 10F);
             ExpensesBtn.ForeColor = Color.White;
-            ExpensesBtn.Location = new Point(1, 130);
+            ExpensesBtn.Location = new Point(4, 188);
             ExpensesBtn.Margin = new Padding(4);
             ExpensesBtn.Name = "ExpensesBtn";
             ExpensesBtn.Padding = new Padding(8, 4, 8, 4);
-            ExpensesBtn.Size = new Size(186, 43);
+            ExpensesBtn.Size = new Size(277, 65);
             ExpensesBtn.TabIndex = 3;
             ExpensesBtn.Tag = "Styled";
             ExpensesBtn.Text = "ادارة المصروفات";
@@ -126,16 +131,16 @@
             // 
             // CafetriaBtn
             // 
-            CafetriaBtn.BackColor = Color.FromArgb(66, 133, 244);
+            CafetriaBtn.BackColor = Color.FromArgb(32, 87, 129);
             CafetriaBtn.FlatAppearance.BorderSize = 0;
             CafetriaBtn.FlatStyle = FlatStyle.Flat;
             CafetriaBtn.Font = new Font("Segoe UI", 10F);
             CafetriaBtn.ForeColor = Color.White;
-            CafetriaBtn.Location = new Point(1, 87);
+            CafetriaBtn.Location = new Point(2, 121);
             CafetriaBtn.Margin = new Padding(4);
             CafetriaBtn.Name = "CafetriaBtn";
             CafetriaBtn.Padding = new Padding(8, 4, 8, 4);
-            CafetriaBtn.Size = new Size(186, 43);
+            CafetriaBtn.Size = new Size(280, 64);
             CafetriaBtn.TabIndex = 2;
             CafetriaBtn.Tag = "Styled";
             CafetriaBtn.Text = "ادارة الكافيتريا";
@@ -144,16 +149,16 @@
             // 
             // DeviceManagementBtn
             // 
-            DeviceManagementBtn.BackColor = Color.FromArgb(66, 133, 244);
+            DeviceManagementBtn.BackColor = Color.FromArgb(32, 87, 129);
             DeviceManagementBtn.FlatAppearance.BorderSize = 0;
             DeviceManagementBtn.FlatStyle = FlatStyle.Flat;
             DeviceManagementBtn.Font = new Font("Segoe UI", 10F);
             DeviceManagementBtn.ForeColor = Color.White;
-            DeviceManagementBtn.Location = new Point(1, 44);
+            DeviceManagementBtn.Location = new Point(1, 57);
             DeviceManagementBtn.Margin = new Padding(4);
             DeviceManagementBtn.Name = "DeviceManagementBtn";
             DeviceManagementBtn.Padding = new Padding(8, 4, 8, 4);
-            DeviceManagementBtn.Size = new Size(186, 43);
+            DeviceManagementBtn.Size = new Size(280, 61);
             DeviceManagementBtn.TabIndex = 1;
             DeviceManagementBtn.Tag = "Styled";
             DeviceManagementBtn.Text = "ادارة الاجهزة";
@@ -162,7 +167,7 @@
             // 
             // UserManagementBtn
             // 
-            UserManagementBtn.BackColor = Color.FromArgb(66, 133, 244);
+            UserManagementBtn.BackColor = Color.FromArgb(32, 87, 129);
             UserManagementBtn.FlatAppearance.BorderSize = 0;
             UserManagementBtn.FlatStyle = FlatStyle.Flat;
             UserManagementBtn.Font = new Font("Segoe UI", 10F);
@@ -171,7 +176,7 @@
             UserManagementBtn.Margin = new Padding(4);
             UserManagementBtn.Name = "UserManagementBtn";
             UserManagementBtn.Padding = new Padding(8, 4, 8, 4);
-            UserManagementBtn.Size = new Size(186, 43);
+            UserManagementBtn.Size = new Size(280, 60);
             UserManagementBtn.TabIndex = 0;
             UserManagementBtn.Tag = "Styled";
             UserManagementBtn.Text = "ادارة الحسابات";
@@ -182,19 +187,28 @@
             // EmployeePanel
             // 
             EmployeePanel.Controls.Add(UserManagementBtn);
-            EmployeePanel.Location = new Point(2, 307);
+            EmployeePanel.Location = new Point(2, 347);
             EmployeePanel.Margin = new Padding(4);
             EmployeePanel.Name = "EmployeePanel";
-            EmployeePanel.Size = new Size(189, 193);
+            EmployeePanel.Size = new Size(279, 153);
             EmployeePanel.TabIndex = 2;
             // 
             // MainContainer
             // 
             MainContainer.Dock = DockStyle.Right;
-            MainContainer.Location = new Point(195, 95);
+            MainContainer.Location = new Point(292, 95);
             MainContainer.Name = "MainContainer";
-            MainContainer.Size = new Size(698, 418);
+            MainContainer.Size = new Size(601, 418);
             MainContainer.TabIndex = 3;
+            // 
+            // label3
+            // 
+            label3.AutoSize = true;
+            label3.Location = new Point(754, 73);
+            label3.Name = "label3";
+            label3.Size = new Size(116, 19);
+            label3.TabIndex = 2;
+            label3.Text = "الدعم الفني: واتساب";
             // 
             // Home
             // 
@@ -234,5 +248,6 @@
         private Button ExpensesBtn;
         private Panel MainContainer;
         private Button AllDevicesBtn;
+        private Label label3;
     }
 }

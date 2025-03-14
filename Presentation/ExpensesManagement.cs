@@ -15,13 +15,18 @@ namespace PlayStation.Application.Services
     public partial class ExpensesForm : BaseForm
     {
         private readonly ExpensesService expensesService;
-        public ExpensesForm(ExpensesService _expensesService)
+        private readonly UserService userService;
+        public ExpensesForm(ExpensesService _expensesService, UserService _userService)
         {
             expensesService = _expensesService;
+            userService = _userService;
             // Note: I stopped with bug in connecting the user to the expenses, need to fix this bug first
             InitializeComponent();            
             PopulateExpensesGrid();
             ApplyGlobalStyles(this);
+            ExpensesUser.DataSource = userService.GetAllUsersFromService();
+            ExpensesUser.DisplayMember = "Name";
+            ExpensesUser.ValueMember = "Id";
             ExpensesUser.DisplayMember = "UserName";
             ExpensesUser.ValueMember = "ID";
             ExpensesGrid.Columns["Id"].Visible = false;

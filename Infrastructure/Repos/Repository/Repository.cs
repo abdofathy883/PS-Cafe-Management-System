@@ -49,6 +49,7 @@ namespace PlayStation.Infrastructure.Repos.Repository
 
         public T Update(T entity)
         {
+            // Bug here
             _dbSet.Update(entity);
             _dbContext.SaveChanges();
             return entity;

@@ -19,7 +19,10 @@ namespace PlayStation.Presentation
         private readonly DeviceService deviceService;
         Device CurrentDevice;
         Session CurrentSession;
-        public SingleDevice(int _CurrentDeviceId, CafeService _CafeService, SessionService _sessionService, DeviceService _deviceService)
+        AllDevices AllDevices;
+        //private System.Timers.Timer timer;
+        private int elapsedSeconds;
+        public SingleDevice(int _CurrentDeviceId, CafeService _CafeService, SessionService _sessionService, DeviceService _deviceService, AllDevices _allDevices)
         {
             InitializeComponent();
             ApplyGlobalStyles(this);
@@ -27,6 +30,7 @@ namespace PlayStation.Presentation
             CafeService = _CafeService;
             sessionService = _sessionService;
             deviceService = _deviceService;
+            AllDevices = _allDevices;
 
             CurrentDevice = deviceService.GetDeviceByIdFromService(_CurrentDeviceId);
 
@@ -37,7 +41,17 @@ namespace PlayStation.Presentation
             {
                 CurrentSession = CurrentDevice.Sessions.First(s => s.Status == "Active");
             }
+            DeviceNameLbl.Text = CurrentDevice.Name;
+
+            //timer = new System.Timers.Timer();
+            //timer.Interval = 1000;
+            //timer.Tick +=
         }
+        //public void Timer_Tick(object sender, EventArgs e)
+        //{
+        //    Seconds++;
+        //    TimerLbl.Text = $"{Seconds}";
+        //}
 
         private void AddItemBtn_Click(object sender, EventArgs e)
         {
@@ -54,12 +68,19 @@ namespace PlayStation.Presentation
             else
             {
 
-                var item = CafeService.GetItemByID((int)ItemsCombo.SelectedValue);
+                //var item = CafeService.GetItemByID((int)ItemsCombo.SelectedValue);
+                var selectedValue = ItemsCombo.SelectedValue;
+                if (selectedValue == null)
+                {
+                    MessageBox.Show("يرجى اختيار منتج صالح", "فشل اضافة منتج", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+                var item = CafeService.GetItemByID((int)selectedValue);
                 if (item.Stock < ItemsCounter.Value)
                 {
                     MessageBox.Show("الكمية المتاحة لهذا المنتج اقل من الكمية المطلوبة", "تحذير", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
-                    
+
                 }
                 var Itemsprice = CafeService.GetCafeItemByIdFromService((int)ItemsCombo.SelectedValue).Price;
                 OrderDetail orderDetail = new OrderDetail()
@@ -97,8 +118,19 @@ namespace PlayStation.Presentation
 
         }
 
+        //private void SessionToggle()
+        //{
+        //    if (dateTimePicker1.ShowCheckBox == true)
+        //    {
+        //        StartBtn.Enabled = false;
+        //        StartBtn.Hide = false;
+        //    }
+        //}
         private void StartBtn_Click(object sender, EventArgs e)
         {
+            elapsedSeconds = 0;
+            TimerLbl.Text = "00:00:00";
+            timer.Start();
             CurrentSession = new Session()
             {
                 Id = 0,
@@ -117,6 +149,7 @@ namespace PlayStation.Presentation
 
         private void EndBtn_Click(object sender, EventArgs e)
         {
+            timer.Stop();
             if (CurrentSession == null)
             {
                 MessageBox.Show("يرجي بدا الجلسه قبل اضافة منتج", "فشل في انهاء الجلسه", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -139,6 +172,35 @@ namespace PlayStation.Presentation
         private void panel1_Paint(object sender, PaintEventArgs e)
         {
 
+        }
+
+        private void SingleDevice_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            //AllDevices.Refresh();
+
+        }
+
+        private void dateTimePicker1_ValueChanged(object sender, EventArgs e)
+        {
+            StartBtn.Enabled = !dateTimePicker1.Checked;
+        }
+
+        private void timer_Tick(object sender, EventArgs e)
+        {
+            //Seconds++;
+            //TimerLbl.Text = $"{Seconds}";
+
+
+            elapsedSeconds++;
+            int hours = elapsedSeconds / 3600;
+            int minutes = (elapsedSeconds % 3600) / 60;
+            int seconds = elapsedSeconds % 60;
+            TimerLbl.Text = $"{hours}:{minutes}:{seconds}";
+        }
+
+        private void dateTimePickerEnd_ValueChanged(object sender, EventArgs e)
+        {
+            EndBtn.Enabled = !dateTimePickerEnd.Checked;
         }
     }
 }

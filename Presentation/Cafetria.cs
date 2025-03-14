@@ -37,11 +37,20 @@ namespace PlayStation.Presentation
             }
             else
             {
-                Item cafeteriaItems = new Item();
-                cafeteriaItems.Name = ProductNameInput.Text;
-                cafeteriaItems.Stock = (byte)ProductStockInput.Value;
-                cafeteriaItems.Price = ProductPriceInput.Value;
-                cafeService.AddCafeItemFromService(cafeteriaItems);
+                Item newCafeteriaItem = new Item()
+                {
+                    Name = ProductNameInput.Text,
+                    Stock = (byte)ProductStockInput.Value,
+                    Price = ProductPriceInput.Value,
+                };
+
+                //Check for already existing product
+                if (cafeService.GetCafeItemsFromService().Any(x => x.Name == newCafeteriaItem.Name))
+                {
+                    MessageBox.Show("هذا المنتج موجود بالفعل", "فشل اضافة منتج", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+                cafeService.AddCafeItemFromService(newCafeteriaItem);
                 ProductsGrid.Refresh();
             }
         }
@@ -50,9 +59,9 @@ namespace PlayStation.Presentation
             Item UpdatedItem = new()
             {
                 Id = Convert.ToInt32(ProductsGrid.Rows[e.RowIndex].Cells["ID"].Value),
-                Name = ProductsGrid.Rows[e.RowIndex].Cells["ItemName"].Value.ToString() ?? "اسم الجهاز غير محدد",
-                Price = Convert.ToDecimal(ProductsGrid.Rows[e.RowIndex].Cells["ItemPrice"].Value),
-                Stock = Convert.ToByte(ProductsGrid.Rows[e.RowIndex].Cells["ItemStock"].Value)
+                Name = ProductsGrid.Rows[e.RowIndex].Cells["Name"].Value.ToString() ?? "اسم الجهاز غير محدد",
+                Price = Convert.ToDecimal(ProductsGrid.Rows[e.RowIndex].Cells["Price"].Value),
+                Stock = Convert.ToByte(ProductsGrid.Rows[e.RowIndex].Cells["Stock"].Value)
             };
             UpdateItem updateItem = new UpdateItem(UpdatedItem);
             updateItem.ShowDialog();

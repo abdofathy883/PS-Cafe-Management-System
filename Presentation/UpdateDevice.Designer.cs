@@ -70,9 +70,10 @@
             // 
             // UpdateDeviceBtn
             // 
-            UpdateDeviceBtn.Location = new Point(22, 98);
+            UpdateDeviceBtn.Location = new Point(22, 105);
+            UpdateDeviceBtn.Margin = new Padding(0);
             UpdateDeviceBtn.Name = "UpdateDeviceBtn";
-            UpdateDeviceBtn.Size = new Size(237, 27);
+            UpdateDeviceBtn.Size = new Size(237, 26);
             UpdateDeviceBtn.TabIndex = 4;
             UpdateDeviceBtn.Text = "تحديث";
             UpdateDeviceBtn.UseVisualStyleBackColor = true;
@@ -91,7 +92,9 @@
             FormBorderStyle = FormBorderStyle.FixedSingle;
             MaximizeBox = false;
             Name = "UpdateDevice";
-            Text = "UpdateDevice";
+            ShowIcon = false;
+            StartPosition = FormStartPosition.CenterScreen;
+            Text = "تحديث جهاز";
             ((System.ComponentModel.ISupportInitialize)NewDevicePriceInput).EndInit();
             ResumeLayout(false);
             PerformLayout();
