@@ -19,10 +19,9 @@ namespace PlayStation.Presentation
         private readonly DeviceService deviceService;
         Device CurrentDevice;
         Session CurrentSession;
-        AllDevices AllDevices;
         //private System.Timers.Timer timer;
         private int elapsedSeconds;
-        public SingleDevice(int _CurrentDeviceId, CafeService _CafeService, SessionService _sessionService, DeviceService _deviceService, AllDevices _allDevices)
+        public SingleDevice(int _CurrentDeviceId, CafeService _CafeService, SessionService _sessionService, DeviceService _deviceService)
         {
             InitializeComponent();
             ApplyGlobalStyles(this);
@@ -30,7 +29,6 @@ namespace PlayStation.Presentation
             CafeService = _CafeService;
             sessionService = _sessionService;
             deviceService = _deviceService;
-            AllDevices = _allDevices;
 
             CurrentDevice = deviceService.GetDeviceByIdFromService(_CurrentDeviceId);
 
@@ -40,12 +38,11 @@ namespace PlayStation.Presentation
             if (CurrentDevice.status == DevaisStatus.NotAvailable)
             {
                 CurrentSession = CurrentDevice.Sessions.First(s => s.Status == "Active");
+                elapsedSeconds = ((int)(DateTime.Now - CurrentSession.StartTime).TotalSeconds);
+                timer.Start();
             }
             DeviceNameLbl.Text = CurrentDevice.Name;
 
-            //timer = new System.Timers.Timer();
-            //timer.Interval = 1000;
-            //timer.Tick +=
         }
         //public void Timer_Tick(object sender, EventArgs e)
         //{

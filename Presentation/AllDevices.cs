@@ -87,7 +87,7 @@ namespace PlayStation.Presentation
             };
             ManageBtn.Click += (s, e) =>
             {
-                SingleDevice singleDevice = new SingleDevice(device.Id,cafeService,sessionService,deviceService, this);
+                SingleDevice singleDevice = new SingleDevice(device.Id,cafeService,sessionService,deviceService);
                 singleDevice.ShowDialog();
                 DeviceStatus.Text = deviceService.GetDeviceByIdFromService(device.Id).status.ToString();
             };
