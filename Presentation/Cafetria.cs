@@ -50,11 +50,11 @@ namespace PlayStation.Presentation
             Item UpdatedItem = new()
             {
                 Id = Convert.ToInt32(ProductsGrid.Rows[e.RowIndex].Cells["ID"].Value),
-                Name = ProductsGrid.Rows[e.RowIndex].Cells["ItemName"].Value.ToString() ?? "اسم الجهاز غير محدد",
-                Price = Convert.ToDecimal(ProductsGrid.Rows[e.RowIndex].Cells["ItemPrice"].Value),
-                Stock = Convert.ToByte(ProductsGrid.Rows[e.RowIndex].Cells["ItemStock"].Value)
+                Name = ProductsGrid.Rows[e.RowIndex].Cells["Name"].Value.ToString() ?? "اسم الجهاز غير محدد",
+                Price = Convert.ToDecimal(ProductsGrid.Rows[e.RowIndex].Cells["Price"].Value),
+                Stock = Convert.ToByte(ProductsGrid.Rows[e.RowIndex].Cells["Stock"].Value)
             };
-            UpdateItem updateItem = new UpdateItem(UpdatedItem);
+            UpdateItem updateItem = new UpdateItem(UpdatedItem, cafeService);
             updateItem.ShowDialog();
         }
     }

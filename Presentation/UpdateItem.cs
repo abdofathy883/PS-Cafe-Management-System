@@ -16,14 +16,9 @@ namespace PlayStation.Presentation
     {
         private readonly  CafeService cafeService ;
         Item UpdatedItem;
-        public UpdateItem(CafeService _cafeService)
+        public UpdateItem(Item _UpdatedItem, CafeService _cafeService)
         {
             cafeService = _cafeService;
-            InitializeComponent();
-            ApplyGlobalStyles(this);
-        }
-        public UpdateItem(Item _UpdatedItem)
-        {
             InitializeComponent();
             ApplyGlobalStyles(this);
             UpdatedItem = _UpdatedItem;
