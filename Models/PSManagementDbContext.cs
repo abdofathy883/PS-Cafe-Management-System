@@ -24,6 +24,7 @@ public partial class PSManagementDbContext : DbContext
     public virtual DbSet<OrderDetail> OrderDetails { get; set; }
 
     public virtual DbSet<Session> Sessions { get; set; }
+    public virtual DbSet<LoginSession> LoginSessions { get; set; }
 
     public virtual DbSet<User> Users { get; set; }
 
@@ -31,8 +32,10 @@ public partial class PSManagementDbContext : DbContext
     {
         if (!optionsBuilder.IsConfigured)
         {
+            optionsBuilder.UseSqlServer("Server=ZEZOTAHA\\SQLEXPRESS;Database=PSManagementSystemNew;Trusted_Connection=True;Encrypt=False;MultipleActiveResultSets=True;");
+
+            //note use this ya abdo and comment the above line 
             //optionsBuilder.UseSqlServer("Server=.;Database=PSManagementSystemNeww;Trusted_Connection=True;Encrypt=False;");
-            optionsBuilder.UseSqlServer("Server=.;Database=PSManagementSystemNeww;Trusted_Connection=True;Encrypt=False;");
         }
     }
 
@@ -41,7 +44,7 @@ public partial class PSManagementDbContext : DbContext
         modelBuilder.Entity<Device>(entity =>
         {
             entity.HasKey(e => e.Id).HasName("PK__Device__3214EC27833622CA");
-
+            entity.HasIndex(e => e.Name, "UQ__Device__737584F6D3A3D3A3").IsUnique();
             entity.ToTable("Device");
 
             entity.Property(e => e.Id).HasColumnName("ID");
@@ -66,7 +69,7 @@ public partial class PSManagementDbContext : DbContext
         modelBuilder.Entity<Item>(entity =>
         {
             entity.HasKey(e => e.Id).HasName("PK__Items__3214EC277D3552D0");
-
+            entity.HasIndex(e => e.Name, "UQ__Items__737584F6D3A3D3A3").IsUnique();
             entity.Property(e => e.Id).HasColumnName("ID");
             entity.Property(e => e.Name).HasMaxLength(30);
             entity.Property(e => e.Price).HasColumnType("decimal(18, 0)");
@@ -120,7 +123,7 @@ public partial class PSManagementDbContext : DbContext
         modelBuilder.Entity<User>(entity =>
         {
             entity.HasKey(e => e.Id).HasName("PK__User__3214EC274FC86FB1");
-
+            entity.HasIndex(e => e.Name, "UQ__User__737584F6D3A3D3A3").IsUnique();
             entity.ToTable("User");
 
             entity.Property(e => e.Id).HasColumnName("ID");

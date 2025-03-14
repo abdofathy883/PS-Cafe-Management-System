@@ -28,7 +28,7 @@ namespace PlayStation
             var services = new ServiceCollection();
             
             // Register DbContext
-            services.AddDbContext<PSManagementDbContext>(o=>o.UseSqlServer(Configuration.GetConnectionString("AbdoSqlServer")).UseLazyLoadingProxies());
+            services.AddDbContext<PSManagementDbContext>(o=>o.UseSqlServer(Configuration.GetConnectionString("ZezoSqlServer")).UseLazyLoadingProxies());
             
             // Register Repository
             services.AddTransient(typeof(IRepository<>), typeof(Repository<>));
@@ -37,6 +37,7 @@ namespace PlayStation
             services.AddTransient<CafeService>();
             services.AddTransient<DeviceService>();
             services.AddTransient<ExpensesService>();
+            services.AddTransient<LoginSessionService>();
             services.AddTransient<SessionService>();
             services.AddTransient<UserService>();
 
@@ -60,7 +61,7 @@ namespace PlayStation
             System.Windows.Forms.Application.EnableVisualStyles();
             System.Windows.Forms.Application.SetCompatibleTextRenderingDefault(false);
 
-            var mainForm = serviceProvider.GetRequiredService<Home>();
+            var mainForm = serviceProvider.GetRequiredService<LogIn>();
 
             // To customize application configuration such as set high DPI settings or default font,
             // see https://aka.ms/applicationconfiguration.

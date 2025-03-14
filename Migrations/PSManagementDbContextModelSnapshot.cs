@@ -34,6 +34,9 @@ namespace PlayStation.Migrations
                     b.Property<decimal>("HourlyRate")
                         .HasColumnType("decimal(18,2)");
 
+                    b.Property<decimal>("HourlyRateForMulti")
+                        .HasColumnType("decimal(18,2)");
+
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
@@ -52,6 +55,9 @@ namespace PlayStation.Migrations
 
                     b.HasKey("Id")
                         .HasName("PK__Device__3214EC27833622CA");
+
+                    b.HasIndex(new[] { "Name" }, "UQ__Device__737584F6D3A3D3A3")
+                        .IsUnique();
 
                     b.ToTable("Device", (string)null);
                 });
@@ -111,13 +117,46 @@ namespace PlayStation.Migrations
                     b.Property<decimal>("Price")
                         .HasColumnType("decimal(18, 0)");
 
-                    b.Property<byte>("Stock")
-                        .HasColumnType("tinyint");
+                    b.Property<decimal>("Stock")
+                        .HasColumnType("decimal(18,2)");
 
                     b.HasKey("Id")
                         .HasName("PK__Items__3214EC277D3552D0");
 
+                    b.HasIndex(new[] { "Name" }, "UQ__Items__737584F6D3A3D3A3")
+                        .IsUnique();
+
                     b.ToTable("Items");
+                });
+
+            modelBuilder.Entity("PlayStation.Models.LoginSession", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsLoggedOut")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime>("LoginTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("LogoutTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("LoginSessions");
                 });
 
             modelBuilder.Entity("PlayStation.Models.OrderDetail", b =>
@@ -238,6 +277,9 @@ namespace PlayStation.Migrations
                     b.HasKey("Id")
                         .HasName("PK__User__3214EC274FC86FB1");
 
+                    b.HasIndex(new[] { "Name" }, "UQ__User__737584F6D3A3D3A3")
+                        .IsUnique();
+
                     b.ToTable("User", (string)null);
                 });
 
@@ -247,6 +289,17 @@ namespace PlayStation.Migrations
                         .WithMany("Expenses")
                         .HasForeignKey("UserId")
                         .HasConstraintName("FK_Expenses_USer");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("PlayStation.Models.LoginSession", b =>
+                {
+                    b.HasOne("PlayStation.Models.User", "User")
+                        .WithMany("LoginSession")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("User");
                 });
@@ -303,6 +356,8 @@ namespace PlayStation.Migrations
             modelBuilder.Entity("PlayStation.Models.User", b =>
                 {
                     b.Navigation("Expenses");
+
+                    b.Navigation("LoginSession");
 
                     b.Navigation("Session");
                 });

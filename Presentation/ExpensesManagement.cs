@@ -37,8 +37,7 @@ namespace PlayStation.Application.Services
         }
         private void PopulateExpensesGrid()
         {
-            var expenses = expensesService.GetAllExpensesFromService();
-            var expensesWithUserNames = expenses.Select(expense => new
+            var expenses = expensesService.GetAllExpensesFromService().Select(expense => new
             {
                 expense.Id,
                 expense.Description,
@@ -46,8 +45,13 @@ namespace PlayStation.Application.Services
                 expense.Date,
                 UserName = expense.User != null ? expense.User.Name : "غير معروف"
             }).ToList();
-            ExpensesGrid.DataSource = expensesWithUserNames;
-            
+            ExpensesGrid.DataSource = expenses;
+            ExpensesGrid.Columns["Id"].Visible = false;
+            ExpensesGrid.Columns["UserName"].HeaderText = "اسم المستخدم";
+            ExpensesGrid.Columns["Date"].HeaderText = "التاريخ";
+            ExpensesGrid.Columns["Amount"].HeaderText = "المبلغ";
+            ExpensesGrid.Columns["Description"].HeaderText = "الوصف";
+
         }
         private void AddExpensesBtn_Click(object sender, EventArgs e)
         {

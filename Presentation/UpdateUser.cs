@@ -14,20 +14,14 @@ namespace PlayStation.Presentation
 {
     public partial class UpdateUser : BaseForm
     {
-        User UpdatedUser = new User();
+        private User UpdatedUser ;
         private readonly UserService userService ;
-        public UpdateUser(UserService _userService)
+        public UpdateUser(int userId , UserService _userService)
         {
             userService = _userService;
             InitializeComponent();
             ApplyGlobalStyles(this);
-        }
-        public UpdateUser(User user , UserService _userService)
-        {
-            userService = _userService;
-            InitializeComponent();
-            ApplyGlobalStyles(this);
-            UpdatedUser = user;
+            UpdatedUser = userService.GetUserByIdFromService(userId);
             NewUserNameInput.Text = UpdatedUser.Name;
             NewUserPassInput.Text = UpdatedUser.Password;
             UserTypeCombo.SelectedItem = UpdatedUser.Role;
@@ -35,6 +29,11 @@ namespace PlayStation.Presentation
 
         private void UpdateUserBtn_Click(object sender, EventArgs e)
         {
+            if (UpdatedUser.Name != NewUserNameInput.Text && userService.IsUsereNameIsUsed(NewUserNameInput.Text))
+            {
+                MessageBox.Show("هذا الحساب موجود بالفعل", "فشل اضافة حساب", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
             UpdatedUser.Name = NewUserNameInput.Text;
             UpdatedUser.Password = NewUserPassInput.Text;
             UpdatedUser.Role = UserTypeCombo.SelectedItem as string ?? string.Empty;

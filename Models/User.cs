@@ -19,4 +19,5 @@ public partial class User : IDeletable
     public virtual ICollection<Expense> Expenses { get; set; } = new List<Expense>();
 
     public virtual ICollection<Session> Session { get; set; } = new List<Session>();
+    public virtual ICollection<LoginSession> LoginSession { get; set; } = new List<LoginSession>();
 }

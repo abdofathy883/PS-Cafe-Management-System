@@ -12,8 +12,8 @@ using PlayStation.Models;
 namespace PlayStation.Migrations
 {
     [DbContext(typeof(PSManagementDbContext))]
-    [Migration("20250313055941_changeSessionAndDeleteOrder")]
-    partial class changeSessionAndDeleteOrder
+    [Migration("20250314152537_init")]
+    partial class init
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -37,6 +37,9 @@ namespace PlayStation.Migrations
                     b.Property<decimal>("HourlyRate")
                         .HasColumnType("decimal(18,2)");
 
+                    b.Property<decimal>("HourlyRateForMulti")
+                        .HasColumnType("decimal(18,2)");
+
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
@@ -55,6 +58,9 @@ namespace PlayStation.Migrations
 
                     b.HasKey("Id")
                         .HasName("PK__Device__3214EC27833622CA");
+
+                    b.HasIndex(new[] { "Name" }, "UQ__Device__737584F6D3A3D3A3")
+                        .IsUnique();
 
                     b.ToTable("Device", (string)null);
                 });
@@ -114,11 +120,14 @@ namespace PlayStation.Migrations
                     b.Property<decimal>("Price")
                         .HasColumnType("decimal(18, 0)");
 
-                    b.Property<byte>("Stock")
-                        .HasColumnType("tinyint");
+                    b.Property<decimal>("Stock")
+                        .HasColumnType("decimal(18,2)");
 
                     b.HasKey("Id")
                         .HasName("PK__Items__3214EC277D3552D0");
+
+                    b.HasIndex(new[] { "Name" }, "UQ__Items__737584F6D3A3D3A3")
+                        .IsUnique();
 
                     b.ToTable("Items");
                 });
@@ -180,14 +189,14 @@ namespace PlayStation.Migrations
                     b.Property<decimal>("Duration")
                         .HasColumnType("decimal(18, 0)");
 
-                    b.Property<TimeOnly>("EndTime")
-                        .HasColumnType("time");
+                    b.Property<DateTime?>("EndTime")
+                        .HasColumnType("datetime2");
 
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
-                    b.Property<TimeOnly>("StartTime")
-                        .HasColumnType("time");
+                    b.Property<DateTime>("StartTime")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("Status")
                         .IsRequired()
@@ -241,6 +250,9 @@ namespace PlayStation.Migrations
                     b.HasKey("Id")
                         .HasName("PK__User__3214EC274FC86FB1");
 
+                    b.HasIndex(new[] { "Name" }, "UQ__User__737584F6D3A3D3A3")
+                        .IsUnique();
+
                     b.ToTable("User", (string)null);
                 });
 
@@ -282,7 +294,7 @@ namespace PlayStation.Migrations
                         .HasConstraintName("FK_Session_Console");
 
                     b.HasOne("PlayStation.Models.User", null)
-                        .WithMany("Orders")
+                        .WithMany("Session")
                         .HasForeignKey("UserId");
 
                     b.Navigation("Device");
@@ -307,7 +319,7 @@ namespace PlayStation.Migrations
                 {
                     b.Navigation("Expenses");
 
-                    b.Navigation("Orders");
+                    b.Navigation("Session");
                 });
 #pragma warning restore 612, 618
         }

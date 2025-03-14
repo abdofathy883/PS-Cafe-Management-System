@@ -37,5 +37,9 @@ namespace PlayStation.Application.Services
         {
             _deviceRepository.DeleteById(device.Id);
         }
+        public bool IsDeviceNameIsUsed(string name)
+        {
+            return _deviceRepository.IsUsed(d => d.Name == name);
+        }
     }
 }

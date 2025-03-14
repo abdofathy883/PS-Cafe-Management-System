@@ -35,5 +35,9 @@ namespace PlayStation.Application.Services
         {
             return _itemRepository.GetById(id);
         }
+        public bool IsItemNameIsUsed(string name)
+        {
+            return _itemRepository.IsUsed(d => d.Name == name);
+        }
     }
 }

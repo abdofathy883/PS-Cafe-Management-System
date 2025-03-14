@@ -22,14 +22,17 @@ namespace PlayStation.Presentation
             deviceService = _deviceService;
             InitializeComponent();
             ApplyGlobalStyles(this);
-            DevicesTable.DataSource = deviceService.GetAllDevicesFromService();
+            DisplayDevicesTable();
+        }
+        private void DisplayDevicesTable()
+        {
+            DevicesTable.DataSource = null;
+            DevicesTable.DataSource = deviceService.GetAllDevicesFromService().Select(d => new {d.Id,d.Name,d.Type,d.HourlyRate,d.status}).ToList();
             DevicesTable.Columns["ID"].Visible = false;
             DevicesTable.Columns["Name"].HeaderText = "الاسم";
             DevicesTable.Columns["Type"].HeaderText = "النوع";
             DevicesTable.Columns["HourlyRate"].HeaderText = "سعر الساعة";
-            DevicesTable.Columns["Sessions"].HeaderText = "نشاط الجهاز";
-            DevicesTable.Columns["Status"].Visible = false;
-            DevicesTable.Columns["IsDeleted"].Visible = false;
+            DevicesTable.Columns["status"].HeaderText = "نشاط الجهاز";
         }
         private void button1_Click(object sender, EventArgs e)
         {
@@ -47,13 +50,15 @@ namespace PlayStation.Presentation
                 device.HourlyRate = (byte)HourlyRateInput.Value;
 
                 //Check for already existing device
-                if (deviceService.GetAllDevicesFromService().Contains(device))
+                if (deviceService.IsDeviceNameIsUsed(device.Name))
                 {
                     MessageBox.Show("هذا الجهاز موجود بالفعل", "فشل اضافة جهاز", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
                 deviceService.AddDeviceFromService(device);
-                DevicesTable.Refresh();
+
+                DisplayDevicesTable();
+
             }
         }
         private void DevicesTable_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -61,15 +66,11 @@ namespace PlayStation.Presentation
             string ColumnName = DevicesTable.Columns[e.ColumnIndex].Name;
             if (ColumnName == "UpdateCellButton")
             {
-                Device device = new()
-                {
-                    Id = Convert.ToInt32(DevicesTable.Rows[e.RowIndex].Cells["ID"].Value),
-                    Name = DevicesTable.Rows[e.RowIndex].Cells["Name"].Value?.ToString() ?? "غير محدد",
-                    Type = (string)DevicesTable.Rows[e.RowIndex].Cells["Type"].Value,
-                    HourlyRate = Convert.ToByte(DevicesTable.Rows[e.RowIndex].Cells["HourlyRate"].Value)
-                };
-                UpdateDevice updateDevice = new UpdateDevice(device,deviceService);
+
+                var Id = Convert.ToInt32(DevicesTable.Rows[e.RowIndex].Cells["ID"].Value);
+                UpdateDevice updateDevice = new UpdateDevice(Id,deviceService);
                 updateDevice.ShowDialog();
+                DisplayDevicesTable();
             }
             else if(ColumnName == "DeleteCellButton")
             {
@@ -84,8 +85,7 @@ namespace PlayStation.Presentation
                         HourlyRate = Convert.ToByte(DevicesTable.Rows[e.RowIndex].Cells["HourlyRate"].Value)
                     };
                     deviceService.RemoveDeviceFromService(device);
-                    DevicesTable.DataSource = null;
-                    DevicesTable.DataSource = deviceService.GetAllDevicesFromService();
+                    DisplayDevicesTable();
                 }
             }
         }

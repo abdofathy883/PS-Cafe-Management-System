@@ -20,6 +20,11 @@ namespace PlayStation.Presentation
             userService = _userService;
             InitializeComponent();
             ApplyGlobalStyles(this);
+            DisplayUsersTableGrid();
+        }
+        private void DisplayUsersTableGrid()
+        {
+            UsersTableGrid.DataSource = null;
             UsersTableGrid.DataSource = userService.GetAllUsersFromService();
             UsersTableGrid.Columns["ID"].Visible = false;
             UsersTableGrid.Columns["Password"].Visible = false;
@@ -42,15 +47,14 @@ namespace PlayStation.Presentation
                 };
 
                 //Check for already existing user
-                if (userService.GetAllUsersFromService().Any(x => x.Name == user.Name))
+                if (userService.IsUsereNameIsUsed( user.Name))
                 {
                     MessageBox.Show("هذا الحساب موجود بالفعل", "فشل اضافة حساب", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
 
                 userService.AddUserFromService(user);
-                UsersTableGrid.DataSource = null;
-                UsersTableGrid.DataSource = userService.GetAllUsersFromService();
+                DisplayUsersTableGrid();
             }
         }
         private void UsersTableGrid_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -58,15 +62,9 @@ namespace PlayStation.Presentation
             string ColumnName = UsersTableGrid.Columns[e.ColumnIndex].Name;
             if (ColumnName == "UpdateUser")
             {
-                User UpdatedUser = new()
-                {
-                    Id = Convert.ToInt32(UsersTableGrid.Rows[e.RowIndex].Cells["ID"].Value),
-                    Name = UsersTableGrid.Rows[e.RowIndex].Cells["Name"].Value?.ToString() ?? string.Empty,
-                    Password = UsersTableGrid.Rows[e.RowIndex].Cells["Password"].Value?.ToString() ?? string.Empty,
-                    Role = (string)UsersTableGrid.Rows[e.RowIndex].Cells["Role"].Value
-                };
+                var Id = Convert.ToInt32(UsersTableGrid.Rows[e.RowIndex].Cells["ID"].Value);
 
-                UpdateUser updatedUser = new UpdateUser(UpdatedUser, userService);
+                UpdateUser updatedUser = new UpdateUser(Id, userService);
                 updatedUser.ShowDialog();
             }
             else if (ColumnName == "DeleteUser")
@@ -82,7 +80,7 @@ namespace PlayStation.Presentation
                         Role = (string)UsersTableGrid.Rows[e.RowIndex].Cells["Role"].Value
                     };
                     userService.DeleteUserFromService(UpdatedUser);
-                    UsersTableGrid.Refresh();
+                    DisplayUsersTableGrid();
                 }
             }
         }

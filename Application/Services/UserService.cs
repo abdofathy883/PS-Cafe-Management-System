@@ -1,4 +1,5 @@
-﻿using PlayStation.Infrastructure.Repos;
+﻿//using PlayStation.Domain.Models;
+using PlayStation.Infrastructure.Repos;
 using PlayStation.Models;
 using System;
 using System.Collections.Generic;
@@ -15,6 +16,14 @@ namespace PlayStation.Application.Services
         {
             _userRepository = userRepository;
         }
+        public User GetUserByIdFromService(int id)
+        {
+            return _userRepository.GetById(id);
+        }
+        public User? GetUserByUserFromService(string userName)
+        {
+            return _userRepository.Find(u=>u.Name==userName).FirstOrDefault();
+        }
         public List<User> GetAllUsersFromService()
         {
             return _userRepository.GetAll().ToList();
@@ -30,6 +39,10 @@ namespace PlayStation.Application.Services
         public void DeleteUserFromService(User user)
         {
             _userRepository.DeleteById(user.Id);
+        }
+        public bool IsUsereNameIsUsed(string name)
+        {
+            return _userRepository.IsUsed(d => d.Name == name);
         }
     }
 }

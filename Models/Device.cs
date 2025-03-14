@@ -1,4 +1,4 @@
-﻿ using PlayStation.Infrastructure.Repos.Repository;
+﻿using PlayStation.Infrastructure.Repos.Repository;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -14,7 +14,7 @@ public partial class Device : IDeletable
     public string Type { get; set; } = null!;
     [Display(Name = "سعر الساعة")]
     public decimal HourlyRate { get; set; }
-    //public decimal HourlyRateForMulti { get; set; }
+    public decimal HourlyRateForMulti { get; set; } = 0;
 
     public DevaisStatus status { get; set; } = DevaisStatus.Available;
 
