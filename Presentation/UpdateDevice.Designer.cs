@@ -33,7 +33,10 @@
             label2 = new Label();
             NewDevicePriceInput = new NumericUpDown();
             UpdateDeviceBtn = new Button();
+            numericUpDown1 = new NumericUpDown();
+            label3 = new Label();
             ((System.ComponentModel.ISupportInitialize)NewDevicePriceInput).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)numericUpDown1).BeginInit();
             SuspendLayout();
             // 
             // label1
@@ -59,17 +62,17 @@
             label2.AutoSize = true;
             label2.Font = new Font("Arial", 12F, FontStyle.Bold);
             label2.ForeColor = Color.White;
-            label2.Location = new Point(51, 45);
+            label2.Location = new Point(18, 45);
             label2.Name = "label2";
-            label2.Size = new Size(74, 19);
+            label2.Size = new Size(107, 19);
             label2.TabIndex = 2;
-            label2.Text = "سعر الساعة";
+            label2.Text = "سعر الساعة سنجل";
             // 
             // NewDevicePriceInput
             // 
-            NewDevicePriceInput.Location = new Point(32, 73);
+            NewDevicePriceInput.Location = new Point(18, 73);
             NewDevicePriceInput.Name = "NewDevicePriceInput";
-            NewDevicePriceInput.Size = new Size(93, 23);
+            NewDevicePriceInput.Size = new Size(107, 23);
             NewDevicePriceInput.TabIndex = 3;
             // 
             // UpdateDeviceBtn
@@ -79,20 +82,40 @@
             UpdateDeviceBtn.FlatStyle = FlatStyle.Flat;
             UpdateDeviceBtn.Font = new Font("Arial", 12F, FontStyle.Bold);
             UpdateDeviceBtn.ForeColor = Color.White;
-            UpdateDeviceBtn.Location = new Point(32, 118);
+            UpdateDeviceBtn.Location = new Point(18, 127);
             UpdateDeviceBtn.Margin = new Padding(0);
             UpdateDeviceBtn.Name = "UpdateDeviceBtn";
-            UpdateDeviceBtn.Size = new Size(249, 26);
+            UpdateDeviceBtn.Size = new Size(107, 26);
             UpdateDeviceBtn.TabIndex = 4;
             UpdateDeviceBtn.Text = "تحديث";
             UpdateDeviceBtn.UseVisualStyleBackColor = false;
             UpdateDeviceBtn.Click += UpdateDeviceBtn_Click;
+            // 
+            // numericUpDown1
+            // 
+            numericUpDown1.Location = new Point(145, 130);
+            numericUpDown1.Name = "numericUpDown1";
+            numericUpDown1.Size = new Size(136, 23);
+            numericUpDown1.TabIndex = 6;
+            // 
+            // label3
+            // 
+            label3.AutoSize = true;
+            label3.Font = new Font("Arial", 12F, FontStyle.Bold);
+            label3.ForeColor = Color.White;
+            label3.Location = new Point(175, 104);
+            label3.Name = "label3";
+            label3.Size = new Size(106, 19);
+            label3.TabIndex = 5;
+            label3.Text = "سعر الساعة مالتي";
             // 
             // UpdateDevice
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(337, 195);
+            Controls.Add(numericUpDown1);
+            Controls.Add(label3);
             Controls.Add(UpdateDeviceBtn);
             Controls.Add(NewDevicePriceInput);
             Controls.Add(label2);
@@ -105,6 +128,7 @@
             StartPosition = FormStartPosition.CenterScreen;
             Text = "تحديث جهاز";
             ((System.ComponentModel.ISupportInitialize)NewDevicePriceInput).EndInit();
+            ((System.ComponentModel.ISupportInitialize)numericUpDown1).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -116,5 +140,7 @@
         private Label label2;
         private NumericUpDown NewDevicePriceInput;
         private Button UpdateDeviceBtn;
+        private NumericUpDown numericUpDown1;
+        private Label label3;
     }
 }

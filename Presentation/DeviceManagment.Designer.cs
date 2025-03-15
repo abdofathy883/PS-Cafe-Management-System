@@ -38,8 +38,11 @@
             DeNameInput = new TextBox();
             HourlyRateInput = new NumericUpDown();
             DeTypeCombo = new ComboBox();
+            HourlyRateMulti = new NumericUpDown();
+            label1 = new Label();
             ((System.ComponentModel.ISupportInitialize)DevicesTable).BeginInit();
             ((System.ComponentModel.ISupportInitialize)HourlyRateInput).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)HourlyRateMulti).BeginInit();
             SuspendLayout();
             // 
             // label2
@@ -57,12 +60,12 @@
             // 
             label3.AutoSize = true;
             label3.ForeColor = Color.White;
-            label3.Location = new Point(443, 76);
+            label3.Location = new Point(410, 76);
             label3.Margin = new Padding(4, 0, 4, 0);
             label3.Name = "label3";
-            label3.Size = new Size(74, 19);
+            label3.Size = new Size(107, 19);
             label3.TabIndex = 2;
-            label3.Text = "سعر الساعة";
+            label3.Text = "سعر الساعة سنجل";
             // 
             // label4
             // 
@@ -81,7 +84,7 @@
             button1.FlatAppearance.BorderSize = 0;
             button1.FlatStyle = FlatStyle.Flat;
             button1.ForeColor = Color.White;
-            button1.Location = new Point(228, 100);
+            button1.Location = new Point(93, 95);
             button1.Margin = new Padding(4);
             button1.Name = "button1";
             button1.Size = new Size(153, 41);
@@ -138,11 +141,31 @@
             DeTypeCombo.Size = new Size(178, 27);
             DeTypeCombo.TabIndex = 11;
             // 
+            // HourlyRateMulti
+            // 
+            HourlyRateMulti.Location = new Point(253, 104);
+            HourlyRateMulti.Name = "HourlyRateMulti";
+            HourlyRateMulti.Size = new Size(129, 26);
+            HourlyRateMulti.TabIndex = 13;
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.ForeColor = Color.White;
+            label1.Location = new Point(276, 76);
+            label1.Margin = new Padding(4, 0, 4, 0);
+            label1.Name = "label1";
+            label1.Size = new Size(106, 19);
+            label1.TabIndex = 12;
+            label1.Text = "سعر الساعة مالتي";
+            // 
             // DeviceManagment
             // 
             AutoScaleDimensions = new SizeF(10F, 19F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(967, 379);
+            Controls.Add(HourlyRateMulti);
+            Controls.Add(label1);
             Controls.Add(DeTypeCombo);
             Controls.Add(HourlyRateInput);
             Controls.Add(DeNameInput);
@@ -157,6 +180,7 @@
             Text = "ادارة الاجهزة";
             ((System.ComponentModel.ISupportInitialize)DevicesTable).EndInit();
             ((System.ComponentModel.ISupportInitialize)HourlyRateInput).EndInit();
+            ((System.ComponentModel.ISupportInitialize)HourlyRateMulti).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -172,5 +196,8 @@
         private ComboBox DeTypeCombo;
         private DataGridViewButtonColumn UpdateCellButton;
         private DataGridViewButtonColumn DeleteCellButton;
+        private NumericUpDown numericUpDown1;
+        private Label label1;
+        private NumericUpDown HourlyRateMulti;
     }
 }

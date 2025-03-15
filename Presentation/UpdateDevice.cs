@@ -39,6 +39,5 @@ namespace PlayStation.Presentation
             deviceService.UpdateDeviceFromService(UpdatedDevice);
             this.Close();
         }
-
     }
 }

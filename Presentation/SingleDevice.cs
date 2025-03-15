@@ -44,11 +44,6 @@ namespace PlayStation.Presentation
             DeviceNameLbl.Text = CurrentDevice.Name;
 
         }
-        //public void Timer_Tick(object sender, EventArgs e)
-        //{
-        //    Seconds++;
-        //    TimerLbl.Text = $"{Seconds}";
-        //}
 
         private void AddItemBtn_Click(object sender, EventArgs e)
         {
@@ -100,28 +95,19 @@ namespace PlayStation.Presentation
             TotalPriceLbl.Text = CurrentSession.TotalCost.ToString();
         }
 
-        private void panel2_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
-        private void SingleDevice_Load(object sender, EventArgs e)
-        {
-
-        }
-
-        private void OrderGrid_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
-        }
-
-        //private void SessionToggle()
+        //private void panel2_Paint(object sender, PaintEventArgs e)
         //{
-        //    if (dateTimePicker1.ShowCheckBox == true)
-        //    {
-        //        StartBtn.Enabled = false;
-        //        StartBtn.Hide = false;
-        //    }
+
+        //}
+
+        //private void SingleDevice_Load(object sender, EventArgs e)
+        //{
+
+        //}
+
+        //private void OrderGrid_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        //{
+
         //}
         private void StartBtn_Click(object sender, EventArgs e)
         {
@@ -149,7 +135,7 @@ namespace PlayStation.Presentation
             timer.Stop();
             if (CurrentSession == null)
             {
-                MessageBox.Show("يرجي بدا الجلسه قبل اضافة منتج", "فشل في انهاء الجلسه", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("يرجي بدا الجلسه قبل بدايتها", "فشل في انهاء الجلسه", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
             CurrentSession.EndTime = dateTimePickerEnd.Value; //DateTime.Now;
@@ -158,7 +144,15 @@ namespace PlayStation.Presentation
             {
                 CurrentSession.Duration = (decimal)(CurrentSession.EndTime.Value - CurrentSession.StartTime).TotalMinutes;
             }
-            CurrentSession.TotalCost += Math.Round(((CurrentSession.Duration / 60) * CurrentDevice.HourlyRate), 2);
+            //CurrentSession.TotalCost += Math.Round(((CurrentSession.Duration / 60) * CurrentDevice.HourlyRate), 2);
+            if (MultiRadio.Checked)
+            {
+                CurrentSession.TotalCost += Math.Round(((CurrentSession.Duration / 60) * CurrentDevice.HourlyRateForMulti), 2);
+            }
+            else if (SingleRadio.Checked)
+            {
+                CurrentSession.TotalCost += Math.Round(((CurrentSession.Duration / 60) * CurrentDevice.HourlyRate), 2);
+            }
             sessionService.UpdateSessionFromService(CurrentSession);
             TotalPriceLbl.Text = CurrentSession.TotalCost.ToString();
 

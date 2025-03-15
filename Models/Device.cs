@@ -24,7 +24,10 @@ public partial class Device : IDeletable
 
 public enum DevaisStatus
 {
+    [Display(Name = "متاح")]
     Available = 1,
+    [Display(Name = "غير متاح")]
     NotAvailable = 2,
+    [Display(Name = "في الصيانة")]
     UnderMaintenance = 3
 }

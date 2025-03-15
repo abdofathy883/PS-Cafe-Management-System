@@ -48,6 +48,7 @@ namespace PlayStation.Presentation
                 device.Name = DeNameInput.Text;
                 device.Type = (string)DeTypeCombo.SelectedItem;
                 device.HourlyRate = (byte)HourlyRateInput.Value;
+                device.HourlyRateForMulti = HourlyRateMulti.Value;
 
                 //Check for already existing device
                 if (deviceService.IsDeviceNameIsUsed(device.Name))

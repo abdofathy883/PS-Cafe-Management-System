@@ -46,7 +46,7 @@ namespace PlayStation.Presentation
             panelDevice = new Panel();
             panel3 = new Panel();
             SingleRadio = new RadioButton();
-            MultiRaadio = new RadioButton();
+            MultiRadio = new RadioButton();
             dateTimePickerEnd = new DateTimePicker();
             EndBtn = new Button();
             dateTimePicker1 = new DateTimePicker();
@@ -145,7 +145,6 @@ namespace PlayStation.Presentation
             panel2.Name = "panel2";
             panel2.Size = new Size(651, 129);
             panel2.TabIndex = 0;
-            panel2.Paint += panel2_Paint;
             // 
             // AddItemBtn
             // 
@@ -201,7 +200,6 @@ namespace PlayStation.Presentation
             OrderGrid.Name = "OrderGrid";
             OrderGrid.Size = new Size(651, 323);
             OrderGrid.TabIndex = 1;
-            OrderGrid.CellContentClick += OrderGrid_CellContentClick;
             // 
             // panelDevice
             // 
@@ -216,7 +214,7 @@ namespace PlayStation.Presentation
             // panel3
             // 
             panel3.Controls.Add(SingleRadio);
-            panel3.Controls.Add(MultiRaadio);
+            panel3.Controls.Add(MultiRadio);
             panel3.Controls.Add(dateTimePickerEnd);
             panel3.Controls.Add(EndBtn);
             panel3.Controls.Add(dateTimePicker1);
@@ -241,19 +239,19 @@ namespace PlayStation.Presentation
             SingleRadio.Text = "سنجل";
             SingleRadio.UseVisualStyleBackColor = true;
             // 
-            // MultiRaadio
+            // MultiRadio
             // 
-            MultiRaadio.AutoSize = true;
-            MultiRaadio.Font = new Font("Arial", 12F, FontStyle.Bold);
-            MultiRaadio.ForeColor = Color.White;
-            MultiRaadio.Location = new Point(221, 37);
-            MultiRaadio.Name = "MultiRaadio";
-            MultiRaadio.RightToLeft = RightToLeft.Yes;
-            MultiRaadio.Size = new Size(55, 23);
-            MultiRaadio.TabIndex = 4;
-            MultiRaadio.TabStop = true;
-            MultiRaadio.Text = "مالتي";
-            MultiRaadio.UseVisualStyleBackColor = true;
+            MultiRadio.AutoSize = true;
+            MultiRadio.Font = new Font("Arial", 12F, FontStyle.Bold);
+            MultiRadio.ForeColor = Color.White;
+            MultiRadio.Location = new Point(221, 37);
+            MultiRadio.Name = "MultiRadio";
+            MultiRadio.RightToLeft = RightToLeft.Yes;
+            MultiRadio.Size = new Size(55, 23);
+            MultiRadio.TabIndex = 4;
+            MultiRadio.TabStop = true;
+            MultiRadio.Text = "مالتي";
+            MultiRadio.UseVisualStyleBackColor = true;
             // 
             // dateTimePickerEnd
             // 
@@ -334,7 +332,6 @@ namespace PlayStation.Presentation
             StartPosition = FormStartPosition.CenterScreen;
             Text = "ادارة الجهاز";
             FormClosing += SingleDevice_FormClosing;
-            Load += SingleDevice_Load;
             panelHead.ResumeLayout(false);
             panelHead.PerformLayout();
             panelCafe.ResumeLayout(false);
@@ -371,5 +368,6 @@ namespace PlayStation.Presentation
         private DateTimePicker dateTimePickerEnd;
         private RadioButton SingleRadio;
         private RadioButton MultiRaadio;
+        private RadioButton MultiRadio;
     }
 }
