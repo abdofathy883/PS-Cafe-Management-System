@@ -19,7 +19,6 @@ namespace PlayStation.Presentation
         private readonly DeviceService deviceService;
         Device CurrentDevice;
         Session CurrentSession;
-        //private System.Timers.Timer timer;
         private int elapsedSeconds;
         public SingleDevice(int _CurrentDeviceId, CafeService _CafeService, SessionService _sessionService, DeviceService _deviceService)
         {
@@ -94,26 +93,28 @@ namespace PlayStation.Presentation
             }
             TotalPriceLbl.Text = CurrentSession.TotalCost.ToString();
         }
-
-        //private void panel2_Paint(object sender, PaintEventArgs e)
-        //{
-
-        //}
-
-        //private void SingleDevice_Load(object sender, EventArgs e)
-        //{
-
-        //}
-
-        //private void OrderGrid_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        //{
-
-        //}
         private void StartBtn_Click(object sender, EventArgs e)
         {
+            DateTime parsedTime;
+
+            // Force DateTimePicker to take the current time if input is empty or invalid
+            if (string.IsNullOrWhiteSpace(dateTimePicker1.Text) || !DateTime.TryParse(dateTimePicker1.Text, out parsedTime))
+            {
+                parsedTime = DateTime.Now;
+                dateTimePicker1.Value = parsedTime;
+            }
+
+            // Set the DateTimePicker value to the valid parsed time
+            dateTimePicker1.Value = parsedTime;
+
+
             elapsedSeconds = 0;
             TimerLbl.Text = "00:00:00";
             timer.Start();
+
+            dateTimePicker1.Format = DateTimePickerFormat.Custom;
+            dateTimePicker1.CustomFormat = "HH:mm";
+            dateTimePicker1.ShowUpDown = true;
             CurrentSession = new Session()
             {
                 Id = 0,
@@ -192,6 +193,28 @@ namespace PlayStation.Presentation
         private void dateTimePickerEnd_ValueChanged(object sender, EventArgs e)
         {
             EndBtn.Enabled = !dateTimePickerEnd.Checked;
+        }
+        private void ValidateDateTime()
+        {
+            if (DateTime.TryParse(dateTimePicker1.Text, out _))
+            {
+                StartBtn.Enabled = true;
+            }
+            else
+            {
+                StartBtn.Enabled = false;
+            }
+        }
+
+        private void dateTimePicker1_Leave(object sender, EventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(dateTimePicker1.Text) || !DateTime.TryParse(dateTimePicker1.Text, out DateTime parsedTime))
+            {
+                parsedTime = DateTime.Now; // Default to current time if input is invalid
+                dateTimePicker1.Value = parsedTime;
+            }
+
+            //dateTimePicker1.Value = parsedTime;
         }
     }
 }

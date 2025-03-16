@@ -29,8 +29,8 @@ namespace PlayStation.Application.Services
             userService = _userService;
             // Note: I stopped with bug in connecting the user to the expenses, need to fix this bug first
             InitializeComponent();
-            PopulateExpensesGrid();
             ApplyGlobalStyles(this);
+            PopulateExpensesGrid();
             ExpensesUser.DataSource = userService.GetAllUsersFromService();
             ExpensesUser.DisplayMember = "Name";
             ExpensesUser.ValueMember = "Id";

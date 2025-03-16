@@ -38,8 +38,8 @@
             ProductsGrid = new DataGridView();
             UpdateItemBtn = new DataGridViewButtonColumn();
             panel1 = new Panel();
-            PreviousBtn = new Button();
             NextBtn = new Button();
+            PreviousBtn = new Button();
             ((System.ComponentModel.ISupportInitialize)ProductPriceInput).BeginInit();
             ((System.ComponentModel.ISupportInitialize)ProductStockInput).BeginInit();
             ((System.ComponentModel.ISupportInitialize)ProductsGrid).BeginInit();
@@ -51,7 +51,7 @@
             label2.AutoSize = true;
             label2.Font = new Font("Arial", 12F, FontStyle.Bold);
             label2.ForeColor = Color.White;
-            label2.Location = new Point(551, 24);
+            label2.Location = new Point(791, 26);
             label2.Name = "label2";
             label2.Size = new Size(65, 19);
             label2.TabIndex = 1;
@@ -59,7 +59,7 @@
             // 
             // ProductNameInput
             // 
-            ProductNameInput.Location = new Point(465, 55);
+            ProductNameInput.Location = new Point(705, 57);
             ProductNameInput.Name = "ProductNameInput";
             ProductNameInput.Size = new Size(151, 23);
             ProductNameInput.TabIndex = 2;
@@ -69,7 +69,7 @@
             label3.AutoSize = true;
             label3.Font = new Font("Arial", 12F, FontStyle.Bold);
             label3.ForeColor = Color.White;
-            label3.Location = new Point(419, 30);
+            label3.Location = new Point(659, 32);
             label3.Name = "label3";
             label3.Size = new Size(40, 19);
             label3.TabIndex = 3;
@@ -79,7 +79,7 @@
             // 
             ProductPriceInput.BorderStyle = BorderStyle.FixedSingle;
             ProductPriceInput.DecimalPlaces = 2;
-            ProductPriceInput.Location = new Point(372, 55);
+            ProductPriceInput.Location = new Point(612, 57);
             ProductPriceInput.Name = "ProductPriceInput";
             ProductPriceInput.Size = new Size(87, 23);
             ProductPriceInput.TabIndex = 4;
@@ -91,7 +91,7 @@
             label4.AutoSize = true;
             label4.Font = new Font("Arial", 12F, FontStyle.Bold);
             label4.ForeColor = Color.White;
-            label4.Location = new Point(311, 24);
+            label4.Location = new Point(551, 26);
             label4.Name = "label4";
             label4.Size = new Size(55, 19);
             label4.TabIndex = 5;
@@ -99,7 +99,7 @@
             // 
             // ProductStockInput
             // 
-            ProductStockInput.Location = new Point(280, 55);
+            ProductStockInput.Location = new Point(520, 57);
             ProductStockInput.Name = "ProductStockInput";
             ProductStockInput.Size = new Size(86, 23);
             ProductStockInput.TabIndex = 6;
@@ -113,7 +113,7 @@
             AddItemBtn.FlatStyle = FlatStyle.Flat;
             AddItemBtn.Font = new Font("Arial", 12F, FontStyle.Bold);
             AddItemBtn.ForeColor = Color.White;
-            AddItemBtn.Location = new Point(21, 55);
+            AddItemBtn.Location = new Point(261, 57);
             AddItemBtn.Name = "AddItemBtn";
             AddItemBtn.Size = new Size(222, 29);
             AddItemBtn.TabIndex = 7;
@@ -125,7 +125,7 @@
             // 
             ProductsGrid.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             ProductsGrid.Columns.AddRange(new DataGridViewColumn[] { UpdateItemBtn });
-            ProductsGrid.Location = new Point(21, 101);
+            ProductsGrid.Location = new Point(261, 103);
             ProductsGrid.Name = "ProductsGrid";
             ProductsGrid.RightToLeft = RightToLeft.Yes;
             ProductsGrid.Size = new Size(595, 560);
@@ -147,23 +147,8 @@
             panel1.Dock = DockStyle.Bottom;
             panel1.Location = new Point(0, 686);
             panel1.Name = "panel1";
-            panel1.Size = new Size(728, 63);
+            panel1.Size = new Size(1285, 63);
             panel1.TabIndex = 9;
-            // 
-            // PreviousBtn
-            // 
-            PreviousBtn.BackColor = Color.FromArgb(32, 87, 129);
-            PreviousBtn.FlatAppearance.BorderSize = 0;
-            PreviousBtn.FlatStyle = FlatStyle.Flat;
-            PreviousBtn.Font = new Font("Arial", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            PreviousBtn.ForeColor = Color.White;
-            PreviousBtn.Location = new Point(21, 18);
-            PreviousBtn.Name = "PreviousBtn";
-            PreviousBtn.Size = new Size(94, 29);
-            PreviousBtn.TabIndex = 0;
-            PreviousBtn.Text = "السابق";
-            PreviousBtn.UseVisualStyleBackColor = false;
-            PreviousBtn.Click += PreviousBtn_Click;
             // 
             // NextBtn
             // 
@@ -172,7 +157,7 @@
             NextBtn.FlatStyle = FlatStyle.Flat;
             NextBtn.Font = new Font("Arial", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             NextBtn.ForeColor = Color.White;
-            NextBtn.Location = new Point(522, 18);
+            NextBtn.Location = new Point(762, 18);
             NextBtn.Name = "NextBtn";
             NextBtn.Size = new Size(94, 29);
             NextBtn.TabIndex = 1;
@@ -180,11 +165,26 @@
             NextBtn.UseVisualStyleBackColor = false;
             NextBtn.Click += NextBtn_Click;
             // 
+            // PreviousBtn
+            // 
+            PreviousBtn.BackColor = Color.FromArgb(32, 87, 129);
+            PreviousBtn.FlatAppearance.BorderSize = 0;
+            PreviousBtn.FlatStyle = FlatStyle.Flat;
+            PreviousBtn.Font = new Font("Arial", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            PreviousBtn.ForeColor = Color.White;
+            PreviousBtn.Location = new Point(261, 18);
+            PreviousBtn.Name = "PreviousBtn";
+            PreviousBtn.Size = new Size(94, 29);
+            PreviousBtn.TabIndex = 0;
+            PreviousBtn.Text = "السابق";
+            PreviousBtn.UseVisualStyleBackColor = false;
+            PreviousBtn.Click += PreviousBtn_Click;
+            // 
             // Cafetria
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(728, 749);
+            ClientSize = new Size(1285, 749);
             Controls.Add(panel1);
             Controls.Add(ProductsGrid);
             Controls.Add(AddItemBtn);

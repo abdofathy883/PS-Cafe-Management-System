@@ -39,7 +39,6 @@ namespace PlayStation.Presentation
 
             form.Load += (s, e) =>
             {
-                int x = 0;
                 int y = (MainContainer.Height - form.Height) / 2;
 
                 form.Location = new Point(y, 0);

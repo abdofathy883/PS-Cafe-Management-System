@@ -52,7 +52,7 @@
             // 
             label1.AutoSize = true;
             label1.ForeColor = Color.White;
-            label1.Location = new Point(865, 57);
+            label1.Location = new Point(890, 57);
             label1.Margin = new Padding(4, 0, 4, 0);
             label1.Name = "label1";
             label1.Size = new Size(37, 19);
@@ -61,7 +61,7 @@
             // 
             // NameInput
             // 
-            NameInput.Location = new Point(605, 92);
+            NameInput.Location = new Point(630, 92);
             NameInput.Margin = new Padding(4);
             NameInput.Name = "NameInput";
             NameInput.Size = new Size(326, 26);
@@ -71,7 +71,7 @@
             // 
             label2.AutoSize = true;
             label2.ForeColor = Color.White;
-            label2.Location = new Point(501, 57);
+            label2.Location = new Point(526, 57);
             label2.Margin = new Padding(4, 0, 4, 0);
             label2.Name = "label2";
             label2.Size = new Size(74, 19);
@@ -80,7 +80,7 @@
             // 
             // PasswordInput
             // 
-            PasswordInput.Location = new Point(386, 92);
+            PasswordInput.Location = new Point(411, 92);
             PasswordInput.Margin = new Padding(4);
             PasswordInput.Name = "PasswordInput";
             PasswordInput.Size = new Size(211, 26);
@@ -90,7 +90,7 @@
             // 
             label3.AutoSize = true;
             label3.ForeColor = Color.White;
-            label3.Location = new Point(283, 57);
+            label3.Location = new Point(308, 57);
             label3.Margin = new Padding(4, 0, 4, 0);
             label3.Name = "label3";
             label3.Size = new Size(73, 19);
@@ -101,7 +101,7 @@
             // 
             RolesCombo.FormattingEnabled = true;
             RolesCombo.Items.AddRange(new object[] { "ادمن", "موظف" });
-            RolesCombo.Location = new Point(178, 91);
+            RolesCombo.Location = new Point(203, 91);
             RolesCombo.Margin = new Padding(4);
             RolesCombo.Name = "RolesCombo";
             RolesCombo.Size = new Size(204, 27);
@@ -113,7 +113,7 @@
             AddUserBtn.FlatAppearance.BorderSize = 0;
             AddUserBtn.FlatStyle = FlatStyle.Flat;
             AddUserBtn.ForeColor = Color.White;
-            AddUserBtn.Location = new Point(13, 90);
+            AddUserBtn.Location = new Point(38, 90);
             AddUserBtn.Margin = new Padding(4);
             AddUserBtn.Name = "AddUserBtn";
             AddUserBtn.Size = new Size(157, 39);
@@ -127,7 +127,7 @@
             label4.AutoSize = true;
             label4.Font = new Font("Arial", 18F, FontStyle.Bold, GraphicsUnit.Point, 178);
             label4.ForeColor = Color.White;
-            label4.Location = new Point(753, 17);
+            label4.Location = new Point(778, 17);
             label4.Margin = new Padding(4, 0, 4, 0);
             label4.Name = "label4";
             label4.Size = new Size(160, 29);
@@ -138,7 +138,7 @@
             // 
             UsersTableGrid.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             UsersTableGrid.Columns.AddRange(new DataGridViewColumn[] { UpdateUser, DeleteUser });
-            UsersTableGrid.Location = new Point(13, 137);
+            UsersTableGrid.Location = new Point(38, 137);
             UsersTableGrid.Margin = new Padding(4);
             UsersTableGrid.Name = "UsersTableGrid";
             UsersTableGrid.Size = new Size(918, 561);

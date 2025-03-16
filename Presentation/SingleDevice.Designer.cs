@@ -286,7 +286,7 @@ namespace PlayStation.Presentation
             dateTimePicker1.Checked = false;
             dateTimePicker1.CustomFormat = "hh:mm tt";
             dateTimePicker1.DropDownAlign = LeftRightAlignment.Right;
-            dateTimePicker1.Format = DateTimePickerFormat.Time;
+            dateTimePicker1.Format = DateTimePickerFormat.Custom;
             dateTimePicker1.Location = new Point(221, 109);
             dateTimePicker1.Name = "dateTimePicker1";
             dateTimePicker1.RightToLeft = RightToLeft.No;
@@ -294,6 +294,7 @@ namespace PlayStation.Presentation
             dateTimePicker1.Size = new Size(206, 25);
             dateTimePicker1.TabIndex = 2;
             dateTimePicker1.ValueChanged += dateTimePicker1_ValueChanged;
+            dateTimePicker1.Leave += dateTimePicker1_Leave;
             // 
             // StartBtn
             // 
