@@ -16,7 +16,7 @@ public partial class Device : IDeletable
     public decimal HourlyRate { get; set; }
     public decimal HourlyRateForMulti { get; set; } = 0;
 
-    public DevaisStatus status { get; set; } = DevaisStatus.Available;
+    public DevaisStatus status { get; set; } = DevaisStatus.متاح;
 
     public bool IsDeleted { get; set; } = false;
     public virtual ICollection<Session> Sessions { get; set; } = new List<Session>();
@@ -24,10 +24,7 @@ public partial class Device : IDeletable
 
 public enum DevaisStatus
 {
-    [Display(Name = "متاح")]
-    Available = 1,
-    [Display(Name = "غير متاح")]
-    NotAvailable = 2,
-    [Display(Name = "في الصيانة")]
-    UnderMaintenance = 3
+    متاح = 1,
+    مشغول = 2,
+    صيانة = 3
 }

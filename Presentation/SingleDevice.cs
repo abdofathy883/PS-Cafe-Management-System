@@ -34,7 +34,7 @@ namespace PlayStation.Presentation
             ItemsCombo.DataSource = CafeService.GetCafeItemsFromService();
             ItemsCombo.DisplayMember = "Name";
             ItemsCombo.ValueMember = "Id";
-            if (CurrentDevice.status == DevaisStatus.NotAvailable)
+            if (CurrentDevice.status == DevaisStatus.مشغول)
             {
                 CurrentSession = CurrentDevice.Sessions.First(s => s.Status == "Active");
                 elapsedSeconds = ((int)(DateTime.Now - CurrentSession.StartTime).TotalSeconds);
@@ -126,13 +126,32 @@ namespace PlayStation.Presentation
                 Duration = 0,
                 OrderDetails = new List<OrderDetail>()
             };
-            CurrentDevice.status = DevaisStatus.NotAvailable;
+            CurrentDevice.status = DevaisStatus.مشغول;
             sessionService.AddSessionFromService(CurrentSession);
             deviceService.UpdateDeviceFromService(CurrentDevice);
         }
 
         private void EndBtn_Click(object sender, EventArgs e)
         {
+            DateTime parsedTime;
+
+            // Force DateTimePicker to take the current time if input is empty or invalid
+            if (string.IsNullOrWhiteSpace(dateTimePickerEnd.Text) || !DateTime.TryParse(dateTimePickerEnd.Text, out parsedTime))
+            {
+                parsedTime = DateTime.Now;
+                dateTimePickerEnd.Value = parsedTime;
+            }
+
+            // Set the DateTimePicker value to the valid parsed time
+            dateTimePickerEnd.Value = parsedTime;
+
+
+            dateTimePickerEnd.Format = DateTimePickerFormat.Custom;
+            dateTimePickerEnd.CustomFormat = "HH:mm";
+            dateTimePickerEnd.ShowUpDown = true;
+
+
+
             timer.Stop();
             if (CurrentSession == null)
             {
@@ -157,7 +176,7 @@ namespace PlayStation.Presentation
             sessionService.UpdateSessionFromService(CurrentSession);
             TotalPriceLbl.Text = CurrentSession.TotalCost.ToString();
 
-            CurrentDevice.status = DevaisStatus.Available;
+            CurrentDevice.status = DevaisStatus.متاح;
             deviceService.UpdateDeviceFromService(CurrentDevice);
         }
 
@@ -174,7 +193,8 @@ namespace PlayStation.Presentation
 
         private void dateTimePicker1_ValueChanged(object sender, EventArgs e)
         {
-            StartBtn.Enabled = !dateTimePicker1.Checked;
+            //StartBtn.Enabled = !dateTimePicker1.Checked;
+            ValidateDateTime();
         }
 
         private void timer_Tick(object sender, EventArgs e)
@@ -192,7 +212,8 @@ namespace PlayStation.Presentation
 
         private void dateTimePickerEnd_ValueChanged(object sender, EventArgs e)
         {
-            EndBtn.Enabled = !dateTimePickerEnd.Checked;
+            //EndBtn.Enabled = !dateTimePickerEnd.Checked;
+            ValidateDateTime();
         }
         private void ValidateDateTime()
         {
