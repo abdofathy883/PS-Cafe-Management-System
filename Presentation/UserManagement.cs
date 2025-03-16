@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Drawing.Printing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -15,6 +16,15 @@ namespace PlayStation.Presentation
     public partial class UserManagement : BaseForm
     {
         private readonly UserService userService;
+        //
+        public int PageSize = 10;
+        public int CurrentPage = 1;
+        private int TotalPages()
+        {
+            int totalUsers = userService.GetUsersWithDataFromService().Count;
+            return (int)Math.Ceiling((double)totalUsers / PageSize);
+        }
+
         public UserManagement(UserService _userService)
         {
             userService = _userService;
@@ -25,7 +35,27 @@ namespace PlayStation.Presentation
         private void DisplayUsersTableGrid()
         {
             UsersTableGrid.DataSource = null;
-            UsersTableGrid.DataSource = userService.GetUsersWithDataFromService();
+
+            int startIndex = (CurrentPage - 1) * PageSize;
+            var PageData = userService.GetUsersWithDataFromService().Skip(startIndex).Take(PageSize).ToList();
+            UsersTableGrid.DataSource = PageData;
+
+            int RowHeight = UsersTableGrid.RowTemplate.Height;
+            int HeaderHeight = UsersTableGrid.ColumnHeadersHeight;
+            UsersTableGrid.Height = (PageSize * RowHeight) + HeaderHeight;
+
+            if (CurrentPage > 1)
+            {
+                PreviousBtn.Enabled = true;
+            }
+            if (CurrentPage < TotalPages())
+            {
+                NextBtn.Enabled = true;
+                
+            }
+            //PreviousBtn.Enabled = CurrentPage > 1;
+            //NextBtn.Enabled = CurrentPage < TotalPages();
+
             UsersTableGrid.Columns["Id"].Visible = false;
             UsersTableGrid.Columns["Password"].Visible = false;
             UsersTableGrid.Columns["IsDeleted"].Visible = false;
@@ -53,7 +83,7 @@ namespace PlayStation.Presentation
                 };
 
                 //Check for already existing user
-                if (userService.IsUsereNameIsUsed( user.Name))
+                if (userService.IsUsereNameIsUsed(user.Name))
                 {
                     MessageBox.Show("هذا الحساب موجود بالفعل", "فشل اضافة حساب", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
@@ -88,6 +118,24 @@ namespace PlayStation.Presentation
                     userService.DeleteUserFromService(UpdatedUser);
                     DisplayUsersTableGrid();
                 }
+            }
+        }
+
+        private void NextBtn_Click(object sender, EventArgs e)
+        {
+            if (CurrentPage < TotalPages())
+            {
+                CurrentPage++;
+                DisplayUsersTableGrid();
+            }
+        }
+
+        private void PreviousBtn_Click(object sender, EventArgs e)
+        {
+            if (CurrentPage > 1)
+            {
+                CurrentPage--;
+                DisplayUsersTableGrid();
             }
         }
     }

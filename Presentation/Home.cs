@@ -15,6 +15,7 @@ namespace PlayStation.Presentation
     public partial class Home : BaseForm
     {
         private readonly IServiceProvider _serviceProvider;
+        
         public Home(IServiceProvider serviceProvider)
         {
             InitializeComponent();
@@ -35,15 +36,22 @@ namespace PlayStation.Presentation
             MainContainer.AutoScroll = false;
             MainContainer.Padding = new Padding(0);
             MainContainer.Margin = new Padding(0);
+
             form.Load += (s, e) =>
             {
-                int x = (MainContainer.Width - form.Width) / 2;
+                int x = 0;
                 int y = (MainContainer.Height - form.Height) / 2;
-                form.Location = new Point(Math.Max(0, x), Math.Max(0, y));
-                form.Size = new Size(Math.Min(MainContainer.Width, form.Width),
-                                     Math.Min(MainContainer.Height, form.Height));
+
+                form.Location = new Point(y, 0);
+                form.Size = new Size(MainContainer.Width,
+                         Math.Min(MainContainer.Height, form.Height));
+                //    int x = (MainContainer.Width - form.Width) / 2;
+                //    int y = (MainContainer.Height - form.Height) / 2;
+                //    form.Location = new Point(Math.Max(0, x), Math.Max(0, y));
+                //    form.Size = new Size(Math.Min(MainContainer.Width, form.Width),
+                //                         Math.Min(MainContainer.Height, form.Height));
             };
-            MainContainer.Controls.Add(form);
+        MainContainer.Controls.Add(form);
             form.Show();
         }
         private void UserManagementBtn_Click(object sender, EventArgs e)

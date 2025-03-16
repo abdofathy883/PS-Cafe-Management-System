@@ -14,7 +14,14 @@ namespace PlayStation.Presentation
 {
     public partial class Cafetria : BaseForm
     {
-        private readonly CafeService cafeService ;
+        private readonly CafeService cafeService;
+        public int PageSize = 10;
+        public int CurrentPage = 1;
+        private int TotalPages()
+        {
+            int totalUsers = cafeService.GetCafeItemsFromService().Count;
+            return (int)Math.Ceiling((double)totalUsers / PageSize);
+        }
         public Cafetria(CafeService _cafeService)
         {
             cafeService = _cafeService;
@@ -25,7 +32,25 @@ namespace PlayStation.Presentation
         private void DisplayProductsGrid()
         {
             ProductsGrid.DataSource = null;
-            ProductsGrid.DataSource = cafeService.GetCafeItemsFromService().Select(p=>new {p.Id,p.Name,p.Price,p.Stock }).ToList();
+
+            int startIndex = (CurrentPage - 1) * PageSize;
+            var PageData = cafeService.GetCafeItemsFromService().Select(p => new { p.Id, p.Name, p.Price, p.Stock }).Skip(startIndex).Take(PageSize).ToList();
+            ProductsGrid.DataSource = PageData;
+
+            int RowHeight = ProductsGrid.RowTemplate.Height;
+            int HeaderHeight = ProductsGrid.ColumnHeadersHeight;
+            ProductsGrid.Height = (PageSize * RowHeight) + HeaderHeight;
+
+            if (CurrentPage > 1)
+            {
+                PreviousBtn.Enabled = true;
+            }
+            if (CurrentPage < TotalPages())
+            {
+                NextBtn.Enabled = true;
+
+            }
+            //ProductsGrid.DataSource = cafeService.GetCafeItemsFromService().Select(p => new { p.Id, p.Name, p.Price, p.Stock }).ToList();
             ProductsGrid.Columns["ID"].Visible = false;
             ProductsGrid.Columns["Name"].HeaderText = "الاسم";
             ProductsGrid.Columns["Price"].HeaderText = "السعر";
@@ -63,6 +88,24 @@ namespace PlayStation.Presentation
             UpdateItem updateItem = new UpdateItem(Id, cafeService);
             updateItem.ShowDialog();
             DisplayProductsGrid();
+        }
+
+        private void NextBtn_Click(object sender, EventArgs e)
+        {
+            if (CurrentPage < TotalPages())
+            {
+                CurrentPage++;
+                DisplayProductsGrid();
+            }
+        }
+
+        private void PreviousBtn_Click(object sender, EventArgs e)
+        {
+            if (CurrentPage > 1)
+            {
+                CurrentPage--;
+                DisplayProductsGrid();
+            }
         }
     }
 }

@@ -26,9 +26,13 @@ namespace PlayStation.Presentation
 
         protected void ApplyGlobalStyles(Form parent)
         {
+            ApplyGlobalStylesToControls(parent.Controls);
+        }
+        protected void ApplyGlobalStylesToControls(Control.ControlCollection ctrls)
+        {
             this.BackColor = SecondaryColor;
             this.ForeColor = Color.Black;
-            foreach (Control ctrl in parent.Controls)
+            foreach (Control ctrl in ctrls)
             {
                 if (ctrl is Panel pnl)
                 {
@@ -37,6 +41,10 @@ namespace PlayStation.Presentation
                     pnl.Padding = new Padding(5);
                     pnl.Margin = new Padding(5);
                     pnl.AutoSize = true;
+                    if (pnl.HasChildren)
+                    {
+                        ApplyGlobalStylesToControls(pnl.Controls);
+                    }
                 }
                 else if (ctrl is DataGridView grid)
                 {
@@ -79,6 +87,7 @@ namespace PlayStation.Presentation
                         u.FlatStyle = FlatStyle.Flat;
                         u.DefaultCellStyle.ForeColor = Color.White;
                     }
+                    
                 }
             }
         }
