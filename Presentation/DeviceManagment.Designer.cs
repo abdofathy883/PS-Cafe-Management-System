@@ -49,7 +49,7 @@
             // 
             label2.AutoSize = true;
             label2.ForeColor = Color.White;
-            label2.Location = new Point(862, 76);
+            label2.Location = new Point(1016, 76);
             label2.Margin = new Padding(4, 0, 4, 0);
             label2.Name = "label2";
             label2.Size = new Size(67, 19);
@@ -60,7 +60,7 @@
             // 
             label3.AutoSize = true;
             label3.ForeColor = Color.White;
-            label3.Location = new Point(410, 76);
+            label3.Location = new Point(567, 76);
             label3.Margin = new Padding(4, 0, 4, 0);
             label3.Name = "label3";
             label3.Size = new Size(107, 19);
@@ -71,7 +71,7 @@
             // 
             label4.AutoSize = true;
             label4.ForeColor = Color.White;
-            label4.Location = new Point(634, 76);
+            label4.Location = new Point(785, 76);
             label4.Margin = new Padding(4, 0, 4, 0);
             label4.Name = "label4";
             label4.Size = new Size(67, 19);
@@ -84,7 +84,7 @@
             button1.FlatAppearance.BorderSize = 0;
             button1.FlatStyle = FlatStyle.Flat;
             button1.ForeColor = Color.White;
-            button1.Location = new Point(93, 95);
+            button1.Location = new Point(222, 95);
             button1.Margin = new Padding(4);
             button1.Name = "button1";
             button1.Size = new Size(153, 41);
@@ -100,7 +100,7 @@
             DevicesTable.Location = new Point(13, 153);
             DevicesTable.Margin = new Padding(4);
             DevicesTable.Name = "DevicesTable";
-            DevicesTable.Size = new Size(916, 190);
+            DevicesTable.Size = new Size(1117, 190);
             DevicesTable.TabIndex = 8;
             DevicesTable.CellContentClick += DevicesTable_CellContentClick;
             // 
@@ -120,14 +120,14 @@
             // 
             // DeNameInput
             // 
-            DeNameInput.Location = new Point(707, 107);
+            DeNameInput.Location = new Point(876, 107);
             DeNameInput.Name = "DeNameInput";
             DeNameInput.Size = new Size(222, 26);
             DeNameInput.TabIndex = 9;
             // 
             // HourlyRateInput
             // 
-            HourlyRateInput.Location = new Point(388, 104);
+            HourlyRateInput.Location = new Point(557, 104);
             HourlyRateInput.Name = "HourlyRateInput";
             HourlyRateInput.Size = new Size(129, 26);
             HourlyRateInput.TabIndex = 10;
@@ -136,14 +136,14 @@
             // 
             DeTypeCombo.FormattingEnabled = true;
             DeTypeCombo.Items.AddRange(new object[] { "PS4", "PS5" });
-            DeTypeCombo.Location = new Point(523, 105);
+            DeTypeCombo.Location = new Point(692, 105);
             DeTypeCombo.Name = "DeTypeCombo";
             DeTypeCombo.Size = new Size(178, 27);
             DeTypeCombo.TabIndex = 11;
             // 
             // HourlyRateMulti
             // 
-            HourlyRateMulti.Location = new Point(253, 104);
+            HourlyRateMulti.Location = new Point(382, 104);
             HourlyRateMulti.Name = "HourlyRateMulti";
             HourlyRateMulti.Size = new Size(129, 26);
             HourlyRateMulti.TabIndex = 13;
@@ -152,7 +152,7 @@
             // 
             label1.AutoSize = true;
             label1.ForeColor = Color.White;
-            label1.Location = new Point(276, 76);
+            label1.Location = new Point(383, 76);
             label1.Margin = new Padding(4, 0, 4, 0);
             label1.Name = "label1";
             label1.Size = new Size(106, 19);
@@ -163,7 +163,7 @@
             // 
             AutoScaleDimensions = new SizeF(10F, 19F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(967, 379);
+            ClientSize = new Size(1143, 379);
             Controls.Add(HourlyRateMulti);
             Controls.Add(label1);
             Controls.Add(DeTypeCombo);

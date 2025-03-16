@@ -20,4 +20,5 @@ public partial class User : IDeletable
 
     public virtual ICollection<Session> Session { get; set; } = new List<Session>();
     public virtual ICollection<LoginSession> LoginSession { get; set; } = new List<LoginSession>();
+    public decimal TotalExpense => Expenses.Sum(e => e.Amount);
 }

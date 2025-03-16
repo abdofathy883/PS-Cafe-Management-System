@@ -29,6 +29,16 @@ namespace PlayStation.Infrastructure.Repos.Repository
             return entity;
         }
 
+        public ICollection<T> GetUsersWithData()
+        {
+            return (ICollection<T>)_dbContext.Users.Include(u => u.Expenses).Select(u => new User
+            {
+                Name = u.Name,
+                Role = u.Role,
+                Expenses = u.Expenses.ToList()
+            }).ToList();
+        }
+        
         public ICollection<T> GetAll()
         {
             return _dbSet.Where(e => e.IsDeleted == false).AsNoTracking().ToList();
@@ -85,5 +95,10 @@ namespace PlayStation.Infrastructure.Repos.Repository
             var entity = _dbContext.Set<Type>().Find(id);
             return entity == null ? throw new InvalidOperationException($"This {typeof(Type).Name} is not existed") : true;
         }
+
+        //public ICollection<T> GetUsersWithData()
+        //{
+        //    throw new NotImplementedException();
+        //}
     }
 }

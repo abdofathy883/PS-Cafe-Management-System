@@ -26,7 +26,18 @@ namespace PlayStation.Application.Services
         }
         public List<User> GetAllUsersFromService()
         {
+            //return (List<User>)_userRepository.GetAll().Select(u => new User
+            //{
+            //    Name = u.Name,
+            //    Role = u.Role,
+            //    Expenses = u.Expenses.Where(e => e.Id == u.Id).Sum(e => (decimal?)e.Amount)
+
+            //}).ToList();
             return _userRepository.GetAll().ToList();
+        }
+        public List<User> GetUsersWithDataFromService()
+        {
+            return (List<User>)_userRepository.GetUsersWithData();
         }
         public void AddUserFromService(User user)
         {

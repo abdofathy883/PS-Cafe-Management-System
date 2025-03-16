@@ -27,11 +27,12 @@ namespace PlayStation.Presentation
         private void DisplayDevicesTable()
         {
             DevicesTable.DataSource = null;
-            DevicesTable.DataSource = deviceService.GetAllDevicesFromService().Select(d => new {d.Id,d.Name,d.Type,d.HourlyRate,d.status}).ToList();
+            DevicesTable.DataSource = deviceService.GetAllDevicesFromService().Select(d => new {d.Id,d.Name,d.Type,d.HourlyRate, d.HourlyRateForMulti,d.status}).ToList();
             DevicesTable.Columns["ID"].Visible = false;
             DevicesTable.Columns["Name"].HeaderText = "الاسم";
             DevicesTable.Columns["Type"].HeaderText = "النوع";
-            DevicesTable.Columns["HourlyRate"].HeaderText = "سعر الساعة";
+            DevicesTable.Columns["HourlyRate"].HeaderText = "الساعة سنجل";
+            DevicesTable.Columns["HourlyRateForMulti"].HeaderText = " الساعة مالتي";
             DevicesTable.Columns["status"].HeaderText = "نشاط الجهاز";
         }
         private void button1_Click(object sender, EventArgs e)

@@ -25,10 +25,16 @@ namespace PlayStation.Presentation
         private void DisplayUsersTableGrid()
         {
             UsersTableGrid.DataSource = null;
-            UsersTableGrid.DataSource = userService.GetAllUsersFromService();
-            UsersTableGrid.Columns["ID"].Visible = false;
+            UsersTableGrid.DataSource = userService.GetUsersWithDataFromService();
+            UsersTableGrid.Columns["Id"].Visible = false;
             UsersTableGrid.Columns["Password"].Visible = false;
             UsersTableGrid.Columns["IsDeleted"].Visible = false;
+            UsersTableGrid.Columns["LoginSession"].Visible = false;
+            UsersTableGrid.Columns["Expenses"].Visible = false;
+            UsersTableGrid.Columns["Session"].Visible = false;
+            UsersTableGrid.Columns["Name"].HeaderText = "الاسم";
+            UsersTableGrid.Columns["Role"].HeaderText = "الدور";
+            UsersTableGrid.Columns["TotalExpense"].HeaderText = "مجموع المصاريف";
         }
         private void AddUserBtn_Click(object sender, EventArgs e)
         {

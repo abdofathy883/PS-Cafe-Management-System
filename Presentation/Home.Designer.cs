@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             panel1 = new Panel();
-            label3 = new Label();
             label2 = new Label();
             label1 = new Label();
             panel2 = new Panel();
@@ -40,38 +39,30 @@
             UserManagementBtn = new Button();
             EmployeePanel = new Panel();
             MainContainer = new Panel();
+            panel3 = new Panel();
             panel1.SuspendLayout();
             panel2.SuspendLayout();
             EmployeePanel.SuspendLayout();
+            panel3.SuspendLayout();
             SuspendLayout();
             // 
             // panel1
             // 
-            panel1.Controls.Add(label3);
-            panel1.Controls.Add(label2);
+            panel1.Controls.Add(panel3);
             panel1.Controls.Add(label1);
             panel1.Dock = DockStyle.Top;
             panel1.Location = new Point(0, 0);
             panel1.Margin = new Padding(4);
             panel1.Name = "panel1";
-            panel1.Size = new Size(893, 95);
+            panel1.Size = new Size(893, 125);
             panel1.TabIndex = 0;
-            // 
-            // label3
-            // 
-            label3.AutoSize = true;
-            label3.Location = new Point(754, 73);
-            label3.Name = "label3";
-            label3.Size = new Size(116, 19);
-            label3.TabIndex = 2;
-            label3.Text = "الدعم الفني: واتساب";
             // 
             // label2
             // 
             label2.AutoSize = true;
             label2.Font = new Font("Comic Sans MS", 26.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
             label2.ForeColor = Color.White;
-            label2.Location = new Point(666, 22);
+            label2.Location = new Point(14, 22);
             label2.Margin = new Padding(0);
             label2.Name = "label2";
             label2.Size = new Size(218, 49);
@@ -99,10 +90,10 @@
             panel2.Controls.Add(CafetriaBtn);
             panel2.Controls.Add(DeviceManagementBtn);
             panel2.Dock = DockStyle.Left;
-            panel2.Location = new Point(0, 95);
+            panel2.Location = new Point(0, 125);
             panel2.Margin = new Padding(4);
             panel2.Name = "panel2";
-            panel2.Size = new Size(285, 418);
+            panel2.Size = new Size(285, 388);
             panel2.TabIndex = 1;
             // 
             // AllDevicesBtn
@@ -205,10 +196,19 @@
             // MainContainer
             // 
             MainContainer.Dock = DockStyle.Right;
-            MainContainer.Location = new Point(292, 95);
+            MainContainer.Location = new Point(292, 125);
             MainContainer.Name = "MainContainer";
-            MainContainer.Size = new Size(601, 418);
+            MainContainer.Size = new Size(601, 388);
             MainContainer.TabIndex = 3;
+            // 
+            // panel3
+            // 
+            panel3.Controls.Add(label2);
+            panel3.Dock = DockStyle.Right;
+            panel3.Location = new Point(579, 0);
+            panel3.Name = "panel3";
+            panel3.Size = new Size(314, 125);
+            panel3.TabIndex = 3;
             // 
             // Home
             // 
@@ -232,6 +232,8 @@
             panel1.PerformLayout();
             panel2.ResumeLayout(false);
             EmployeePanel.ResumeLayout(false);
+            panel3.ResumeLayout(false);
+            panel3.PerformLayout();
             ResumeLayout(false);
         }
 
@@ -249,5 +251,6 @@
         private Panel MainContainer;
         private Button AllDevicesBtn;
         private Label label3;
+        private Panel panel3;
     }
 }
