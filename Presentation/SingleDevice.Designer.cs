@@ -45,6 +45,7 @@ namespace PlayStation.Presentation
             OrderGrid = new DataGridView();
             panelDevice = new Panel();
             panel3 = new Panel();
+            ChangeSessionTypeBtn = new Button();
             SingleRadio = new RadioButton();
             MultiRadio = new RadioButton();
             dateTimePickerEnd = new DateTimePicker();
@@ -52,6 +53,7 @@ namespace PlayStation.Presentation
             dateTimePicker1 = new DateTimePicker();
             StartBtn = new Button();
             timer = new System.Windows.Forms.Timer(components);
+            DeleteBtb = new DataGridViewButtonColumn();
             panelHead.SuspendLayout();
             panelCafe.SuspendLayout();
             panel2.SuspendLayout();
@@ -194,12 +196,14 @@ namespace PlayStation.Presentation
             // OrderGrid
             // 
             OrderGrid.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            OrderGrid.Columns.AddRange(new DataGridViewColumn[] { DeleteBtb });
             OrderGrid.Dock = DockStyle.Bottom;
             OrderGrid.Location = new Point(0, 123);
             OrderGrid.Margin = new Padding(4, 3, 4, 3);
             OrderGrid.Name = "OrderGrid";
             OrderGrid.Size = new Size(651, 323);
             OrderGrid.TabIndex = 1;
+            OrderGrid.CellContentClick += OrderGrid_CellContentClick;
             // 
             // panelDevice
             // 
@@ -213,6 +217,7 @@ namespace PlayStation.Presentation
             // 
             // panel3
             // 
+            panel3.Controls.Add(ChangeSessionTypeBtn);
             panel3.Controls.Add(SingleRadio);
             panel3.Controls.Add(MultiRadio);
             panel3.Controls.Add(dateTimePickerEnd);
@@ -224,6 +229,22 @@ namespace PlayStation.Presentation
             panel3.Name = "panel3";
             panel3.Size = new Size(430, 208);
             panel3.TabIndex = 0;
+            // 
+            // ChangeSessionTypeBtn
+            // 
+            ChangeSessionTypeBtn.BackColor = Color.FromArgb(32, 87, 129);
+            ChangeSessionTypeBtn.FlatAppearance.BorderSize = 0;
+            ChangeSessionTypeBtn.FlatStyle = FlatStyle.Flat;
+            ChangeSessionTypeBtn.Font = new Font("Arial", 12F, FontStyle.Bold);
+            ChangeSessionTypeBtn.ForeColor = Color.White;
+            ChangeSessionTypeBtn.Location = new Point(157, 67);
+            ChangeSessionTypeBtn.Margin = new Padding(4, 3, 4, 3);
+            ChangeSessionTypeBtn.Name = "ChangeSessionTypeBtn";
+            ChangeSessionTypeBtn.Size = new Size(119, 31);
+            ChangeSessionTypeBtn.TabIndex = 6;
+            ChangeSessionTypeBtn.Text = "تغيير";
+            ChangeSessionTypeBtn.UseVisualStyleBackColor = false;
+            ChangeSessionTypeBtn.Click += ChangeSessionTypeBtn_Click;
             // 
             // SingleRadio
             // 
@@ -257,7 +278,7 @@ namespace PlayStation.Presentation
             // 
             dateTimePickerEnd.CustomFormat = "hh:mm tt";
             dateTimePickerEnd.Format = DateTimePickerFormat.Time;
-            dateTimePickerEnd.Location = new Point(5, 109);
+            dateTimePickerEnd.Location = new Point(5, 152);
             dateTimePickerEnd.Name = "dateTimePickerEnd";
             dateTimePickerEnd.ShowUpDown = true;
             dateTimePickerEnd.Size = new Size(208, 25);
@@ -271,7 +292,7 @@ namespace PlayStation.Presentation
             EndBtn.FlatStyle = FlatStyle.Flat;
             EndBtn.Font = new Font("Arial", 12F, FontStyle.Bold);
             EndBtn.ForeColor = Color.White;
-            EndBtn.Location = new Point(5, 72);
+            EndBtn.Location = new Point(5, 115);
             EndBtn.Margin = new Padding(4, 3, 4, 3);
             EndBtn.Name = "EndBtn";
             EndBtn.Size = new Size(208, 31);
@@ -287,7 +308,7 @@ namespace PlayStation.Presentation
             dateTimePicker1.CustomFormat = "hh:mm tt";
             dateTimePicker1.DropDownAlign = LeftRightAlignment.Right;
             dateTimePicker1.Format = DateTimePickerFormat.Custom;
-            dateTimePicker1.Location = new Point(221, 109);
+            dateTimePicker1.Location = new Point(221, 152);
             dateTimePicker1.Name = "dateTimePicker1";
             dateTimePicker1.RightToLeft = RightToLeft.No;
             dateTimePicker1.ShowUpDown = true;
@@ -303,7 +324,7 @@ namespace PlayStation.Presentation
             StartBtn.FlatStyle = FlatStyle.Flat;
             StartBtn.Font = new Font("Arial", 12F, FontStyle.Bold);
             StartBtn.ForeColor = Color.White;
-            StartBtn.Location = new Point(221, 72);
+            StartBtn.Location = new Point(221, 115);
             StartBtn.Margin = new Padding(4, 3, 4, 3);
             StartBtn.Name = "StartBtn";
             StartBtn.Size = new Size(206, 31);
@@ -316,6 +337,12 @@ namespace PlayStation.Presentation
             // 
             timer.Interval = 1000;
             timer.Tick += timer_Tick;
+            // 
+            // DeleteBtb
+            // 
+            DeleteBtb.HeaderText = "حذف";
+            DeleteBtb.Name = "DeleteBtb";
+            DeleteBtb.Text = "حذف";
             // 
             // SingleDevice
             // 
@@ -370,5 +397,7 @@ namespace PlayStation.Presentation
         private RadioButton SingleRadio;
         private RadioButton MultiRaadio;
         private RadioButton MultiRadio;
+        private DataGridViewButtonColumn DeleteBtb;
+        private Button ChangeSessionTypeBtn;
     }
 }

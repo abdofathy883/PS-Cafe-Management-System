@@ -15,7 +15,7 @@ namespace PlayStation.Presentation
     public partial class Home : BaseForm
     {
         private readonly IServiceProvider _serviceProvider;
-        
+
         public Home(IServiceProvider serviceProvider)
         {
             InitializeComponent();
@@ -50,7 +50,7 @@ namespace PlayStation.Presentation
                 //    form.Size = new Size(Math.Min(MainContainer.Width, form.Width),
                 //                         Math.Min(MainContainer.Height, form.Height));
             };
-        MainContainer.Controls.Add(form);
+            MainContainer.Controls.Add(form);
             form.Show();
         }
         private void UserManagementBtn_Click(object sender, EventArgs e)
@@ -80,6 +80,11 @@ namespace PlayStation.Presentation
         private void AllDevicesBtn_Click(object sender, EventArgs e)
         {
             ShowFormInPanel<AllDevices>();
+        }
+
+        private void ReportsBtn_Click(object sender, EventArgs e)
+        {
+            ShowFormInPanel<SessionReport>();
         }
     }
 }

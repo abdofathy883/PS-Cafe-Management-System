@@ -28,5 +28,30 @@ namespace PlayStation.Application.Services
             sessionRepository.DeleteById(session.Id);
         }
 
+        //Reports
+        public List<Session> GetSessionsByDateRange(DateTime startDate, DateTime endDate)
+        {
+            return sessionRepository.Find(s => s.StartTime >= startDate && s.StartTime <= endDate).ToList();
+        }
+
+        public List<Session> GetDailySessions(DateTime date)
+        {
+            return GetSessionsByDateRange(date.Date, date.Date.AddDays(1).AddTicks(-1));
+        }
+
+        public List<Session> GetWeeklySessions(DateTime date)
+        {
+            var startOfWeek = date.Date.AddDays(-(int)date.DayOfWeek);
+            var endOfWeek = startOfWeek.AddDays(7).AddTicks(-1);
+            return GetSessionsByDateRange(startOfWeek, endOfWeek);
+        }
+
+        public List<Session> GetMonthlySessions(DateTime date)
+        {
+            var startOfMonth = new DateTime(date.Year, date.Month, 1);
+            var endOfMonth = startOfMonth.AddMonths(1).AddTicks(-1);
+            return GetSessionsByDateRange(startOfMonth, endOfMonth);
+        }
+
     }
 }

@@ -26,10 +26,17 @@ namespace PlayStation
 
             IConfiguration Configuration = builder.Build();
             var services = new ServiceCollection();
-            
+
             // Register DbContext
-            services.AddDbContext<PSManagementDbContext>(o=>o.UseSqlServer(Configuration.GetConnectionString("AbdoSqlServer")).UseLazyLoadingProxies());
-            
+            services.AddDbContext<PSManagementDbContext>(o => o.UseSqlServer(Configuration.GetConnectionString("AbdoSqlServer")).UseLazyLoadingProxies());
+            //var app = builder.Build();
+            //using (var scope = app.Services.CreateScope())
+            //{
+            //    var dbContext = scope.ServiceProvider.GetRequiredService<PSManagementDbContext>();
+            //    dbContext.Database.Migrate(); // Auto-create DB
+            //}
+
+
             // Register Repository
             services.AddTransient(typeof(IRepository<>), typeof(Repository<>));
 
@@ -54,6 +61,7 @@ namespace PlayStation
             services.AddTransient<UpdateItem>();
             services.AddTransient<UpdateUser>();
             services.AddTransient<UserManagement>();
+            services.AddTransient<SessionReport>();
 
 
             ServiceProvider serviceProvider = services.BuildServiceProvider();

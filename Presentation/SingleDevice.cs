@@ -41,7 +41,23 @@ namespace PlayStation.Presentation
                 timer.Start();
             }
             DeviceNameLbl.Text = CurrentDevice.Name;
+            PopulateOrderGrif();
 
+        }
+        private void PopulateOrderGrif()
+        {
+            if (CurrentSession != null)
+            {
+                var CurrentOrderList = CurrentSession.OrderDetails
+                    .Select(o => new { o.Item.Name, o.Quantity, o.TotalPrice })
+                    .ToList();
+                //CurrentOrderList.columns
+                OrderGrid.DataSource = null;
+                OrderGrid.DataSource = CurrentOrderList;
+                OrderGrid.Columns["Name"].HeaderText = "المنتج";
+                OrderGrid.Columns["Quantity"].HeaderText = "العدد";
+                OrderGrid.Columns["TotalPrice"].HeaderText = "المجموع";
+            }
         }
 
         private void AddItemBtn_Click(object sender, EventArgs e)
@@ -59,7 +75,6 @@ namespace PlayStation.Presentation
             else
             {
 
-                //var item = CafeService.GetItemByID((int)ItemsCombo.SelectedValue);
                 var selectedValue = ItemsCombo.SelectedValue;
                 if (selectedValue == null)
                 {
@@ -87,14 +102,20 @@ namespace PlayStation.Presentation
                 sessionService.UpdateSessionFromService(CurrentSession);
                 item.Stock -= (byte)ItemsCounter.Value;
                 CafeService.UpdateCafeItemFromService(item);
-                var CurrentOrderList = CurrentSession.OrderDetails.Select(o => new { o.Item.Name, o.Quantity, o.TotalPrice }).ToList();
-                OrderGrid.DataSource = null;
-                OrderGrid.DataSource = CurrentOrderList;
+                PopulateOrderGrif();
+
+
             }
             TotalPriceLbl.Text = CurrentSession.TotalCost.ToString();
         }
         private void StartBtn_Click(object sender, EventArgs e)
         {
+            //if (!MultiRaadio.Checked && !SingleRadio.Checked)
+                if (MultiRadio.Checked == false && SingleRadio.Checked == false)
+                {
+                    MessageBox.Show("يرجى اختيار نوع اللعب قبل البدء", "فشل بدء اللعب", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    return;
+                }
             DateTime parsedTime;
 
             // Force DateTimePicker to take the current time if input is empty or invalid
@@ -126,6 +147,14 @@ namespace PlayStation.Presentation
                 Duration = 0,
                 OrderDetails = new List<OrderDetail>()
             };
+            if (MultiRadio.Checked)
+            {
+                CurrentSession.TotalCost += Math.Round(((CurrentSession.Duration / 60) * CurrentDevice.HourlyRateForMulti), 2);
+            }
+            else if (SingleRadio.Checked)
+            {
+                CurrentSession.TotalCost += Math.Round(((CurrentSession.Duration / 60) * CurrentDevice.HourlyRate), 2);
+            }
             CurrentDevice.status = DevaisStatus.مشغول;
             sessionService.AddSessionFromService(CurrentSession);
             deviceService.UpdateDeviceFromService(CurrentDevice);
@@ -165,14 +194,7 @@ namespace PlayStation.Presentation
                 CurrentSession.Duration = (decimal)(CurrentSession.EndTime.Value - CurrentSession.StartTime).TotalMinutes;
             }
             //CurrentSession.TotalCost += Math.Round(((CurrentSession.Duration / 60) * CurrentDevice.HourlyRate), 2);
-            if (MultiRadio.Checked)
-            {
-                CurrentSession.TotalCost += Math.Round(((CurrentSession.Duration / 60) * CurrentDevice.HourlyRateForMulti), 2);
-            }
-            else if (SingleRadio.Checked)
-            {
-                CurrentSession.TotalCost += Math.Round(((CurrentSession.Duration / 60) * CurrentDevice.HourlyRate), 2);
-            }
+
             sessionService.UpdateSessionFromService(CurrentSession);
             TotalPriceLbl.Text = CurrentSession.TotalCost.ToString();
 
@@ -236,6 +258,63 @@ namespace PlayStation.Presentation
             }
 
             //dateTimePicker1.Value = parsedTime;
+        }
+
+        private void OrderGrid_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (OrderGrid.Columns[e.ColumnIndex].Name == "DeleteBtb" && e.RowIndex >= 0)
+            {
+                var OrderDetail = CurrentSession.OrderDetails.ElementAt(e.RowIndex);
+                CurrentSession.OrderDetails.Remove(OrderDetail);
+                sessionService.UpdateSessionFromService(CurrentSession);
+
+                TotalPriceLbl.Text = CurrentSession.TotalCost.ToString();
+            }
+        }
+
+        private void ChangeSessionTypeBtn_Click(object sender, EventArgs e)
+        {
+            if (CurrentSession == null)
+            {
+                MessageBox.Show("يرجى بدء الجلسة قبل تغيير نوع الجلسة", "فشل في تغيير نوع الجلسة", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            // Calculate the duration up to this point
+            var currentDuration = (decimal)(DateTime.Now - CurrentSession.StartTime).TotalMinutes;
+
+            // Calculate the cost up to this point based on the current session type
+            if (MultiRadio.Checked)
+            {
+                CurrentSession.TotalCost += Math.Round((currentDuration / 60) * CurrentDevice.HourlyRateForMulti, 2);
+            }
+            else if (SingleRadio.Checked)
+            {
+                CurrentSession.TotalCost += Math.Round((currentDuration / 60) * CurrentDevice.HourlyRate, 2);
+            }
+
+            // Update the session start time to now
+            CurrentSession.StartTime = DateTime.Now;
+
+            // Change the session type
+            if (MultiRadio.Checked)
+            {
+                SingleRadio.Checked = true;
+                MultiRadio.Checked = false;
+            }
+            else if (SingleRadio.Checked)
+            {
+                MultiRadio.Checked = true;
+                SingleRadio.Checked = false;
+            }
+
+            // Update the session in the database
+            sessionService.UpdateSessionFromService(CurrentSession);
+
+            // Update the total cost label
+            TotalPriceLbl.Text = CurrentSession.TotalCost.ToString();
+
+            MessageBox.Show("تم تغيير نوع الجلسة بنجاح", "نجاح", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
     }
 }

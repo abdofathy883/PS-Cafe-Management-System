@@ -36,8 +36,6 @@ namespace PlayStation.Presentation
             DevicesTable.DataSource = null;
 
             int startIndex = (CurrentPage - 1) * PageSize;
-            //var PageData = deviceService.GetAllDevicesFromService().Skip(startIndex).Take(PageSize).ToList();
-            //DevicesTable.DataSource = PageData;
 
             int RowHeight = DevicesTable.RowTemplate.Height;
             int HeaderHeight = DevicesTable.ColumnHeadersHeight;
