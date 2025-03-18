@@ -343,6 +343,7 @@ namespace PlayStation.Presentation
             DeleteBtb.HeaderText = "حذف";
             DeleteBtb.Name = "DeleteBtb";
             DeleteBtb.Text = "حذف";
+            DeleteBtb.UseColumnTextForButtonValue = true;
             // 
             // SingleDevice
             // 
@@ -397,7 +398,7 @@ namespace PlayStation.Presentation
         private RadioButton SingleRadio;
         private RadioButton MultiRaadio;
         private RadioButton MultiRadio;
-        private DataGridViewButtonColumn DeleteBtb;
         private Button ChangeSessionTypeBtn;
+        private DataGridViewButtonColumn DeleteBtb;
     }
 }

@@ -48,10 +48,10 @@ namespace PlayStation.Presentation
                 EndBtn.Enabled = false;
             }
             DeviceNameLbl.Text = CurrentDevice.Name;
-            PopulateOrderGrif();
+            PopulateOrderGrid();
 
         }
-        private void PopulateOrderGrif()
+        private void PopulateOrderGrid()
         {
             if (CurrentSession != null)
             {
@@ -110,7 +110,7 @@ namespace PlayStation.Presentation
                 sessionService.UpdateSessionFromService(CurrentSession);
                 item.Stock -= ItemsCounter.Value;
                 cafeService.UpdateCafeItemFromService(item);
-                PopulateOrderGrif();
+                PopulateOrderGrid();
 
 
             }
@@ -118,7 +118,6 @@ namespace PlayStation.Presentation
         }
         private void StartBtn_Click(object sender, EventArgs e)
         {
-            //if (!MultiRaadio.Checked && !SingleRadio.Checked)
                 if (MultiRadio.Checked == false && SingleRadio.Checked == false)
                 {
                     MessageBox.Show("يرجى اختيار نوع اللعب قبل البدء", "فشل بدء اللعب", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
@@ -168,7 +167,9 @@ namespace PlayStation.Presentation
             deviceService.UpdateDeviceFromService(CurrentDevice);
             StartBtn.Enabled = false;
             EndBtn.Enabled = true;
-            //dateTimePicker1.Enabled = false;
+            dateTimePicker1.Enabled = false;
+            MultiRadio.Enabled = false;
+            SingleRadio.Enabled = false;
         }
 
         private void EndBtn_Click(object sender, EventArgs e)
@@ -213,6 +214,9 @@ namespace PlayStation.Presentation
             deviceService.UpdateDeviceFromService(CurrentDevice);
             StartBtn.Enabled = true;
             EndBtn.Enabled = false;
+            dateTimePicker1.Enabled = true;
+            MultiRadio.Enabled = true;
+            SingleRadio.Enabled = true;
         }
 
         private void panel1_Paint(object sender, PaintEventArgs e)
@@ -283,6 +287,7 @@ namespace PlayStation.Presentation
 
                 TotalPriceLbl.Text = CurrentSession.TotalCost.ToString();
             }
+            PopulateOrderGrid();
         }
 
         private void ChangeSessionTypeBtn_Click(object sender, EventArgs e)
