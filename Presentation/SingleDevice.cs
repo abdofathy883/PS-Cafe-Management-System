@@ -238,10 +238,6 @@ namespace PlayStation.Presentation
 
         private void timer_Tick(object sender, EventArgs e)
         {
-            //Seconds++;
-            //TimerLbl.Text = $"{Seconds}";
-
-
             elapsedSeconds++;
             int hours = elapsedSeconds / 3600;
             int minutes = (elapsedSeconds % 3600) / 60;
@@ -251,7 +247,6 @@ namespace PlayStation.Presentation
 
         private void dateTimePickerEnd_ValueChanged(object sender, EventArgs e)
         {
-            //EndBtn.Enabled = !dateTimePickerEnd.Checked;
             ValidateDateTime();
         }
         private void ValidateDateTime()
@@ -273,8 +268,6 @@ namespace PlayStation.Presentation
                 parsedTime = DateTime.Now; // Default to current time if input is invalid
                 dateTimePicker1.Value = parsedTime;
             }
-
-            //dateTimePicker1.Value = parsedTime;
         }
 
         private void OrderGrid_CellContentClick(object sender, DataGridViewCellEventArgs e)
