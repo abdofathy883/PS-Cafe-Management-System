@@ -14,24 +14,26 @@ namespace PlayStation.Presentation
 {
     public partial class SingleDevice : BaseForm
     {
-        private readonly CafeService CafeService;
+        private readonly CafeService cafeService;
         private readonly SessionService sessionService;
         private readonly DeviceService deviceService;
+        private readonly OrderDetailsService orderDetailsService;
         Device CurrentDevice;
         Session CurrentSession;
         private int elapsedSeconds;
-        public SingleDevice(int _CurrentDeviceId, CafeService _CafeService, SessionService _sessionService, DeviceService _deviceService)
+        public SingleDevice(int _CurrentDeviceId, CafeService _CafeService, SessionService _sessionService, DeviceService _deviceService, OrderDetailsService _orderDetailsService)
         {
             InitializeComponent();
             ApplyGlobalStyles(this);
 
-            CafeService = _CafeService;
+            cafeService = _CafeService;
             sessionService = _sessionService;
             deviceService = _deviceService;
+            orderDetailsService = _orderDetailsService;
 
             CurrentDevice = deviceService.GetDeviceByIdFromService(_CurrentDeviceId);
 
-            ItemsCombo.DataSource = CafeService.GetCafeItemsFromService();
+            ItemsCombo.DataSource = cafeService.GetCafeItemsFromService();
             ItemsCombo.DisplayMember = "Name";
             ItemsCombo.ValueMember = "Id";
             if (CurrentDevice.status == DevaisStatus.مشغول)
@@ -39,6 +41,11 @@ namespace PlayStation.Presentation
                 CurrentSession = CurrentDevice.Sessions.First(s => s.Status == "Active");
                 elapsedSeconds = ((int)(DateTime.Now - CurrentSession.StartTime).TotalSeconds);
                 timer.Start();
+                StartBtn.Enabled = false;
+            }
+            else
+            {
+                EndBtn.Enabled = false;
             }
             DeviceNameLbl.Text = CurrentDevice.Name;
             PopulateOrderGrif();
@@ -48,7 +55,7 @@ namespace PlayStation.Presentation
         {
             if (CurrentSession != null)
             {
-                var CurrentOrderList = CurrentSession.OrderDetails
+                var CurrentOrderList = CurrentSession.OrderDetails.Where(d=>d.IsDeleted==false)
                     .Select(o => new { o.Item.Name, o.Quantity, o.TotalPrice })
                     .ToList();
                 //CurrentOrderList.columns
@@ -57,6 +64,7 @@ namespace PlayStation.Presentation
                 OrderGrid.Columns["Name"].HeaderText = "المنتج";
                 OrderGrid.Columns["Quantity"].HeaderText = "العدد";
                 OrderGrid.Columns["TotalPrice"].HeaderText = "المجموع";
+
             }
         }
 
@@ -81,14 +89,14 @@ namespace PlayStation.Presentation
                     MessageBox.Show("يرجى اختيار منتج صالح", "فشل اضافة منتج", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
-                var item = CafeService.GetItemByID((int)selectedValue);
+                var item = cafeService.GetItemByID((int)selectedValue);
                 if (item.Stock < ItemsCounter.Value)
                 {
                     MessageBox.Show("الكمية المتاحة لهذا المنتج اقل من الكمية المطلوبة", "تحذير", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
 
                 }
-                var Itemsprice = CafeService.GetCafeItemByIdFromService((int)ItemsCombo.SelectedValue).Price;
+                var Itemsprice = cafeService.GetCafeItemByIdFromService((int)ItemsCombo.SelectedValue).Price;
                 OrderDetail orderDetail = new OrderDetail()
                 {
                     Id = 0,
@@ -100,8 +108,8 @@ namespace PlayStation.Presentation
                 CurrentSession.TotalCost += (Itemsprice * (int)ItemsCounter.Value);
                 CurrentSession.OrderDetails.Add(orderDetail);
                 sessionService.UpdateSessionFromService(CurrentSession);
-                item.Stock -= (byte)ItemsCounter.Value;
-                CafeService.UpdateCafeItemFromService(item);
+                item.Stock -= ItemsCounter.Value;
+                cafeService.UpdateCafeItemFromService(item);
                 PopulateOrderGrif();
 
 
@@ -158,6 +166,9 @@ namespace PlayStation.Presentation
             CurrentDevice.status = DevaisStatus.مشغول;
             sessionService.AddSessionFromService(CurrentSession);
             deviceService.UpdateDeviceFromService(CurrentDevice);
+            StartBtn.Enabled = false;
+            EndBtn.Enabled = true;
+            //dateTimePicker1.Enabled = false;
         }
 
         private void EndBtn_Click(object sender, EventArgs e)
@@ -200,6 +211,8 @@ namespace PlayStation.Presentation
 
             CurrentDevice.status = DevaisStatus.متاح;
             deviceService.UpdateDeviceFromService(CurrentDevice);
+            StartBtn.Enabled = true;
+            EndBtn.Enabled = false;
         }
 
         private void panel1_Paint(object sender, PaintEventArgs e)
@@ -265,8 +278,8 @@ namespace PlayStation.Presentation
             if (OrderGrid.Columns[e.ColumnIndex].Name == "DeleteBtb" && e.RowIndex >= 0)
             {
                 var OrderDetail = CurrentSession.OrderDetails.ElementAt(e.RowIndex);
-                CurrentSession.OrderDetails.Remove(OrderDetail);
-                sessionService.UpdateSessionFromService(CurrentSession);
+
+                orderDetailsService.DeleteById(OrderDetail.Id);
 
                 TotalPriceLbl.Text = CurrentSession.TotalCost.ToString();
             }

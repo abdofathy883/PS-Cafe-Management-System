@@ -19,11 +19,13 @@ namespace PlayStation.Presentation
         private  readonly CafeService cafeService;
         private  readonly SessionService sessionService;
         private readonly DeviceService deviceService;
-        public AllDevices(CafeService _cafeService,SessionService _sessionService, DeviceService _deviceService)
+        private readonly OrderDetailsService orderDetailsService;
+        public AllDevices(CafeService _cafeService,SessionService _sessionService, DeviceService _deviceService, OrderDetailsService _orderDetailsService)
         {
             cafeService = _cafeService;
             sessionService = _sessionService;
             deviceService = _deviceService;
+            orderDetailsService=_orderDetailsService;
             InitializeComponent();
             ApplyGlobalStyles(this);
             layoutPanel = new FlowLayoutPanel()
@@ -95,7 +97,7 @@ namespace PlayStation.Presentation
             };
             ManageBtn.Click += (s, e) =>
             {
-                SingleDevice singleDevice = new SingleDevice(device.Id,cafeService,sessionService,deviceService);
+                SingleDevice singleDevice = new SingleDevice(device.Id,cafeService,sessionService,deviceService,orderDetailsService);
                 singleDevice.ShowDialog();
                 DeviceStatus.Text = deviceService.GetDeviceByIdFromService(device.Id).status.ToString();
             };

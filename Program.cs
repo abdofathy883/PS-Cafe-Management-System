@@ -46,6 +46,7 @@ namespace PlayStation
             services.AddTransient<ExpensesService>();
             services.AddTransient<LoginSessionService>();
             services.AddTransient<SessionService>();
+            services.AddTransient<OrderDetailsService>();
             services.AddTransient<UserService>();
 
             // Register Presentation
