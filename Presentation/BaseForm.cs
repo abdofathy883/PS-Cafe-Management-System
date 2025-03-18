@@ -17,7 +17,7 @@ namespace PlayStation.Presentation
             InitializeComponent();
             ApplyGlobalStyles(this);
         }
-        protected Color PrimaryColor = ColorTranslator.FromHtml("#205781");  // Deep Blue
+        protected Color PrimaryColor = ColorTranslator.FromHtml("#16404D");  // Deep Blue
         protected Color SecondaryColor = ColorTranslator.FromHtml("#4F959D"); // Teal
         protected Color AccentColor = ColorTranslator.FromHtml("#98D2C0"); // Soft Green
         protected Color BackgroundColor = ColorTranslator.FromHtml("#F6F8D5"); // Light Cream
@@ -30,13 +30,13 @@ namespace PlayStation.Presentation
         }
         protected void ApplyGlobalStylesToControls(Control.ControlCollection ctrls)
         {
-            this.BackColor = SecondaryColor;
-            this.ForeColor = Color.Black;
+            this.BackColor = PrimaryColor;
+            this.ForeColor = Color.White;
             foreach (Control ctrl in ctrls)
             {
                 if (ctrl is Panel pnl)
                 {
-                    pnl.BackColor = SecondaryColor;
+                    pnl.BackColor = PrimaryColor;
                     pnl.BorderStyle = BorderStyle.None; // Flat style
                     pnl.Padding = new Padding(5);
                     pnl.Margin = new Padding(5);
@@ -87,6 +87,11 @@ namespace PlayStation.Presentation
                         u.FlatStyle = FlatStyle.Flat;
                         u.DefaultCellStyle.ForeColor = Color.White;
                     }
+                    
+                }
+                else if (ctrl is Button btn)
+                {
+                    btn.BackColor = ColorTranslator.FromHtml("#DDA853");
                     
                 }
             }

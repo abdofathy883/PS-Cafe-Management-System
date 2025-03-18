@@ -28,24 +28,31 @@ namespace PlayStation.Presentation
             InitializeComponent();
             ApplyGlobalStyles(this);
             sessionService = _sessionService;
+            TotalLbl.Visible = false;
         }
 
         private void GenerateDailyReport(DateTime date)
         {
             var sessions = sessionService.GetDailySessions(date);
             DisplaySessions(sessions);
+            TotalLbl.Visible = true;
+            TotalLbl.Text = "مجموع الايرادات هذا اليوم: " + sessions.Sum(s => s.TotalCost).ToString();
         }
 
         private void GenerateWeeklyReport(DateTime date)
         {
             var sessions = sessionService.GetWeeklySessions(date);
             DisplaySessions(sessions);
+            TotalLbl.Visible = true;
+            TotalLbl.Text = "مجموع الايرادات هذا الاسبوع: " + sessions.Sum(s => s.TotalCost).ToString();
         }
 
         private void GenerateMonthlyReport(DateTime date)
         {
             var sessions = sessionService.GetMonthlySessions(date);
             DisplaySessions(sessions);
+            TotalLbl.Visible = true;
+            TotalLbl.Text = "مجموع الايرادات هذا الشهر: " + sessions.Sum(s => s.TotalCost).ToString();
         }
 
         private void DisplaySessions(List<Session> sessions)
@@ -99,6 +106,7 @@ namespace PlayStation.Presentation
         {
             var selectedDate = dateTimePicker.Value;
             GenerateDailyReport(selectedDate);
+            
         }
 
         private void WeeklyReportBtn_Click(object sender, EventArgs e)

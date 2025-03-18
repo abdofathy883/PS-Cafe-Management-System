@@ -33,8 +33,10 @@ namespace PlayStation.Infrastructure.Repos.Repository
         {
             return (ICollection<T>)_dbContext.Users.Include(u => u.Expenses).Select(u => new User
             {
+                Id = u.Id,
                 Name = u.Name,
                 Role = u.Role,
+                IsDeleted = u.IsDeleted,
                 Expenses = u.Expenses.ToList()
             }).ToList();
         }

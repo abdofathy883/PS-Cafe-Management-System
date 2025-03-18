@@ -81,9 +81,9 @@
             // 
             // ExpensesDescInput
             // 
-            ExpensesDescInput.Location = new Point(741, 79);
+            ExpensesDescInput.Location = new Point(799, 79);
             ExpensesDescInput.Name = "ExpensesDescInput";
-            ExpensesDescInput.Size = new Size(230, 23);
+            ExpensesDescInput.Size = new Size(172, 23);
             ExpensesDescInput.TabIndex = 4;
             // 
             // label4
@@ -91,7 +91,7 @@
             label4.AutoSize = true;
             label4.Font = new Font("Arial", 12F, FontStyle.Bold);
             label4.ForeColor = Color.White;
-            label4.Location = new Point(678, 51);
+            label4.Location = new Point(736, 51);
             label4.Name = "label4";
             label4.Size = new Size(57, 19);
             label4.TabIndex = 5;
@@ -100,9 +100,9 @@
             // ExpensesUser
             // 
             ExpensesUser.FormattingEnabled = true;
-            ExpensesUser.Location = new Point(613, 78);
+            ExpensesUser.Location = new Point(693, 78);
             ExpensesUser.Name = "ExpensesUser";
-            ExpensesUser.Size = new Size(122, 23);
+            ExpensesUser.Size = new Size(100, 23);
             ExpensesUser.TabIndex = 6;
             // 
             // label5
@@ -122,7 +122,7 @@
             ExpensesDateTime.MaxDate = new DateTime(2049, 12, 31, 0, 0, 0, 0);
             ExpensesDateTime.MinDate = new DateTime(2025, 1, 1, 0, 0, 0, 0);
             ExpensesDateTime.Name = "ExpensesDateTime";
-            ExpensesDateTime.Size = new Size(211, 23);
+            ExpensesDateTime.Size = new Size(291, 23);
             ExpensesDateTime.TabIndex = 8;
             // 
             // AddExpensesBtn

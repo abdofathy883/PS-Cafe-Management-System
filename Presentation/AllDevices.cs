@@ -91,7 +91,7 @@ namespace PlayStation.Presentation
                 Location = new Point(10, 260),
                 FlatStyle = FlatStyle.Flat,
                 ForeColor = Color.White,
-                BackColor = ColorTranslator.FromHtml("#205781"),
+                BackColor = ColorTranslator.FromHtml("#DDA853"),
                 Font = new Font("Arial", 12, FontStyle.Bold),
                 Height = 30
             };

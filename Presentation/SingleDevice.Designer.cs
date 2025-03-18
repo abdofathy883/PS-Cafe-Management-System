@@ -43,8 +43,10 @@ namespace PlayStation.Presentation
             label1 = new Label();
             ItemsCombo = new ComboBox();
             OrderGrid = new DataGridView();
+            DeleteBtb = new DataGridViewButtonColumn();
             panelDevice = new Panel();
             panel3 = new Panel();
+            ResetBtn = new Button();
             ChangeSessionTypeBtn = new Button();
             SingleRadio = new RadioButton();
             MultiRadio = new RadioButton();
@@ -53,7 +55,6 @@ namespace PlayStation.Presentation
             dateTimePicker1 = new DateTimePicker();
             StartBtn = new Button();
             timer = new System.Windows.Forms.Timer(components);
-            DeleteBtb = new DataGridViewButtonColumn();
             panelHead.SuspendLayout();
             panelCafe.SuspendLayout();
             panel2.SuspendLayout();
@@ -205,6 +206,13 @@ namespace PlayStation.Presentation
             OrderGrid.TabIndex = 1;
             OrderGrid.CellContentClick += OrderGrid_CellContentClick;
             // 
+            // DeleteBtb
+            // 
+            DeleteBtb.HeaderText = "حذف";
+            DeleteBtb.Name = "DeleteBtb";
+            DeleteBtb.Text = "حذف";
+            DeleteBtb.UseColumnTextForButtonValue = true;
+            // 
             // panelDevice
             // 
             panelDevice.Controls.Add(panel3);
@@ -217,6 +225,7 @@ namespace PlayStation.Presentation
             // 
             // panel3
             // 
+            panel3.Controls.Add(ResetBtn);
             panel3.Controls.Add(ChangeSessionTypeBtn);
             panel3.Controls.Add(SingleRadio);
             panel3.Controls.Add(MultiRadio);
@@ -227,8 +236,20 @@ namespace PlayStation.Presentation
             panel3.Location = new Point(35, 37);
             panel3.Margin = new Padding(4, 3, 4, 3);
             panel3.Name = "panel3";
-            panel3.Size = new Size(430, 208);
+            panel3.Size = new Size(430, 225);
             panel3.TabIndex = 0;
+            // 
+            // ResetBtn
+            // 
+            ResetBtn.FlatAppearance.BorderSize = 0;
+            ResetBtn.FlatStyle = FlatStyle.Flat;
+            ResetBtn.Location = new Point(5, 183);
+            ResetBtn.Name = "ResetBtn";
+            ResetBtn.Size = new Size(422, 29);
+            ResetBtn.TabIndex = 7;
+            ResetBtn.Text = "لعبة جديدة";
+            ResetBtn.UseVisualStyleBackColor = true;
+            ResetBtn.Click += ResetBtn_Click;
             // 
             // ChangeSessionTypeBtn
             // 
@@ -237,7 +258,7 @@ namespace PlayStation.Presentation
             ChangeSessionTypeBtn.FlatStyle = FlatStyle.Flat;
             ChangeSessionTypeBtn.Font = new Font("Arial", 12F, FontStyle.Bold);
             ChangeSessionTypeBtn.ForeColor = Color.White;
-            ChangeSessionTypeBtn.Location = new Point(157, 67);
+            ChangeSessionTypeBtn.Location = new Point(157, 71);
             ChangeSessionTypeBtn.Margin = new Padding(4, 3, 4, 3);
             ChangeSessionTypeBtn.Name = "ChangeSessionTypeBtn";
             ChangeSessionTypeBtn.Size = new Size(119, 31);
@@ -338,13 +359,6 @@ namespace PlayStation.Presentation
             timer.Interval = 1000;
             timer.Tick += timer_Tick;
             // 
-            // DeleteBtb
-            // 
-            DeleteBtb.HeaderText = "حذف";
-            DeleteBtb.Name = "DeleteBtb";
-            DeleteBtb.Text = "حذف";
-            DeleteBtb.UseColumnTextForButtonValue = true;
-            // 
             // SingleDevice
             // 
             AutoScaleDimensions = new SizeF(8F, 17F);
@@ -400,5 +414,6 @@ namespace PlayStation.Presentation
         private RadioButton MultiRadio;
         private Button ChangeSessionTypeBtn;
         private DataGridViewButtonColumn DeleteBtb;
+        private Button ResetBtn;
     }
 }

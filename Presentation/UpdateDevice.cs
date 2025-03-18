@@ -24,6 +24,7 @@ namespace PlayStation.Presentation
             UpdatedDevice = deviceService.GetDeviceByIdFromService(deviceId);
             NewDeviceNameInput.Text = UpdatedDevice.Name;
             NewDevicePriceInput.Value = UpdatedDevice.HourlyRate;
+            NewMultiPriceInput.Value = UpdatedDevice.HourlyRateForMulti;
 
         }
 
@@ -36,6 +37,7 @@ namespace PlayStation.Presentation
             }
             UpdatedDevice.Name = NewDeviceNameInput.Text;
             UpdatedDevice.HourlyRate = NewDevicePriceInput.Value;
+            UpdatedDevice.HourlyRateForMulti = NewMultiPriceInput.Value;
             deviceService.UpdateDeviceFromService(UpdatedDevice);
             this.Close();
         }

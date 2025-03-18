@@ -33,10 +33,10 @@
             label2 = new Label();
             NewDevicePriceInput = new NumericUpDown();
             UpdateDeviceBtn = new Button();
-            numericUpDown1 = new NumericUpDown();
+            NewMultiPriceInput = new NumericUpDown();
             label3 = new Label();
             ((System.ComponentModel.ISupportInitialize)NewDevicePriceInput).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)numericUpDown1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)NewMultiPriceInput).BeginInit();
             SuspendLayout();
             // 
             // label1
@@ -91,12 +91,12 @@
             UpdateDeviceBtn.UseVisualStyleBackColor = false;
             UpdateDeviceBtn.Click += UpdateDeviceBtn_Click;
             // 
-            // numericUpDown1
+            // NewMultiPriceInput
             // 
-            numericUpDown1.Location = new Point(145, 130);
-            numericUpDown1.Name = "numericUpDown1";
-            numericUpDown1.Size = new Size(136, 23);
-            numericUpDown1.TabIndex = 6;
+            NewMultiPriceInput.Location = new Point(145, 130);
+            NewMultiPriceInput.Name = "NewMultiPriceInput";
+            NewMultiPriceInput.Size = new Size(136, 23);
+            NewMultiPriceInput.TabIndex = 6;
             // 
             // label3
             // 
@@ -114,7 +114,7 @@
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(337, 195);
-            Controls.Add(numericUpDown1);
+            Controls.Add(NewMultiPriceInput);
             Controls.Add(label3);
             Controls.Add(UpdateDeviceBtn);
             Controls.Add(NewDevicePriceInput);
@@ -128,7 +128,7 @@
             StartPosition = FormStartPosition.CenterScreen;
             Text = "تحديث جهاز";
             ((System.ComponentModel.ISupportInitialize)NewDevicePriceInput).EndInit();
-            ((System.ComponentModel.ISupportInitialize)numericUpDown1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)NewMultiPriceInput).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -142,5 +142,6 @@
         private Button UpdateDeviceBtn;
         private NumericUpDown numericUpDown1;
         private Label label3;
+        private NumericUpDown NewMultiPriceInput;
     }
 }

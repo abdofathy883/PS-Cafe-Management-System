@@ -35,6 +35,7 @@
             dateTimePicker = new DateTimePicker();
             NextBtn = new Button();
             PreviousBtn = new Button();
+            TotalLbl = new Label();
             ((System.ComponentModel.ISupportInitialize)SessionsReportGrid).BeginInit();
             SuspendLayout();
             // 
@@ -43,7 +44,7 @@
             SessionsReportGrid.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             SessionsReportGrid.Location = new Point(80, 61);
             SessionsReportGrid.Name = "SessionsReportGrid";
-            SessionsReportGrid.Size = new Size(560, 497);
+            SessionsReportGrid.Size = new Size(560, 438);
             SessionsReportGrid.TabIndex = 0;
             // 
             // DailyReportBtn
@@ -105,7 +106,7 @@
             NextBtn.FlatStyle = FlatStyle.Flat;
             NextBtn.Font = new Font("Arial", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             NextBtn.ForeColor = Color.White;
-            NextBtn.Location = new Point(552, 564);
+            NextBtn.Location = new Point(552, 505);
             NextBtn.Name = "NextBtn";
             NextBtn.Size = new Size(88, 33);
             NextBtn.TabIndex = 5;
@@ -119,18 +120,30 @@
             PreviousBtn.FlatStyle = FlatStyle.Flat;
             PreviousBtn.Font = new Font("Arial", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             PreviousBtn.ForeColor = Color.White;
-            PreviousBtn.Location = new Point(80, 564);
+            PreviousBtn.Location = new Point(80, 505);
             PreviousBtn.Name = "PreviousBtn";
             PreviousBtn.Size = new Size(88, 33);
             PreviousBtn.TabIndex = 6;
             PreviousBtn.Text = "السابق";
             PreviousBtn.UseVisualStyleBackColor = false;
             // 
+            // TotalLbl
+            // 
+            TotalLbl.AutoSize = true;
+            TotalLbl.Font = new Font("Arial", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            TotalLbl.ForeColor = Color.White;
+            TotalLbl.Location = new Point(734, 61);
+            TotalLbl.Name = "TotalLbl";
+            TotalLbl.Size = new Size(54, 19);
+            TotalLbl.TabIndex = 7;
+            TotalLbl.Text = "label1";
+            // 
             // SessionReport
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 609);
+            Controls.Add(TotalLbl);
             Controls.Add(PreviousBtn);
             Controls.Add(NextBtn);
             Controls.Add(dateTimePicker);
@@ -142,6 +155,7 @@
             Text = "SessionReport";
             ((System.ComponentModel.ISupportInitialize)SessionsReportGrid).EndInit();
             ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
@@ -153,5 +167,6 @@
         private DateTimePicker dateTimePicker;
         private Button NextBtn;
         private Button PreviousBtn;
+        private Label TotalLbl;
     }
 }

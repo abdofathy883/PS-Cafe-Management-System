@@ -84,6 +84,11 @@ namespace PlayStation.Application.Services
                 MessageBox.Show("لا يمكن اضافة قيم فارغة", "فشل اضافة مصروفات", MessageBoxButtons.OKCancel, MessageBoxIcon.Error);
                 return;
             }
+            //else if (ExpensesDateTime.Value > DateTime.Now)
+            //{
+            //    MessageBox.Show("لا يمكن اختيار تاريخ مسبق", "فشل اضافة مصروفات", MessageBoxButtons.OKCancel, MessageBoxIcon.Error);
+            //    return;
+            //}
             else
             {
                 Expense newExpenses = new Expense();

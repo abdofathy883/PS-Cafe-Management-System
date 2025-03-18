@@ -37,7 +37,7 @@ namespace PlayStation.Presentation
             UsersTableGrid.DataSource = null;
 
             int startIndex = (CurrentPage - 1) * PageSize;
-            var PageData = userService.GetUsersWithDataFromService().Skip(startIndex).Take(PageSize).ToList();
+            var PageData = userService.GetUsersWithDataFromService().Where(u => u.IsDeleted = true).Skip(startIndex).Take(PageSize).ToList();
             UsersTableGrid.DataSource = PageData;
 
             int RowHeight = UsersTableGrid.RowTemplate.Height;
@@ -110,8 +110,8 @@ namespace PlayStation.Presentation
                 {
                     User UpdatedUser = new()
                     {
-                        Id = Convert.ToInt32(UsersTableGrid.Rows[e.RowIndex].Cells["ID"].Value),
-                        Name = UsersTableGrid.Rows[e.RowIndex].Cells["UserName"].Value?.ToString() ?? string.Empty,
+                        Id = Convert.ToInt32(UsersTableGrid.Rows[e.RowIndex].Cells["Id"].Value),
+                        Name = UsersTableGrid.Rows[e.RowIndex].Cells["Name"].Value?.ToString() ?? string.Empty,
                         Password = UsersTableGrid.Rows[e.RowIndex].Cells["Password"].Value?.ToString() ?? string.Empty,
                         Role = (string)UsersTableGrid.Rows[e.RowIndex].Cells["Role"].Value
                     };

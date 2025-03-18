@@ -96,7 +96,7 @@ namespace PlayStation.Presentation
             if (ColumnName == "UpdateCellButton")
             {
 
-                var Id = Convert.ToInt32(DevicesTable.Rows[e.RowIndex].Cells["ID"].Value);
+                var Id = Convert.ToInt32(DevicesTable.Rows[e.RowIndex].Cells["Id"].Value);
                 UpdateDevice updateDevice = new UpdateDevice(Id, deviceService);
                 updateDevice.ShowDialog();
                 DisplayDevicesTable();

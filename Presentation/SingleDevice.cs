@@ -55,7 +55,7 @@ namespace PlayStation.Presentation
         {
             if (CurrentSession != null)
             {
-                var CurrentOrderList = CurrentSession.OrderDetails.Where(d=>d.IsDeleted==false)
+                var CurrentOrderList = CurrentSession.OrderDetails.Where(d => d.IsDeleted == false)
                     .Select(o => new { o.Item.Name, o.Quantity, o.TotalPrice })
                     .ToList();
                 //CurrentOrderList.columns
@@ -74,11 +74,13 @@ namespace PlayStation.Presentation
             {
                 MessageBox.Show("يرجي بدا الجلسه قبل اضافة منتج", "فشل اضافة منتج", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
+                //AddItemBtn.Enabled = false;
             }
             if (ItemsCounter.Value <= 0)
             {
                 MessageBox.Show("يرجى اختيار عدد الوحدات المستخدمة من هذا المنتج", "فشل اضافة منتج", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
+                //AddItemBtn.Enabled = false;
             }
             else
             {
@@ -118,11 +120,11 @@ namespace PlayStation.Presentation
         }
         private void StartBtn_Click(object sender, EventArgs e)
         {
-                if (MultiRadio.Checked == false && SingleRadio.Checked == false)
-                {
-                    MessageBox.Show("يرجى اختيار نوع اللعب قبل البدء", "فشل بدء اللعب", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                    return;
-                }
+            if (!MultiRadio.Checked && !SingleRadio.Checked)
+            {
+                MessageBox.Show("يرجى اختيار نوع اللعب قبل البدء", "فشل بدء اللعب", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return;
+            }
             DateTime parsedTime;
 
             // Force DateTimePicker to take the current time if input is empty or invalid
@@ -170,6 +172,7 @@ namespace PlayStation.Presentation
             dateTimePicker1.Enabled = false;
             MultiRadio.Enabled = false;
             SingleRadio.Enabled = false;
+            ResetBtn.Enabled = false;
         }
 
         private void EndBtn_Click(object sender, EventArgs e)
@@ -205,6 +208,21 @@ namespace PlayStation.Presentation
             {
                 CurrentSession.Duration = (decimal)(CurrentSession.EndTime.Value - CurrentSession.StartTime).TotalMinutes;
             }
+
+
+            var currentDuration = (decimal)(DateTime.Now - CurrentSession.StartTime).TotalMinutes;
+            if (MultiRadio.Checked)
+            {
+                CurrentSession.TotalCost += Math.Round((currentDuration / 60) * CurrentDevice.HourlyRateForMulti, 2);
+            }
+            else if (SingleRadio.Checked)
+            {
+                CurrentSession.TotalCost += Math.Round((currentDuration / 60) * CurrentDevice.HourlyRate, 2);
+            }
+
+
+
+
             //CurrentSession.TotalCost += Math.Round(((CurrentSession.Duration / 60) * CurrentDevice.HourlyRate), 2);
 
             sessionService.UpdateSessionFromService(CurrentSession);
@@ -217,6 +235,7 @@ namespace PlayStation.Presentation
             dateTimePicker1.Enabled = true;
             MultiRadio.Enabled = true;
             SingleRadio.Enabled = true;
+            ResetBtn.Enabled = true;
         }
 
         private void panel1_Paint(object sender, PaintEventArgs e)
@@ -248,6 +267,7 @@ namespace PlayStation.Presentation
         private void dateTimePickerEnd_ValueChanged(object sender, EventArgs e)
         {
             ValidateDateTime();
+            StartBtn.Enabled = false;
         }
         private void ValidateDateTime()
         {
@@ -326,6 +346,21 @@ namespace PlayStation.Presentation
             TotalPriceLbl.Text = CurrentSession.TotalCost.ToString();
 
             MessageBox.Show("تم تغيير نوع الجلسة بنجاح", "نجاح", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
+        private void ResetBtn_Click(object sender, EventArgs e)
+        {
+            OrderGrid.DataSource = null;
+            CurrentSession = null;
+            elapsedSeconds = 0;
+            TimerLbl.Text = "00:00:00";
+            TotalPriceLbl.Text = "0";
+            StartBtn.Enabled = true;
+            EndBtn.Enabled = false;
+            dateTimePicker1.Enabled = true;
+            MultiRadio.Enabled = true;
+            SingleRadio.Enabled = true;
+
         }
     }
 }
