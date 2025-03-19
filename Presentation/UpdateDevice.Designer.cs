@@ -71,6 +71,7 @@
             // NewDevicePriceInput
             // 
             NewDevicePriceInput.Location = new Point(18, 73);
+            NewDevicePriceInput.Maximum = new decimal(new int[] { 1000, 0, 0, 0 });
             NewDevicePriceInput.Name = "NewDevicePriceInput";
             NewDevicePriceInput.Size = new Size(107, 23);
             NewDevicePriceInput.TabIndex = 3;
@@ -94,6 +95,7 @@
             // NewMultiPriceInput
             // 
             NewMultiPriceInput.Location = new Point(145, 130);
+            NewMultiPriceInput.Maximum = new decimal(new int[] { 1000, 0, 0, 0 });
             NewMultiPriceInput.Name = "NewMultiPriceInput";
             NewMultiPriceInput.Size = new Size(136, 23);
             NewMultiPriceInput.TabIndex = 6;
