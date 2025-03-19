@@ -297,10 +297,10 @@ namespace PlayStation.Presentation
             // 
             // dateTimePickerEnd
             // 
-            dateTimePickerEnd.CustomFormat = "hh:mm tt";
-            dateTimePickerEnd.Format = DateTimePickerFormat.Time;
+            dateTimePickerEnd.CustomFormat = "yyyy/MM/dd - hh:mm:ss:tt";
             dateTimePickerEnd.Location = new Point(5, 152);
             dateTimePickerEnd.Name = "dateTimePickerEnd";
+            dateTimePickerEnd.Format = DateTimePickerFormat.Custom;
             dateTimePickerEnd.ShowUpDown = true;
             dateTimePickerEnd.Size = new Size(208, 25);
             dateTimePickerEnd.TabIndex = 3;
@@ -326,7 +326,7 @@ namespace PlayStation.Presentation
             // 
             dateTimePicker1.CalendarForeColor = SystemColors.MenuHighlight;
             dateTimePicker1.Checked = false;
-            dateTimePicker1.CustomFormat = "hh:mm tt";
+            dateTimePicker1.CustomFormat = "yyyy/MM/dd - hh:mm:ss:tt";
             dateTimePicker1.DropDownAlign = LeftRightAlignment.Right;
             dateTimePicker1.Format = DateTimePickerFormat.Custom;
             dateTimePicker1.Location = new Point(221, 152);

@@ -21,7 +21,7 @@ namespace PlayStation.Presentation
         public int CurrentPage = 1;
         private int TotalPages()
         {
-            int totalUsers = userService.GetUsersWithDataFromService().Count;
+            int totalUsers = userService.GetAllUsersFromService().Count;
             return (int)Math.Ceiling((double)totalUsers / PageSize);
         }
 
@@ -37,7 +37,7 @@ namespace PlayStation.Presentation
             UsersTableGrid.DataSource = null;
 
             int startIndex = (CurrentPage - 1) * PageSize;
-            var PageData = userService.GetUsersWithDataFromService().Where(u => u.IsDeleted = true).Skip(startIndex).Take(PageSize).ToList();
+            var PageData = userService.GetAllUsersFromService().Where(u => u.IsDeleted = true).Skip(startIndex).Take(PageSize).ToList();
             UsersTableGrid.DataSource = PageData;
 
             int RowHeight = UsersTableGrid.RowTemplate.Height;
@@ -102,6 +102,7 @@ namespace PlayStation.Presentation
 
                 UpdateUser updatedUser = new UpdateUser(Id, userService);
                 updatedUser.ShowDialog();
+                DisplayUsersTableGrid();
             }
             else if (ColumnName == "DeleteUser")
             {

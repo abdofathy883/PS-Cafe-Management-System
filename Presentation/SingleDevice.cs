@@ -41,6 +41,7 @@ namespace PlayStation.Presentation
                 CurrentSession = CurrentDevice.Sessions.First(s => s.Status == "Active");
                 elapsedSeconds = ((int)(DateTime.Now - CurrentSession.StartTime).TotalSeconds);
                 timer.Start();
+                TotalPriceLbl.Text = CurrentSession.TotalCost.ToString();
                 StartBtn.Enabled = false;
             }
             else
@@ -56,11 +57,13 @@ namespace PlayStation.Presentation
             if (CurrentSession != null)
             {
                 var CurrentOrderList = CurrentSession.OrderDetails.Where(d => d.IsDeleted == false)
-                    .Select(o => new { o.Item.Name, o.Quantity, o.TotalPrice })
+                    .Select(o => new { o.Id,o.Item.Name, o.Quantity, o.TotalPrice })
                     .ToList();
                 //CurrentOrderList.columns
                 OrderGrid.DataSource = null;
                 OrderGrid.DataSource = CurrentOrderList;
+
+                OrderGrid.Columns["Id"].Visible=false;
                 OrderGrid.Columns["Name"].HeaderText = "المنتج";
                 OrderGrid.Columns["Quantity"].HeaderText = "العدد";
                 OrderGrid.Columns["TotalPrice"].HeaderText = "المجموع";
@@ -141,10 +144,6 @@ namespace PlayStation.Presentation
             elapsedSeconds = 0;
             TimerLbl.Text = "00:00:00";
             timer.Start();
-
-            dateTimePicker1.Format = DateTimePickerFormat.Custom;
-            dateTimePicker1.CustomFormat = "HH:mm";
-            dateTimePicker1.ShowUpDown = true;
             CurrentSession = new Session()
             {
                 Id = 0,
@@ -189,13 +188,6 @@ namespace PlayStation.Presentation
             // Set the DateTimePicker value to the valid parsed time
             dateTimePickerEnd.Value = parsedTime;
 
-
-            dateTimePickerEnd.Format = DateTimePickerFormat.Custom;
-            dateTimePickerEnd.CustomFormat = "HH:mm";
-            dateTimePickerEnd.ShowUpDown = true;
-
-
-
             timer.Stop();
             if (CurrentSession == null)
             {
@@ -210,7 +202,7 @@ namespace PlayStation.Presentation
             }
 
 
-            var currentDuration = (decimal)(DateTime.Now - CurrentSession.StartTime).TotalMinutes;
+            var currentDuration = CurrentSession.Duration;
             if (MultiRadio.Checked)
             {
                 CurrentSession.TotalCost += Math.Round((currentDuration / 60) * CurrentDevice.HourlyRateForMulti, 2);
@@ -294,11 +286,12 @@ namespace PlayStation.Presentation
         {
             if (OrderGrid.Columns[e.ColumnIndex].Name == "DeleteBtb" && e.RowIndex >= 0)
             {
-                var OrderDetail = CurrentSession.OrderDetails.ElementAt(e.RowIndex);
-
-                orderDetailsService.DeleteById(OrderDetail.Id);
-
+                var id =(int) OrderGrid.Rows[e.RowIndex].Cells["Id"].Value;
+                var OrderDetail = orderDetailsService.GetOrderDetailByIdFromService(id);
+                CurrentSession.TotalCost -= (OrderDetail.Item.Price * OrderDetail.Quantity);
                 TotalPriceLbl.Text = CurrentSession.TotalCost.ToString();
+                OrderDetail.Item.Stock += OrderDetail.Quantity;
+                orderDetailsService.DeleteById(OrderDetail.Id);
             }
             PopulateOrderGrid();
         }

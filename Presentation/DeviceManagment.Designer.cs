@@ -132,6 +132,7 @@
             // HourlyRateInput
             // 
             HourlyRateInput.Location = new Point(667, 53);
+            HourlyRateInput.Maximum = new decimal(new int[] { 1000, 0, 0, 0 });
             HourlyRateInput.Name = "HourlyRateInput";
             HourlyRateInput.Size = new Size(129, 26);
             HourlyRateInput.TabIndex = 10;
@@ -148,6 +149,7 @@
             // HourlyRateMulti
             // 
             HourlyRateMulti.Location = new Point(532, 53);
+            HourlyRateMulti.Maximum = new decimal(new int[] { 1000, 0, 0, 0 });
             HourlyRateMulti.Name = "HourlyRateMulti";
             HourlyRateMulti.Size = new Size(129, 26);
             HourlyRateMulti.TabIndex = 13;
