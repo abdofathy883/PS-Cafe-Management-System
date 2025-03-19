@@ -50,6 +50,7 @@ namespace PlayStation.Presentation
             }
             DeviceNameLbl.Text = CurrentDevice.Name;
             PopulateOrderGrid();
+            dateTimePickerEnd.Enabled = false;
 
         }
         private void PopulateOrderGrid()
@@ -59,15 +60,12 @@ namespace PlayStation.Presentation
                 var CurrentOrderList = CurrentSession.OrderDetails.Where(d => d.IsDeleted == false)
                     .Select(o => new { o.Id,o.Item.Name, o.Quantity, o.TotalPrice })
                     .ToList();
-                //CurrentOrderList.columns
                 OrderGrid.DataSource = null;
                 OrderGrid.DataSource = CurrentOrderList;
-
                 OrderGrid.Columns["Id"].Visible=false;
                 OrderGrid.Columns["Name"].HeaderText = "المنتج";
                 OrderGrid.Columns["Quantity"].HeaderText = "العدد";
                 OrderGrid.Columns["TotalPrice"].HeaderText = "المجموع";
-
             }
         }
 
@@ -139,8 +137,6 @@ namespace PlayStation.Presentation
 
             // Set the DateTimePicker value to the valid parsed time
             dateTimePicker1.Value = parsedTime;
-
-
             elapsedSeconds = 0;
             TimerLbl.Text = "00:00:00";
             timer.Start();
@@ -172,51 +168,48 @@ namespace PlayStation.Presentation
             MultiRadio.Enabled = false;
             SingleRadio.Enabled = false;
             ResetBtn.Enabled = false;
+            dateTimePickerEnd.Enabled = true;
         }
 
         private void EndBtn_Click(object sender, EventArgs e)
         {
-            DateTime parsedTime;
-
-            // Force DateTimePicker to take the current time if input is empty or invalid
-            if (string.IsNullOrWhiteSpace(dateTimePickerEnd.Text) || !DateTime.TryParse(dateTimePickerEnd.Text, out parsedTime))
+            DateTime now = DateTime.Now;
+            if (dateTimePickerEnd.Checked)
             {
-                parsedTime = DateTime.Now;
-                dateTimePickerEnd.Value = parsedTime;
+                CurrentSession.EndTime = dateTimePickerEnd.Value;
             }
-
-            // Set the DateTimePicker value to the valid parsed time
-            dateTimePickerEnd.Value = parsedTime;
-
+            else
+            {
+                CurrentSession.EndTime = now.Date.AddHours(now.Hour).AddMinutes(now.Minute);
+            }
             timer.Stop();
             if (CurrentSession == null)
             {
                 MessageBox.Show("يرجي بدا الجلسه قبل بدايتها", "فشل في انهاء الجلسه", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-            CurrentSession.EndTime = dateTimePickerEnd.Value; //DateTime.Now;
+            CurrentSession.EndTime = dateTimePickerEnd.Value;
             CurrentSession.Status = "Closed";
             if (CurrentSession.EndTime.HasValue)
             {
+                if (CurrentSession.EndTime.Value < CurrentSession.StartTime)
+                {
+                    CurrentSession.EndTime = CurrentSession.EndTime.Value.AddDays(1);
+                }
                 CurrentSession.Duration = (decimal)(CurrentSession.EndTime.Value - CurrentSession.StartTime).TotalMinutes;
             }
 
-
             var currentDuration = CurrentSession.Duration;
+            decimal sessionCost = 0;
             if (MultiRadio.Checked)
             {
-                CurrentSession.TotalCost += Math.Round((currentDuration / 60) * CurrentDevice.HourlyRateForMulti, 2);
+                sessionCost = Math.Round((currentDuration / 60) * CurrentDevice.HourlyRateForMulti, 2);
             }
             else if (SingleRadio.Checked)
             {
-                CurrentSession.TotalCost += Math.Round((currentDuration / 60) * CurrentDevice.HourlyRate, 2);
+                sessionCost = Math.Round((currentDuration / 60) * CurrentDevice.HourlyRate, 2);
             }
-
-
-
-
-            //CurrentSession.TotalCost += Math.Round(((CurrentSession.Duration / 60) * CurrentDevice.HourlyRate), 2);
-
+            CurrentSession.TotalCost += sessionCost + CurrentSession.OrderDetails.Sum(od => od.Quantity * od.UnitPrice);
             sessionService.UpdateSessionFromService(CurrentSession);
             TotalPriceLbl.Text = CurrentSession.TotalCost.ToString();
 
@@ -244,7 +237,7 @@ namespace PlayStation.Presentation
         private void dateTimePicker1_ValueChanged(object sender, EventArgs e)
         {
             //StartBtn.Enabled = !dateTimePicker1.Checked;
-            ValidateDateTime();
+            //ValidateDateTime();
         }
 
         private void timer_Tick(object sender, EventArgs e)
