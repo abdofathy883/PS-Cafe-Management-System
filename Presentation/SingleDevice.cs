@@ -75,13 +75,11 @@ namespace PlayStation.Presentation
             {
                 MessageBox.Show("يرجي بدا الجلسه قبل اضافة منتج", "فشل اضافة منتج", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
-                //AddItemBtn.Enabled = false;
             }
             if (ItemsCounter.Value <= 0)
             {
                 MessageBox.Show("يرجى اختيار عدد الوحدات المستخدمة من هذا المنتج", "فشل اضافة منتج", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
-                //AddItemBtn.Enabled = false;
             }
             else
             {
@@ -126,17 +124,32 @@ namespace PlayStation.Presentation
                 MessageBox.Show("يرجى اختيار نوع اللعب قبل البدء", "فشل بدء اللعب", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 return;
             }
-            DateTime parsedTime;
 
-            // Force DateTimePicker to take the current time if input is empty or invalid
-            if (string.IsNullOrWhiteSpace(dateTimePicker1.Text) || !DateTime.TryParse(dateTimePicker1.Text, out parsedTime))
+            DateTime startTime;
+            if (dateTimePicker1.Value == dateTimePicker1.MinDate || dateTimePicker1.Value == DateTimePicker.MinimumDateTime)
             {
-                parsedTime = DateTime.Now;
-                dateTimePicker1.Value = parsedTime;
+                startTime = DateTime.Now;
+                dateTimePicker1.Value = startTime;
+            }
+            else
+            {
+                startTime = dateTimePicker1.Value;
             }
 
-            // Set the DateTimePicker value to the valid parsed time
-            dateTimePicker1.Value = parsedTime;
+            #region MyRegion
+            //DateTime parsedTime;
+
+            //// Force DateTimePicker to take the current time if input is empty or invalid
+            //if (string.IsNullOrWhiteSpace(dateTimePicker1.Text) || !DateTime.TryParse(dateTimePicker1.Text, out parsedTime))
+            //{
+            //    parsedTime = DateTime.Now;
+            //    dateTimePicker1.Value = parsedTime;
+            //}
+
+            //// Set the DateTimePicker value to the valid parsed time
+            //dateTimePicker1.Value = parsedTime;
+            #endregion
+
             elapsedSeconds = 0;
             TimerLbl.Text = "00:00:00";
             timer.Start();
@@ -144,7 +157,8 @@ namespace PlayStation.Presentation
             {
                 Id = 0,
                 DeviceId = CurrentDevice.Id,
-                StartTime = dateTimePicker1.Value, //DateTime.Now,
+                //StartTime = dateTimePicker1.Value, //DateTime.Now,
+                StartTime = startTime,
                 EndTime = null,
                 Status = "Active",
                 TotalCost = 0,
@@ -173,22 +187,36 @@ namespace PlayStation.Presentation
 
         private void EndBtn_Click(object sender, EventArgs e)
         {
-            DateTime now = DateTime.Now;
-            if (dateTimePickerEnd.Checked)
-            {
-                CurrentSession.EndTime = dateTimePickerEnd.Value;
-            }
-            else
-            {
-                CurrentSession.EndTime = now.Date.AddHours(now.Hour).AddMinutes(now.Minute);
-            }
-            timer.Stop();
             if (CurrentSession == null)
             {
                 MessageBox.Show("يرجي بدا الجلسه قبل بدايتها", "فشل في انهاء الجلسه", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-            CurrentSession.EndTime = dateTimePickerEnd.Value;
+
+            #region ssss
+            //DateTime now = DateTime.Now;
+            //if (dateTimePickerEnd.Checked)
+            //{
+            //    CurrentSession.EndTime = dateTimePickerEnd.Value;
+            //}
+            //else
+            //{
+            //    CurrentSession.EndTime = now.Date.AddHours(now.Hour).AddMinutes(now.Minute);
+            //}
+            #endregion
+            DateTime endTime;
+            if (dateTimePickerEnd.Value == dateTimePickerEnd.MinDate || dateTimePickerEnd.Value == DateTimePicker.MinimumDateTime)
+            {
+                endTime = DateTime.Now;
+                dateTimePickerEnd.Value = endTime;
+            }
+            else
+            {
+                endTime = dateTimePickerEnd.Value;
+            }
+            timer.Stop();
+
+            CurrentSession.EndTime = endTime; //dateTimePickerEnd.Value;
             CurrentSession.Status = "Closed";
             if (CurrentSession.EndTime.HasValue)
             {
