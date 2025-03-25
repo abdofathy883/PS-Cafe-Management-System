@@ -21,6 +21,7 @@ namespace PlayStation.Presentation
         Device CurrentDevice;
         Session CurrentSession;
         private int elapsedSeconds;
+        private bool isInputed = false;
         public SingleDevice(int _CurrentDeviceId, CafeService _CafeService, SessionService _sessionService, DeviceService _deviceService, OrderDetailsService _orderDetailsService)
         {
             InitializeComponent();
@@ -58,11 +59,11 @@ namespace PlayStation.Presentation
             if (CurrentSession != null)
             {
                 var CurrentOrderList = CurrentSession.OrderDetails.Where(d => d.IsDeleted == false)
-                    .Select(o => new { o.Id,o.Item.Name, o.Quantity, o.TotalPrice })
+                    .Select(o => new { o.Id, o.Item.Name, o.Quantity, o.TotalPrice })
                     .ToList();
                 OrderGrid.DataSource = null;
                 OrderGrid.DataSource = CurrentOrderList;
-                OrderGrid.Columns["Id"].Visible=false;
+                OrderGrid.Columns["Id"].Visible = false;
                 OrderGrid.Columns["Name"].HeaderText = "المنتج";
                 OrderGrid.Columns["Quantity"].HeaderText = "العدد";
                 OrderGrid.Columns["TotalPrice"].HeaderText = "المجموع";
@@ -126,29 +127,16 @@ namespace PlayStation.Presentation
             }
 
             DateTime startTime;
-            if (dateTimePicker1.Value == dateTimePicker1.MinDate || dateTimePicker1.Value == DateTimePicker.MinimumDateTime)
+            if (!isInputed)
             {
                 startTime = DateTime.Now;
                 dateTimePicker1.Value = startTime;
+                isInputed = false;
             }
             else
             {
                 startTime = dateTimePicker1.Value;
             }
-
-            #region MyRegion
-            //DateTime parsedTime;
-
-            //// Force DateTimePicker to take the current time if input is empty or invalid
-            //if (string.IsNullOrWhiteSpace(dateTimePicker1.Text) || !DateTime.TryParse(dateTimePicker1.Text, out parsedTime))
-            //{
-            //    parsedTime = DateTime.Now;
-            //    dateTimePicker1.Value = parsedTime;
-            //}
-
-            //// Set the DateTimePicker value to the valid parsed time
-            //dateTimePicker1.Value = parsedTime;
-            #endregion
 
             elapsedSeconds = 0;
             TimerLbl.Text = "00:00:00";
@@ -157,7 +145,6 @@ namespace PlayStation.Presentation
             {
                 Id = 0,
                 DeviceId = CurrentDevice.Id,
-                //StartTime = dateTimePicker1.Value, //DateTime.Now,
                 StartTime = startTime,
                 EndTime = null,
                 Status = "Active",
@@ -193,17 +180,6 @@ namespace PlayStation.Presentation
                 return;
             }
 
-            #region ssss
-            //DateTime now = DateTime.Now;
-            //if (dateTimePickerEnd.Checked)
-            //{
-            //    CurrentSession.EndTime = dateTimePickerEnd.Value;
-            //}
-            //else
-            //{
-            //    CurrentSession.EndTime = now.Date.AddHours(now.Hour).AddMinutes(now.Minute);
-            //}
-            #endregion
             DateTime endTime;
             if (dateTimePickerEnd.Value == dateTimePickerEnd.MinDate || dateTimePickerEnd.Value == DateTimePicker.MinimumDateTime)
             {
@@ -256,16 +232,9 @@ namespace PlayStation.Presentation
 
         }
 
-        private void SingleDevice_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            //AllDevices.Refresh();
-
-        }
-
         private void dateTimePicker1_ValueChanged(object sender, EventArgs e)
         {
-            //StartBtn.Enabled = !dateTimePicker1.Checked;
-            //ValidateDateTime();
+            dateTimePicker1.Value = dateTimePicker1.Value;
         }
 
         private void timer_Tick(object sender, EventArgs e)
@@ -294,20 +263,11 @@ namespace PlayStation.Presentation
             }
         }
 
-        private void dateTimePicker1_Leave(object sender, EventArgs e)
-        {
-            if (string.IsNullOrWhiteSpace(dateTimePicker1.Text) || !DateTime.TryParse(dateTimePicker1.Text, out DateTime parsedTime))
-            {
-                parsedTime = DateTime.Now; // Default to current time if input is invalid
-                dateTimePicker1.Value = parsedTime;
-            }
-        }
-
         private void OrderGrid_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             if (OrderGrid.Columns[e.ColumnIndex].Name == "DeleteBtb" && e.RowIndex >= 0)
             {
-                var id =(int) OrderGrid.Rows[e.RowIndex].Cells["Id"].Value;
+                var id = (int)OrderGrid.Rows[e.RowIndex].Cells["Id"].Value;
                 var OrderDetail = orderDetailsService.GetOrderDetailByIdFromService(id);
                 CurrentSession.TotalCost -= (OrderDetail.Item.Price * OrderDetail.Quantity);
                 TotalPriceLbl.Text = CurrentSession.TotalCost.ToString();
@@ -374,7 +334,19 @@ namespace PlayStation.Presentation
             dateTimePicker1.Enabled = true;
             MultiRadio.Enabled = true;
             SingleRadio.Enabled = true;
+            dateTimePicker1.Value = DateTime.Now;
+            dateTimePickerEnd.Value = DateTime.Now;
 
+        }
+
+        private void dateTimePicker1_MouseDown(object sender, MouseEventArgs e)
+        {
+            isInputed = true;
+        }
+
+        private void dateTimePicker1_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            isInputed = true;
         }
     }
 }

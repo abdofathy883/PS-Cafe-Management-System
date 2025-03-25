@@ -297,10 +297,10 @@ namespace PlayStation.Presentation
             // 
             // dateTimePickerEnd
             // 
-            dateTimePickerEnd.CustomFormat = "yyyy/MM/dd - hh:mm:ss:tt";
+            dateTimePickerEnd.CustomFormat = "yyyy/MM/dd - hh:mm:tt";
+            dateTimePickerEnd.Format = DateTimePickerFormat.Custom;
             dateTimePickerEnd.Location = new Point(5, 152);
             dateTimePickerEnd.Name = "dateTimePickerEnd";
-            dateTimePickerEnd.Format = DateTimePickerFormat.Custom;
             dateTimePickerEnd.ShowUpDown = true;
             dateTimePickerEnd.Size = new Size(208, 25);
             dateTimePickerEnd.TabIndex = 3;
@@ -326,7 +326,7 @@ namespace PlayStation.Presentation
             // 
             dateTimePicker1.CalendarForeColor = SystemColors.MenuHighlight;
             dateTimePicker1.Checked = false;
-            dateTimePicker1.CustomFormat = "yyyy/MM/dd - hh:mm:ss:tt";
+            dateTimePicker1.CustomFormat = "yyyy/MM/dd - hh:mm:tt";
             dateTimePicker1.DropDownAlign = LeftRightAlignment.Right;
             dateTimePicker1.Format = DateTimePickerFormat.Custom;
             dateTimePicker1.Location = new Point(221, 152);
@@ -336,7 +336,8 @@ namespace PlayStation.Presentation
             dateTimePicker1.Size = new Size(206, 25);
             dateTimePicker1.TabIndex = 2;
             dateTimePicker1.ValueChanged += dateTimePicker1_ValueChanged;
-            dateTimePicker1.Leave += dateTimePicker1_Leave;
+            dateTimePicker1.KeyPress += dateTimePicker1_KeyPress;
+            dateTimePicker1.MouseDown += dateTimePicker1_MouseDown;
             // 
             // StartBtn
             // 
@@ -374,7 +375,6 @@ namespace PlayStation.Presentation
             Name = "SingleDevice";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "ادارة الجهاز";
-            FormClosing += SingleDevice_FormClosing;
             panelHead.ResumeLayout(false);
             panelHead.PerformLayout();
             panelCafe.ResumeLayout(false);

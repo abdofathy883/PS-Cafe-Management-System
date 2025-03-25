@@ -16,13 +16,10 @@ namespace PlayStation.Presentation
     public partial class SessionReport : BaseForm
     {
         private readonly SessionService sessionService;
-        //public int PageSize = 10;
-        //public int CurrentPage = 1;
-        //private int TotalPages()
-        //{
-        //    int totalUsers = deviceService.GetAllDevicesFromService().Count;
-        //    return (int)Math.Ceiling((double)totalUsers / PageSize);
-        //}
+        public int PageSize = 10;
+        public int CurrentPage = 1;
+
+        private List<Session> CurrentSessions;
         public SessionReport(SessionService _sessionService)
         {
             InitializeComponent();
@@ -33,55 +30,41 @@ namespace PlayStation.Presentation
 
         private void GenerateDailyReport(DateTime date)
         {
-            var sessions = sessionService.GetDailySessions(date);
-            DisplaySessions(sessions);
+            CurrentSessions = sessionService.GetDailySessions(date);
+            DisplaySessions();
             TotalLbl.Visible = true;
-            TotalLbl.Text = "مجموع الايرادات هذا اليوم: " + sessions.Sum(s => s.TotalCost).ToString();
+            TotalLbl.Text = "مجموع الايرادات هذا اليوم: " + CurrentSessions.Sum(s => s.TotalCost).ToString();
         }
 
         private void GenerateWeeklyReport(DateTime date)
         {
-            var sessions = sessionService.GetWeeklySessions(date);
-            DisplaySessions(sessions);
+            CurrentSessions = sessionService.GetWeeklySessions(date);
+            DisplaySessions();
             TotalLbl.Visible = true;
-            TotalLbl.Text = "مجموع الايرادات هذا الاسبوع: " + sessions.Sum(s => s.TotalCost).ToString();
+            TotalLbl.Text = "مجموع الايرادات هذا الاسبوع: " + CurrentSessions.Sum(s => s.TotalCost).ToString();
         }
 
         private void GenerateMonthlyReport(DateTime date)
         {
-            var sessions = sessionService.GetMonthlySessions(date);
-            DisplaySessions(sessions);
+            CurrentSessions = sessionService.GetMonthlySessions(date);
+            DisplaySessions();
             TotalLbl.Visible = true;
-            TotalLbl.Text = "مجموع الايرادات هذا الشهر: " + sessions.Sum(s => s.TotalCost).ToString();
+            TotalLbl.Text = "مجموع الايرادات هذا الشهر: " + CurrentSessions.Sum(s => s.TotalCost).ToString();
         }
 
-        private void DisplaySessions(List<Session> sessions)
+        private void DisplaySessions()
         {
             SessionsReportGrid.DataSource = null;
-            int PageSize = 10;
-            int CurrentPage = 1;
-            int TotalPages()
-            {
-                int totalUsers = sessions.Count;
-                return (int)Math.Ceiling((double)totalUsers / PageSize);
-            }
-        int startIndex = (CurrentPage - 1) * PageSize;
 
+            int TotalSessions = CurrentSessions.Count;
+            int TotalPages = (int)Math.Ceiling((double)TotalSessions / PageSize);
+            int startIndex = (CurrentPage - 1) * PageSize;
             int RowHeight = SessionsReportGrid.RowTemplate.Height;
             int HeaderHeight = SessionsReportGrid.ColumnHeadersHeight;
             SessionsReportGrid.Height = (PageSize * RowHeight) + HeaderHeight;
-
-            if (CurrentPage > 1)
-            {
-                PreviousBtn.Enabled = true;
-            }
-            if (CurrentPage < TotalPages())
-            {
-                NextBtn.Enabled = true;
-
-            }
-            // Assuming you have a DataGridView named SessionsGrid
-            SessionsReportGrid.DataSource = sessions.Select(s => new
+            PreviousBtn.Enabled = CurrentPage > 1;
+            NextBtn.Enabled = CurrentPage < TotalPages;
+            SessionsReportGrid.DataSource = CurrentSessions.Select(s => new
             {
                 s.Id,
                 s.StartTime,
@@ -106,7 +89,7 @@ namespace PlayStation.Presentation
         {
             var selectedDate = dateTimePicker.Value;
             GenerateDailyReport(selectedDate);
-            
+
         }
 
         private void WeeklyReportBtn_Click(object sender, EventArgs e)
@@ -119,6 +102,18 @@ namespace PlayStation.Presentation
         {
             var selectedDate = dateTimePicker.Value;
             GenerateMonthlyReport(selectedDate);
+        }
+
+        private void NextBtn_Click(object sender, EventArgs e)
+        {
+            CurrentPage++;
+            DisplaySessions();
+        }
+
+        private void PreviousBtn_Click(object sender, EventArgs e)
+        {
+            CurrentPage--;
+            DisplaySessions();
         }
     }
 }

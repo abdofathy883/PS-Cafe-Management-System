@@ -112,6 +112,7 @@
             NextBtn.TabIndex = 5;
             NextBtn.Text = "التالي";
             NextBtn.UseVisualStyleBackColor = false;
+            NextBtn.Click += NextBtn_Click;
             // 
             // PreviousBtn
             // 
@@ -126,6 +127,7 @@
             PreviousBtn.TabIndex = 6;
             PreviousBtn.Text = "السابق";
             PreviousBtn.UseVisualStyleBackColor = false;
+            PreviousBtn.Click += PreviousBtn_Click;
             // 
             // TotalLbl
             // 

@@ -50,7 +50,6 @@ namespace PlayStation.Presentation
                 NextBtn.Enabled = true;
 
             }
-            //ProductsGrid.DataSource = cafeService.GetCafeItemsFromService().Select(p => new { p.Id, p.Name, p.Price, p.Stock }).ToList();
             ProductsGrid.Columns["ID"].Visible = false;
             ProductsGrid.Columns["Name"].HeaderText = "الاسم";
             ProductsGrid.Columns["Price"].HeaderText = "السعر";
