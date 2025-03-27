@@ -19,7 +19,7 @@ namespace PlayStation.Presentation
         }
         protected Color PrimaryColor = ColorTranslator.FromHtml("#16404D");  // Deep Blue
         protected Color SecondaryColor = ColorTranslator.FromHtml("#4F959D"); // Teal
-        protected Color AccentColor = ColorTranslator.FromHtml("#98D2C0"); // Soft Green
+        protected Color AccentColor = ColorTranslator.FromHtml("#DDA853"); // Soft Green
         protected Color BackgroundColor = ColorTranslator.FromHtml("#F6F8D5"); // Light Cream
         protected Color TextColor = Color.Black; // Black for contrast
         protected Color BorderColor = Color.Gray; // Neutral gray for subtle borders
@@ -56,24 +56,21 @@ namespace PlayStation.Presentation
                     grid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
                     grid.RowHeadersVisible = false;
                     grid.GridColor = Color.FromArgb(200, 200, 200);
-                    //grid.Height = 10000;
 
                     grid.DefaultCellStyle.BackColor = Color.White;
                     grid.DefaultCellStyle.ForeColor = PrimaryColor;
-                    //grid.DefaultCellStyle.SelectionBackColor = Color.FromArgb(92, 184, 92);
-                    //grid.DefaultCellStyle.SelectionForeColor = Color.White;
                     grid.DefaultCellStyle.Padding = new Padding(5);
 
-                    grid.ColumnHeadersDefaultCellStyle.BackColor = PrimaryColor;
-                    grid.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
-                    grid.ColumnHeadersDefaultCellStyle.Font = new Font("Segoe UI", 10, FontStyle.Bold);
+                    grid.ColumnHeadersDefaultCellStyle.BackColor = AccentColor;
+                    grid.ColumnHeadersDefaultCellStyle.ForeColor = PrimaryColor;
+                    grid.ColumnHeadersDefaultCellStyle.Font = new Font("Segoe UI", 12, FontStyle.Bold);
                     grid.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
                     grid.ColumnHeadersDefaultCellStyle.Padding = new Padding(5);
                     grid.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
                     grid.EnableHeadersVisualStyles = false;
 
                     grid.CellBorderStyle = DataGridViewCellBorderStyle.SingleHorizontal;
-                    grid.AlternatingRowsDefaultCellStyle.BackColor = AccentColor;
+                    grid.AlternatingRowsDefaultCellStyle.BackColor = SecondaryColor;
                     grid.ColumnHeadersHeight = 40;
                     grid.RowTemplate.Height = 40;
 
@@ -87,12 +84,12 @@ namespace PlayStation.Presentation
                         u.FlatStyle = FlatStyle.Flat;
                         u.DefaultCellStyle.ForeColor = Color.White;
                     }
-                    
                 }
                 else if (ctrl is Button btn)
                 {
-                    btn.BackColor = ColorTranslator.FromHtml("#DDA853");
-                    
+                    btn.BackColor = AccentColor;
+                    btn.ForeColor = PrimaryColor;
+                    btn.FlatAppearance.BorderSize = 0;
                 }
             }
         }

@@ -37,12 +37,12 @@
             AddUserBtn = new Button();
             label4 = new Label();
             UsersTableGrid = new DataGridView();
-            UpdateUser = new DataGridViewButtonColumn();
-            DeleteUser = new DataGridViewButtonColumn();
             NextBtn = new Button();
             PreviousBtn = new Button();
             panel1 = new Panel();
             panel2 = new Panel();
+            UpdateUser = new DataGridViewButtonColumn();
+            DeleteCellButton = new DataGridViewButtonColumn();
             ((System.ComponentModel.ISupportInitialize)UsersTableGrid).BeginInit();
             panel1.SuspendLayout();
             panel2.SuspendLayout();
@@ -137,27 +137,13 @@
             // UsersTableGrid
             // 
             UsersTableGrid.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            UsersTableGrid.Columns.AddRange(new DataGridViewColumn[] { UpdateUser, DeleteUser });
+            UsersTableGrid.Columns.AddRange(new DataGridViewColumn[] { UpdateUser, DeleteCellButton });
             UsersTableGrid.Location = new Point(38, 137);
             UsersTableGrid.Margin = new Padding(4);
             UsersTableGrid.Name = "UsersTableGrid";
-            UsersTableGrid.Size = new Size(918, 561);
+            UsersTableGrid.Size = new Size(1108, 561);
             UsersTableGrid.TabIndex = 8;
             UsersTableGrid.CellContentClick += UsersTableGrid_CellContentClick;
-            // 
-            // UpdateUser
-            // 
-            UpdateUser.HeaderText = "تعديل";
-            UpdateUser.Name = "UpdateUser";
-            UpdateUser.Text = "تعديل";
-            UpdateUser.UseColumnTextForButtonValue = true;
-            // 
-            // DeleteUser
-            // 
-            DeleteUser.HeaderText = "حذف";
-            DeleteUser.Name = "DeleteUser";
-            DeleteUser.Text = "حذف";
-            DeleteUser.UseColumnTextForButtonValue = true;
             // 
             // NextBtn
             // 
@@ -194,7 +180,7 @@
             panel1.Dock = DockStyle.Bottom;
             panel1.Location = new Point(0, 705);
             panel1.Name = "panel1";
-            panel1.Size = new Size(982, 44);
+            panel1.Size = new Size(1159, 44);
             panel1.TabIndex = 11;
             // 
             // panel2
@@ -211,14 +197,28 @@
             panel2.Dock = DockStyle.Fill;
             panel2.Location = new Point(0, 0);
             panel2.Name = "panel2";
-            panel2.Size = new Size(982, 705);
+            panel2.Size = new Size(1159, 705);
             panel2.TabIndex = 12;
+            // 
+            // UpdateUser
+            // 
+            UpdateUser.HeaderText = "تعديل";
+            UpdateUser.Name = "UpdateUser";
+            UpdateUser.Text = "تعديل";
+            UpdateUser.UseColumnTextForButtonValue = true;
+            // 
+            // DeleteCellButton
+            // 
+            DeleteCellButton.HeaderText = "حذف";
+            DeleteCellButton.Name = "DeleteCellButton";
+            DeleteCellButton.Text = "حذف";
+            DeleteCellButton.UseColumnTextForButtonValue = true;
             // 
             // UserManagement
             // 
             AutoScaleDimensions = new SizeF(10F, 19F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(982, 749);
+            ClientSize = new Size(1159, 749);
             Controls.Add(panel2);
             Controls.Add(panel1);
             Font = new Font("Arial", 12F, FontStyle.Bold, GraphicsUnit.Point, 178);
@@ -243,11 +243,11 @@
         private Button AddUserBtn;
         private Label label4;
         private DataGridView UsersTableGrid;
-        private DataGridViewButtonColumn UpdateUser;
-        private DataGridViewButtonColumn DeleteUser;
         private Button NextBtn;
         private Button PreviousBtn;
         private Panel panel1;
         private Panel panel2;
+        private DataGridViewButtonColumn UpdateUser;
+        private DataGridViewButtonColumn DeleteCellButton;
     }
 }

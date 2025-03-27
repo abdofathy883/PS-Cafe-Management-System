@@ -101,10 +101,10 @@
             // 
             DevicesTable.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             DevicesTable.Columns.AddRange(new DataGridViewColumn[] { UpdateCellButton, DeleteCellButton });
-            DevicesTable.Location = new Point(163, 102);
+            DevicesTable.Location = new Point(81, 102);
             DevicesTable.Margin = new Padding(4);
             DevicesTable.Name = "DevicesTable";
-            DevicesTable.Size = new Size(1057, 560);
+            DevicesTable.Size = new Size(1191, 560);
             DevicesTable.TabIndex = 8;
             DevicesTable.CellContentClick += DevicesTable_CellContentClick;
             // 

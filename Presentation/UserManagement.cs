@@ -16,7 +16,6 @@ namespace PlayStation.Presentation
     public partial class UserManagement : BaseForm
     {
         private readonly UserService userService;
-        //
         public int PageSize = 10;
         public int CurrentPage = 1;
         private int TotalPages()
@@ -35,15 +34,12 @@ namespace PlayStation.Presentation
         private void DisplayUsersTableGrid()
         {
             UsersTableGrid.DataSource = null;
-
             int startIndex = (CurrentPage - 1) * PageSize;
             var PageData = userService.GetAllUsersFromService().Where(u => u.IsDeleted = true).Skip(startIndex).Take(PageSize).ToList();
             UsersTableGrid.DataSource = PageData;
-
             int RowHeight = UsersTableGrid.RowTemplate.Height;
             int HeaderHeight = UsersTableGrid.ColumnHeadersHeight;
             UsersTableGrid.Height = (PageSize * RowHeight) + HeaderHeight;
-
             if (CurrentPage > 1)
             {
                 PreviousBtn.Enabled = true;
@@ -53,8 +49,6 @@ namespace PlayStation.Presentation
                 NextBtn.Enabled = true;
                 
             }
-            //PreviousBtn.Enabled = CurrentPage > 1;
-            //NextBtn.Enabled = CurrentPage < TotalPages();
 
             UsersTableGrid.Columns["Id"].Visible = false;
             UsersTableGrid.Columns["Password"].Visible = false;
@@ -81,8 +75,6 @@ namespace PlayStation.Presentation
                     Password = PasswordInput.Text,
                     Role = (string)RolesCombo.SelectedItem ?? "موظف"
                 };
-
-                //Check for already existing user
                 if (userService.IsUsereNameIsUsed(user.Name))
                 {
                     MessageBox.Show("هذا الحساب موجود بالفعل", "فشل اضافة حساب", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -104,7 +96,7 @@ namespace PlayStation.Presentation
                 updatedUser.ShowDialog();
                 DisplayUsersTableGrid();
             }
-            else if (ColumnName == "DeleteUser")
+            else if (ColumnName == "DeleteCellButton")
             {
                 DialogResult DeleteDialog = MessageBox.Show("تأكيد حذف الحساب! سيتم حذف الحساب نهائيا واي بيانات متلعقة به", "حذف حساب", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
                 if (DeleteDialog == DialogResult.OK)

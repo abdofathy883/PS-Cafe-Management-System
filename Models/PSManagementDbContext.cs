@@ -36,6 +36,7 @@ public partial class PSManagementDbContext : DbContext
 
             //note use this ya abdo and comment the above line 
             //optionsBuilder.UseSqlServer("Server=ZEZOTAHA\\SQLEXPRESS;Database=PSManagementSystemNew;Trusted_Connection=True;Encrypt=False;MultipleActiveResultSets=True;");
+            //optionsBuilder.UseSqlServer("Server=.\\SQLEXPRESS;Database=PSManagementSystemNew;Trusted_Connection=True;Encrypt=False;MultipleActiveResultSets=True;");
         }
     }
 

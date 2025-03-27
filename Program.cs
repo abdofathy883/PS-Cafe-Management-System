@@ -29,14 +29,7 @@ namespace PlayStation
 
             // Register DbContext
             services.AddDbContext<PSManagementDbContext>(o => o.UseSqlServer(Configuration.GetConnectionString("AbdoSqlServer")).UseLazyLoadingProxies());
-            //var app = builder.Build();
-            //using (var scope = app.Services.CreateScope())
-            //{
-            //    var dbContext = scope.ServiceProvider.GetRequiredService<PSManagementDbContext>();
-            //    dbContext.Database.Migrate(); // Auto-create DB
-            //}
-
-
+           
             // Register Repository
             services.AddTransient(typeof(IRepository<>), typeof(Repository<>));
 
