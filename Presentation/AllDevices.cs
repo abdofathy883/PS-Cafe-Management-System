@@ -15,7 +15,7 @@ namespace PlayStation.Presentation
 {
     public partial class AllDevices: BaseForm
     {
-        static FlowLayoutPanel layoutPanel;
+        static FlowLayoutPanel? layoutPanel;
         private  readonly CafeService cafeService;
         private  readonly SessionService sessionService;
         private readonly DeviceService deviceService;
@@ -33,7 +33,7 @@ namespace PlayStation.Presentation
                 Dock = DockStyle.Fill,
                 AutoScroll = true,
                 WrapContents = true,
-                FlowDirection = FlowDirection.LeftToRight
+                FlowDirection = FlowDirection.RightToLeft
             };
             this.Controls.Add(layoutPanel);
             foreach(var device in deviceService.GetAllDevicesFromService())
@@ -51,15 +51,14 @@ namespace PlayStation.Presentation
         public Panel CreatePanalForDevice(Device device)
         {
             //Create a new panel for the new device and add it to the All Devices Form
-            Panel DevicePanel = new Panel()
+            Panel DevicePanel = new ()
             {
-                Size = new Size(250, 300),
+                Size = new Size(250, 310),
                 BorderStyle = BorderStyle.FixedSingle,
-                //BackColor = Color.White,
                 ForeColor = Color.Black
             };
 
-            Label DeviceName = new Label()
+            Label DeviceName = new ()
             {
                 Text = device.Name,
                 Location = new Point(65, 10),
@@ -68,14 +67,14 @@ namespace PlayStation.Presentation
                 ForeColor = Color.White,
                 Font = new Font("Arial", 16, FontStyle.Bold)
             };
-            PictureBox DeviceImage = new PictureBox()
+            PictureBox DeviceImage = new()
             {
                 Size = new Size(225, 180),
                 Location = new Point(12, 45),
-                Image = Image.FromFile("DeviceImage.jpg"), // image path
+                Image = Image.FromFile("DeviceImage.jpg"),
                 SizeMode = PictureBoxSizeMode.StretchImage
             };
-            Label DeviceStatus = new Label()
+            Label DeviceStatus = new ()
             {
                 Text = device.status.ToString(),
                 Location = new Point(65, 230),
@@ -84,12 +83,13 @@ namespace PlayStation.Presentation
                 ForeColor = Color.White,
                 Font = new Font("Arial", 16, FontStyle.Bold)
             };
-            Button ManageBtn = new Button()
+            Button ManageBtn = new ()
             {
                 Text = "ادارة",
                 Width = DevicePanel.Width - 20,
-                Location = new Point(10, 260),
+                Location = new Point(10, 265),
                 FlatStyle = FlatStyle.Flat,
+                FlatAppearance = { BorderSize = 0 },
                 ForeColor = Color.White,
                 BackColor = ColorTranslator.FromHtml("#DDA853"),
                 Font = new Font("Arial", 12, FontStyle.Bold),

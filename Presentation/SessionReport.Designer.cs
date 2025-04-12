@@ -42,9 +42,9 @@
             // SessionsReportGrid
             // 
             SessionsReportGrid.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            SessionsReportGrid.Location = new Point(80, 61);
+            SessionsReportGrid.Location = new Point(153, 99);
             SessionsReportGrid.Name = "SessionsReportGrid";
-            SessionsReportGrid.Size = new Size(560, 438);
+            SessionsReportGrid.Size = new Size(688, 438);
             SessionsReportGrid.TabIndex = 0;
             // 
             // DailyReportBtn
@@ -54,9 +54,9 @@
             DailyReportBtn.FlatStyle = FlatStyle.Flat;
             DailyReportBtn.Font = new Font("Arial", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             DailyReportBtn.ForeColor = Color.White;
-            DailyReportBtn.Location = new Point(552, 22);
+            DailyReportBtn.Location = new Point(717, 59);
             DailyReportBtn.Name = "DailyReportBtn";
-            DailyReportBtn.Size = new Size(88, 33);
+            DailyReportBtn.Size = new Size(124, 33);
             DailyReportBtn.TabIndex = 1;
             DailyReportBtn.Text = "اليوم";
             DailyReportBtn.UseVisualStyleBackColor = false;
@@ -69,9 +69,9 @@
             WeeklyReportBtn.FlatStyle = FlatStyle.Flat;
             WeeklyReportBtn.Font = new Font("Arial", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             WeeklyReportBtn.ForeColor = Color.White;
-            WeeklyReportBtn.Location = new Point(458, 22);
+            WeeklyReportBtn.Location = new Point(587, 60);
             WeeklyReportBtn.Name = "WeeklyReportBtn";
-            WeeklyReportBtn.Size = new Size(88, 33);
+            WeeklyReportBtn.Size = new Size(124, 33);
             WeeklyReportBtn.TabIndex = 2;
             WeeklyReportBtn.Text = "الاسبوع";
             WeeklyReportBtn.UseVisualStyleBackColor = false;
@@ -84,9 +84,9 @@
             MonthlyReportBtn.FlatStyle = FlatStyle.Flat;
             MonthlyReportBtn.Font = new Font("Arial", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             MonthlyReportBtn.ForeColor = Color.White;
-            MonthlyReportBtn.Location = new Point(364, 22);
+            MonthlyReportBtn.Location = new Point(447, 60);
             MonthlyReportBtn.Name = "MonthlyReportBtn";
-            MonthlyReportBtn.Size = new Size(88, 33);
+            MonthlyReportBtn.Size = new Size(134, 33);
             MonthlyReportBtn.TabIndex = 3;
             MonthlyReportBtn.Text = "الشهر";
             MonthlyReportBtn.UseVisualStyleBackColor = false;
@@ -94,9 +94,9 @@
             // 
             // dateTimePicker
             // 
-            dateTimePicker.Location = new Point(80, 25);
+            dateTimePicker.Location = new Point(153, 63);
             dateTimePicker.Name = "dateTimePicker";
-            dateTimePicker.Size = new Size(278, 23);
+            dateTimePicker.Size = new Size(288, 23);
             dateTimePicker.TabIndex = 4;
             // 
             // NextBtn
@@ -106,9 +106,9 @@
             NextBtn.FlatStyle = FlatStyle.Flat;
             NextBtn.Font = new Font("Arial", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             NextBtn.ForeColor = Color.White;
-            NextBtn.Location = new Point(552, 505);
+            NextBtn.Location = new Point(723, 543);
             NextBtn.Name = "NextBtn";
-            NextBtn.Size = new Size(88, 33);
+            NextBtn.Size = new Size(118, 33);
             NextBtn.TabIndex = 5;
             NextBtn.Text = "التالي";
             NextBtn.UseVisualStyleBackColor = false;
@@ -121,9 +121,9 @@
             PreviousBtn.FlatStyle = FlatStyle.Flat;
             PreviousBtn.Font = new Font("Arial", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             PreviousBtn.ForeColor = Color.White;
-            PreviousBtn.Location = new Point(80, 505);
+            PreviousBtn.Location = new Point(153, 543);
             PreviousBtn.Name = "PreviousBtn";
-            PreviousBtn.Size = new Size(88, 33);
+            PreviousBtn.Size = new Size(130, 33);
             PreviousBtn.TabIndex = 6;
             PreviousBtn.Text = "السابق";
             PreviousBtn.UseVisualStyleBackColor = false;
@@ -134,7 +134,7 @@
             TotalLbl.AutoSize = true;
             TotalLbl.Font = new Font("Arial", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             TotalLbl.ForeColor = Color.White;
-            TotalLbl.Location = new Point(734, 61);
+            TotalLbl.Location = new Point(484, 550);
             TotalLbl.Name = "TotalLbl";
             TotalLbl.Size = new Size(54, 19);
             TotalLbl.TabIndex = 7;
@@ -144,7 +144,7 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 609);
+            ClientSize = new Size(1037, 609);
             Controls.Add(TotalLbl);
             Controls.Add(PreviousBtn);
             Controls.Add(NextBtn);

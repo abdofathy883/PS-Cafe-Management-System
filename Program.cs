@@ -12,28 +12,27 @@ namespace PlayStation
 {
     internal static class Program
     {
-
-
-        /// <summary>
-        ///  The main entry point for the application.
-        /// </summary>
         [STAThread]
         static void Main()
         {
             ApplicationConfiguration.Initialize();
 
-            var builder = new ConfigurationBuilder().SetBasePath(Directory.GetCurrentDirectory()).AddJsonFile("appsettings.json", optional: false, reloadOnChange: true);
+            var builder = new ConfigurationBuilder()
+                .SetBasePath(Directory.GetCurrentDirectory())
+                .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true);
 
             IConfiguration Configuration = builder.Build();
             var services = new ServiceCollection();
 
             // Register DbContext
-            services.AddDbContext<PSManagementDbContext>(o => o.UseSqlServer(Configuration.GetConnectionString("AbdoSqlServer")).UseLazyLoadingProxies());
-           
+            services.AddDbContext<PSManagementDbContext>(o =>
+                o.UseSqlServer(Configuration.GetConnectionString("DefaultSQLConnection"))
+                 .UseLazyLoadingProxies());
+
             // Register Repository
             services.AddTransient(typeof(IRepository<>), typeof(Repository<>));
 
-            //Register services
+            // Register services
             services.AddTransient<CafeService>();
             services.AddTransient<DeviceService>();
             services.AddTransient<ExpensesService>();
@@ -57,7 +56,6 @@ namespace PlayStation
             services.AddTransient<UserManagement>();
             services.AddTransient<SessionReport>();
 
-
             ServiceProvider serviceProvider = services.BuildServiceProvider();
 
             System.Windows.Forms.Application.EnableVisualStyles();
@@ -65,10 +63,7 @@ namespace PlayStation
 
             var mainForm = serviceProvider.GetRequiredService<LogIn>();
 
-            // To customize application configuration such as set high DPI settings or default font,
-            // see https://aka.ms/applicationconfiguration.
             System.Windows.Forms.Application.Run(mainForm);
         }
-
     }
 }

@@ -17,12 +17,9 @@ namespace PlayStation.Presentation
             InitializeComponent();
             ApplyGlobalStyles(this);
         }
-        protected Color PrimaryColor = ColorTranslator.FromHtml("#16404D");  // Deep Blue
-        protected Color SecondaryColor = ColorTranslator.FromHtml("#4F959D"); // Teal
-        protected Color AccentColor = ColorTranslator.FromHtml("#DDA853"); // Soft Green
-        protected Color BackgroundColor = ColorTranslator.FromHtml("#F6F8D5"); // Light Cream
-        protected Color TextColor = Color.Black; // Black for contrast
-        protected Color BorderColor = Color.Gray; // Neutral gray for subtle borders
+        protected Color PrimaryColor = ColorTranslator.FromHtml("#16404D");
+        protected Color SecondaryColor = ColorTranslator.FromHtml("#4F959D"); 
+        protected Color AccentColor = ColorTranslator.FromHtml("#DDA853"); 
 
         protected void ApplyGlobalStyles(Form parent)
         {
@@ -37,7 +34,7 @@ namespace PlayStation.Presentation
                 if (ctrl is Panel pnl)
                 {
                     pnl.BackColor = PrimaryColor;
-                    pnl.BorderStyle = BorderStyle.None; // Flat style
+                    pnl.BorderStyle = BorderStyle.None;
                     pnl.Padding = new Padding(5);
                     pnl.Margin = new Padding(5);
                     pnl.AutoSize = true;
@@ -73,23 +70,14 @@ namespace PlayStation.Presentation
                     grid.AlternatingRowsDefaultCellStyle.BackColor = SecondaryColor;
                     grid.ColumnHeadersHeight = 40;
                     grid.RowTemplate.Height = 40;
-
-                    if (grid.Columns["DeleteCellButton"] is DataGridViewButtonColumn c)
-                    {
-                        c.FlatStyle = FlatStyle.Flat;
-                        c.DefaultCellStyle.ForeColor = Color.White;
-                    }
-                    if (grid.Columns["UpdateCellButton"] is DataGridViewButtonColumn u)
-                    {
-                        u.FlatStyle = FlatStyle.Flat;
-                        u.DefaultCellStyle.ForeColor = Color.White;
-                    }
                 }
                 else if (ctrl is Button btn)
                 {
                     btn.BackColor = AccentColor;
                     btn.ForeColor = PrimaryColor;
                     btn.FlatAppearance.BorderSize = 0;
+                    btn.FlatStyle = FlatStyle.Flat;
+                    btn.Font = new Font("Arial", 13, FontStyle.Bold);
                 }
             }
         }

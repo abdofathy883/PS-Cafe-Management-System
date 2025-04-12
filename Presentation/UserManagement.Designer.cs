@@ -37,12 +37,12 @@
             AddUserBtn = new Button();
             label4 = new Label();
             UsersTableGrid = new DataGridView();
+            UpdateUser = new DataGridViewButtonColumn();
+            DeleteCellButton = new DataGridViewButtonColumn();
             NextBtn = new Button();
             PreviousBtn = new Button();
             panel1 = new Panel();
             panel2 = new Panel();
-            UpdateUser = new DataGridViewButtonColumn();
-            DeleteCellButton = new DataGridViewButtonColumn();
             ((System.ComponentModel.ISupportInitialize)UsersTableGrid).BeginInit();
             panel1.SuspendLayout();
             panel2.SuspendLayout();
@@ -52,7 +52,7 @@
             // 
             label1.AutoSize = true;
             label1.ForeColor = Color.White;
-            label1.Location = new Point(890, 57);
+            label1.Location = new Point(1080, 62);
             label1.Margin = new Padding(4, 0, 4, 0);
             label1.Name = "label1";
             label1.Size = new Size(37, 19);
@@ -61,7 +61,7 @@
             // 
             // NameInput
             // 
-            NameInput.Location = new Point(630, 92);
+            NameInput.Location = new Point(820, 97);
             NameInput.Margin = new Padding(4);
             NameInput.Name = "NameInput";
             NameInput.Size = new Size(326, 26);
@@ -71,7 +71,7 @@
             // 
             label2.AutoSize = true;
             label2.ForeColor = Color.White;
-            label2.Location = new Point(526, 57);
+            label2.Location = new Point(716, 62);
             label2.Margin = new Padding(4, 0, 4, 0);
             label2.Name = "label2";
             label2.Size = new Size(74, 19);
@@ -80,7 +80,7 @@
             // 
             // PasswordInput
             // 
-            PasswordInput.Location = new Point(411, 92);
+            PasswordInput.Location = new Point(601, 97);
             PasswordInput.Margin = new Padding(4);
             PasswordInput.Name = "PasswordInput";
             PasswordInput.Size = new Size(211, 26);
@@ -90,7 +90,7 @@
             // 
             label3.AutoSize = true;
             label3.ForeColor = Color.White;
-            label3.Location = new Point(308, 57);
+            label3.Location = new Point(498, 62);
             label3.Margin = new Padding(4, 0, 4, 0);
             label3.Name = "label3";
             label3.Size = new Size(73, 19);
@@ -101,7 +101,7 @@
             // 
             RolesCombo.FormattingEnabled = true;
             RolesCombo.Items.AddRange(new object[] { "ادمن", "موظف" });
-            RolesCombo.Location = new Point(203, 91);
+            RolesCombo.Location = new Point(393, 96);
             RolesCombo.Margin = new Padding(4);
             RolesCombo.Name = "RolesCombo";
             RolesCombo.Size = new Size(204, 27);
@@ -113,10 +113,10 @@
             AddUserBtn.FlatAppearance.BorderSize = 0;
             AddUserBtn.FlatStyle = FlatStyle.Flat;
             AddUserBtn.ForeColor = Color.White;
-            AddUserBtn.Location = new Point(38, 90);
+            AddUserBtn.Location = new Point(228, 93);
             AddUserBtn.Margin = new Padding(4);
             AddUserBtn.Name = "AddUserBtn";
-            AddUserBtn.Size = new Size(157, 39);
+            AddUserBtn.Size = new Size(157, 33);
             AddUserBtn.TabIndex = 6;
             AddUserBtn.Text = "اضافة حساب";
             AddUserBtn.UseVisualStyleBackColor = false;
@@ -127,7 +127,7 @@
             label4.AutoSize = true;
             label4.Font = new Font("Arial", 18F, FontStyle.Bold, GraphicsUnit.Point, 178);
             label4.ForeColor = Color.White;
-            label4.Location = new Point(778, 17);
+            label4.Location = new Point(968, 22);
             label4.Margin = new Padding(4, 0, 4, 0);
             label4.Name = "label4";
             label4.Size = new Size(160, 29);
@@ -138,12 +138,26 @@
             // 
             UsersTableGrid.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             UsersTableGrid.Columns.AddRange(new DataGridViewColumn[] { UpdateUser, DeleteCellButton });
-            UsersTableGrid.Location = new Point(38, 137);
+            UsersTableGrid.Location = new Point(228, 137);
             UsersTableGrid.Margin = new Padding(4);
             UsersTableGrid.Name = "UsersTableGrid";
-            UsersTableGrid.Size = new Size(1108, 561);
+            UsersTableGrid.Size = new Size(918, 561);
             UsersTableGrid.TabIndex = 8;
             UsersTableGrid.CellContentClick += UsersTableGrid_CellContentClick;
+            // 
+            // UpdateUser
+            // 
+            UpdateUser.HeaderText = "تعديل";
+            UpdateUser.Name = "UpdateUser";
+            UpdateUser.Text = "تعديل";
+            UpdateUser.UseColumnTextForButtonValue = true;
+            // 
+            // DeleteCellButton
+            // 
+            DeleteCellButton.HeaderText = "حذف";
+            DeleteCellButton.Name = "DeleteCellButton";
+            DeleteCellButton.Text = "حذف";
+            DeleteCellButton.UseColumnTextForButtonValue = true;
             // 
             // NextBtn
             // 
@@ -151,9 +165,9 @@
             NextBtn.FlatAppearance.BorderSize = 0;
             NextBtn.FlatStyle = FlatStyle.Flat;
             NextBtn.ForeColor = Color.White;
-            NextBtn.Location = new Point(843, 6);
+            NextBtn.Location = new Point(990, 0);
             NextBtn.Name = "NextBtn";
-            NextBtn.Size = new Size(88, 35);
+            NextBtn.Size = new Size(156, 35);
             NextBtn.TabIndex = 9;
             NextBtn.Text = "التالي";
             NextBtn.UseVisualStyleBackColor = false;
@@ -165,9 +179,9 @@
             PreviousBtn.FlatAppearance.BorderSize = 0;
             PreviousBtn.FlatStyle = FlatStyle.Flat;
             PreviousBtn.ForeColor = Color.White;
-            PreviousBtn.Location = new Point(13, 6);
+            PreviousBtn.Location = new Point(228, 6);
             PreviousBtn.Name = "PreviousBtn";
-            PreviousBtn.Size = new Size(88, 35);
+            PreviousBtn.Size = new Size(168, 35);
             PreviousBtn.TabIndex = 10;
             PreviousBtn.Text = "السابق";
             PreviousBtn.UseVisualStyleBackColor = false;
@@ -199,20 +213,6 @@
             panel2.Name = "panel2";
             panel2.Size = new Size(1159, 705);
             panel2.TabIndex = 12;
-            // 
-            // UpdateUser
-            // 
-            UpdateUser.HeaderText = "تعديل";
-            UpdateUser.Name = "UpdateUser";
-            UpdateUser.Text = "تعديل";
-            UpdateUser.UseColumnTextForButtonValue = true;
-            // 
-            // DeleteCellButton
-            // 
-            DeleteCellButton.HeaderText = "حذف";
-            DeleteCellButton.Name = "DeleteCellButton";
-            DeleteCellButton.Text = "حذف";
-            DeleteCellButton.UseColumnTextForButtonValue = true;
             // 
             // UserManagement
             // 

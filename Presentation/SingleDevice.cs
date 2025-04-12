@@ -19,7 +19,7 @@ namespace PlayStation.Presentation
         private readonly DeviceService deviceService;
         private readonly OrderDetailsService orderDetailsService;
         Device CurrentDevice;
-        Session CurrentSession;
+        Session? CurrentSession;
         private int elapsedSeconds;
         private bool isInputed = false;
         public SingleDevice(int _CurrentDeviceId, CafeService _CafeService, SessionService _sessionService, DeviceService _deviceService, OrderDetailsService _orderDetailsService)
@@ -84,7 +84,6 @@ namespace PlayStation.Presentation
             }
             else
             {
-
                 var selectedValue = ItemsCombo.SelectedValue;
                 if (selectedValue == null)
                 {
@@ -96,10 +95,9 @@ namespace PlayStation.Presentation
                 {
                     MessageBox.Show("الكمية المتاحة لهذا المنتج اقل من الكمية المطلوبة", "تحذير", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
-
                 }
                 var Itemsprice = cafeService.GetCafeItemByIdFromService((int)ItemsCombo.SelectedValue).Price;
-                OrderDetail orderDetail = new OrderDetail()
+                OrderDetail orderDetail = new ()
                 {
                     Id = 0,
                     ItemId = item.Id,
@@ -113,8 +111,6 @@ namespace PlayStation.Presentation
                 item.Stock -= ItemsCounter.Value;
                 cafeService.UpdateCafeItemFromService(item);
                 PopulateOrderGrid();
-
-
             }
             TotalPriceLbl.Text = CurrentSession.TotalCost.ToString();
         }
@@ -179,7 +175,7 @@ namespace PlayStation.Presentation
                 MessageBox.Show("يرجي بدا الجلسه قبل بدايتها", "فشل في انهاء الجلسه", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-
+            
             DateTime endTime;
             if (dateTimePickerEnd.Value == dateTimePickerEnd.MinDate || dateTimePickerEnd.Value == DateTimePicker.MinimumDateTime)
             {
@@ -190,16 +186,27 @@ namespace PlayStation.Presentation
             {
                 endTime = dateTimePickerEnd.Value;
             }
+
+            if (CurrentSession.StartTime.Year == endTime.Year &&
+                CurrentSession.StartTime.Month == endTime.Month &&
+                CurrentSession.StartTime.Day == endTime.Day &&
+                CurrentSession.StartTime.Hour == endTime.Hour &&
+                CurrentSession.StartTime.Minute == endTime.Minute)
+            {
+                MessageBox.Show("لا يمكن إنهاء الجلسة في نفس الدقيقة التي بدأت فيها", "تحذير", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
             timer.Stop();
 
-            CurrentSession.EndTime = endTime; //dateTimePickerEnd.Value;
+            CurrentSession.EndTime = endTime;
             CurrentSession.Status = "Closed";
-            if (CurrentSession.EndTime.HasValue)
+            if (CurrentSession.EndTime.HasValue) 
             {
-                if (CurrentSession.EndTime.Value < CurrentSession.StartTime)
+                if (CurrentSession.EndTime < CurrentSession.StartTime)
                 {
                     CurrentSession.EndTime = CurrentSession.EndTime.Value.AddDays(1);
                 }
+
                 CurrentSession.Duration = (decimal)(CurrentSession.EndTime.Value - CurrentSession.StartTime).TotalMinutes;
             }
 
@@ -213,7 +220,7 @@ namespace PlayStation.Presentation
             {
                 sessionCost = Math.Round((currentDuration / 60) * CurrentDevice.HourlyRate, 2);
             }
-            CurrentSession.TotalCost += sessionCost + CurrentSession.OrderDetails.Sum(od => od.Quantity * od.UnitPrice);
+            CurrentSession.TotalCost = sessionCost + CurrentSession.OrderDetails.Sum(od => od.Quantity * od.UnitPrice);
             sessionService.UpdateSessionFromService(CurrentSession);
             TotalPriceLbl.Text = CurrentSession.TotalCost.ToString();
 
@@ -227,10 +234,7 @@ namespace PlayStation.Presentation
             ResetBtn.Enabled = true;
         }
 
-        private void panel1_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
+        private void panel1_Paint(object sender, PaintEventArgs e) { }
 
         private void dateTimePicker1_ValueChanged(object sender, EventArgs e)
         {
@@ -249,7 +253,8 @@ namespace PlayStation.Presentation
         private void dateTimePickerEnd_ValueChanged(object sender, EventArgs e)
         {
             ValidateDateTime();
-            StartBtn.Enabled = false;
+            //testing edit
+            StartBtn.Enabled = true;
         }
         private void ValidateDateTime()
         {
@@ -330,13 +335,12 @@ namespace PlayStation.Presentation
             TimerLbl.Text = "00:00:00";
             TotalPriceLbl.Text = "0";
             StartBtn.Enabled = true;
-            EndBtn.Enabled = false;
+            EndBtn.Enabled = true;
             dateTimePicker1.Enabled = true;
             MultiRadio.Enabled = true;
             SingleRadio.Enabled = true;
             dateTimePicker1.Value = DateTime.Now;
             dateTimePickerEnd.Value = DateTime.Now;
-
         }
 
         private void dateTimePicker1_MouseDown(object sender, MouseEventArgs e)

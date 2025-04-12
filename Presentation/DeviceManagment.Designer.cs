@@ -53,7 +53,7 @@
             // 
             label2.AutoSize = true;
             label2.ForeColor = Color.White;
-            label2.Location = new Point(1138, 24);
+            label2.Location = new Point(1193, 52);
             label2.Margin = new Padding(4, 0, 4, 0);
             label2.Name = "label2";
             label2.Size = new Size(67, 19);
@@ -64,7 +64,7 @@
             // 
             label3.AutoSize = true;
             label3.ForeColor = Color.White;
-            label3.Location = new Point(677, 25);
+            label3.Location = new Point(743, 52);
             label3.Margin = new Padding(4, 0, 4, 0);
             label3.Name = "label3";
             label3.Size = new Size(107, 19);
@@ -75,7 +75,7 @@
             // 
             label4.AutoSize = true;
             label4.ForeColor = Color.White;
-            label4.Location = new Point(895, 24);
+            label4.Location = new Point(938, 52);
             label4.Margin = new Padding(4, 0, 4, 0);
             label4.Name = "label4";
             label4.Size = new Size(67, 19);
@@ -88,10 +88,10 @@
             button1.FlatAppearance.BorderSize = 0;
             button1.FlatStyle = FlatStyle.Flat;
             button1.ForeColor = Color.White;
-            button1.Location = new Point(372, 48);
+            button1.Location = new Point(416, 81);
             button1.Margin = new Padding(4);
             button1.Name = "button1";
-            button1.Size = new Size(153, 41);
+            button1.Size = new Size(143, 36);
             button1.TabIndex = 7;
             button1.Text = "اضافة جهاز";
             button1.UseVisualStyleBackColor = false;
@@ -101,7 +101,7 @@
             // 
             DevicesTable.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             DevicesTable.Columns.AddRange(new DataGridViewColumn[] { UpdateCellButton, DeleteCellButton });
-            DevicesTable.Location = new Point(81, 102);
+            DevicesTable.Location = new Point(81, 128);
             DevicesTable.Margin = new Padding(4);
             DevicesTable.Name = "DevicesTable";
             DevicesTable.Size = new Size(1191, 560);
@@ -124,41 +124,41 @@
             // 
             // DeNameInput
             // 
-            DeNameInput.Location = new Point(986, 55);
+            DeNameInput.Location = new Point(1038, 85);
             DeNameInput.Name = "DeNameInput";
             DeNameInput.Size = new Size(234, 26);
             DeNameInput.TabIndex = 9;
             // 
             // HourlyRateInput
             // 
-            HourlyRateInput.Location = new Point(667, 53);
+            HourlyRateInput.Location = new Point(743, 85);
             HourlyRateInput.Maximum = new decimal(new int[] { 1000, 0, 0, 0 });
             HourlyRateInput.Name = "HourlyRateInput";
-            HourlyRateInput.Size = new Size(129, 26);
+            HourlyRateInput.Size = new Size(156, 26);
             HourlyRateInput.TabIndex = 10;
             // 
             // DeTypeCombo
             // 
             DeTypeCombo.FormattingEnabled = true;
             DeTypeCombo.Items.AddRange(new object[] { "PS4", "PS5" });
-            DeTypeCombo.Location = new Point(802, 53);
+            DeTypeCombo.Location = new Point(906, 84);
             DeTypeCombo.Name = "DeTypeCombo";
-            DeTypeCombo.Size = new Size(178, 27);
+            DeTypeCombo.Size = new Size(126, 27);
             DeTypeCombo.TabIndex = 11;
             // 
             // HourlyRateMulti
             // 
-            HourlyRateMulti.Location = new Point(532, 53);
+            HourlyRateMulti.Location = new Point(566, 84);
             HourlyRateMulti.Maximum = new decimal(new int[] { 1000, 0, 0, 0 });
             HourlyRateMulti.Name = "HourlyRateMulti";
-            HourlyRateMulti.Size = new Size(129, 26);
+            HourlyRateMulti.Size = new Size(170, 26);
             HourlyRateMulti.TabIndex = 13;
             // 
             // label1
             // 
             label1.AutoSize = true;
             label1.ForeColor = Color.White;
-            label1.Location = new Point(533, 25);
+            label1.Location = new Point(566, 52);
             label1.Margin = new Padding(4, 0, 4, 0);
             label1.Name = "label1";
             label1.Size = new Size(106, 19);
@@ -170,9 +170,9 @@
             panel1.Controls.Add(NextBtn);
             panel1.Controls.Add(PreviousBtn);
             panel1.Dock = DockStyle.Bottom;
-            panel1.Location = new Point(0, 694);
+            panel1.Location = new Point(0, 695);
             panel1.Name = "panel1";
-            panel1.Size = new Size(1285, 55);
+            panel1.Size = new Size(1285, 54);
             panel1.TabIndex = 14;
             // 
             // NextBtn
@@ -181,9 +181,9 @@
             NextBtn.FlatAppearance.BorderSize = 0;
             NextBtn.FlatStyle = FlatStyle.Flat;
             NextBtn.ForeColor = Color.White;
-            NextBtn.Location = new Point(1120, 3);
+            NextBtn.Location = new Point(1134, 3);
             NextBtn.Name = "NextBtn";
-            NextBtn.Size = new Size(100, 40);
+            NextBtn.Size = new Size(138, 39);
             NextBtn.TabIndex = 1;
             NextBtn.Text = "التالي";
             NextBtn.UseVisualStyleBackColor = false;
@@ -195,9 +195,9 @@
             PreviousBtn.FlatAppearance.BorderSize = 0;
             PreviousBtn.FlatStyle = FlatStyle.Flat;
             PreviousBtn.ForeColor = Color.White;
-            PreviousBtn.Location = new Point(163, 3);
+            PreviousBtn.Location = new Point(81, 3);
             PreviousBtn.Name = "PreviousBtn";
-            PreviousBtn.Size = new Size(100, 40);
+            PreviousBtn.Size = new Size(149, 39);
             PreviousBtn.TabIndex = 0;
             PreviousBtn.Text = "السابق";
             PreviousBtn.UseVisualStyleBackColor = false;
