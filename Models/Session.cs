@@ -17,12 +17,17 @@ public partial class Session : IDeletable
     public decimal TotalCost { get; set; }
 
     public decimal Duration { get; set; }
-
-    public int DeviceId { get; set; }
-
+    public SessionType Type { get; set; }
     public bool IsDeleted { get; set; } = false;
+    public int DeviceId { get; set; }
 
     public virtual Device Device { get; set; } = null!;
 
     public virtual ICollection<OrderDetail> OrderDetails { get; set; } = new List<OrderDetail>();
+}
+
+public enum SessionType
+{
+    Single = 1,
+    Multi = 2
 }
