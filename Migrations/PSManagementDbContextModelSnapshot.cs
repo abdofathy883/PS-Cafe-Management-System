@@ -234,6 +234,9 @@ namespace PlayStation.Migrations
                     b.Property<decimal>("TotalCost")
                         .HasColumnType("decimal(18, 0)");
 
+                    b.Property<int>("Type")
+                        .HasColumnType("int");
+
                     b.Property<int?>("UserId")
                         .HasColumnType("int");
 

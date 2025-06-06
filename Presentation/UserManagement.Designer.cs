@@ -113,7 +113,7 @@
             AddUserBtn.FlatAppearance.BorderSize = 0;
             AddUserBtn.FlatStyle = FlatStyle.Flat;
             AddUserBtn.ForeColor = Color.White;
-            AddUserBtn.Location = new Point(228, 93);
+            AddUserBtn.Location = new Point(106, 97);
             AddUserBtn.Margin = new Padding(4);
             AddUserBtn.Name = "AddUserBtn";
             AddUserBtn.Size = new Size(157, 33);
@@ -138,10 +138,10 @@
             // 
             UsersTableGrid.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             UsersTableGrid.Columns.AddRange(new DataGridViewColumn[] { UpdateUser, DeleteCellButton });
-            UsersTableGrid.Location = new Point(228, 137);
+            UsersTableGrid.Location = new Point(106, 137);
             UsersTableGrid.Margin = new Padding(4);
             UsersTableGrid.Name = "UsersTableGrid";
-            UsersTableGrid.Size = new Size(918, 561);
+            UsersTableGrid.Size = new Size(1040, 561);
             UsersTableGrid.TabIndex = 8;
             UsersTableGrid.CellContentClick += UsersTableGrid_CellContentClick;
             // 
@@ -165,7 +165,7 @@
             NextBtn.FlatAppearance.BorderSize = 0;
             NextBtn.FlatStyle = FlatStyle.Flat;
             NextBtn.ForeColor = Color.White;
-            NextBtn.Location = new Point(990, 0);
+            NextBtn.Location = new Point(990, 6);
             NextBtn.Name = "NextBtn";
             NextBtn.Size = new Size(156, 35);
             NextBtn.TabIndex = 9;
@@ -179,7 +179,7 @@
             PreviousBtn.FlatAppearance.BorderSize = 0;
             PreviousBtn.FlatStyle = FlatStyle.Flat;
             PreviousBtn.ForeColor = Color.White;
-            PreviousBtn.Location = new Point(228, 6);
+            PreviousBtn.Location = new Point(106, 9);
             PreviousBtn.Name = "PreviousBtn";
             PreviousBtn.Size = new Size(168, 35);
             PreviousBtn.TabIndex = 10;

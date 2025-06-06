@@ -32,6 +32,8 @@ namespace PlayStation.Presentation
         {
             components = new System.ComponentModel.Container();
             panelHead = new Panel();
+            TotalHoursLbl = new Label();
+            label3 = new Label();
             TotalPriceLbl = new Label();
             TimerLbl = new Label();
             label2 = new Label();
@@ -55,6 +57,8 @@ namespace PlayStation.Presentation
             dateTimePicker1 = new DateTimePicker();
             StartBtn = new Button();
             timer = new System.Windows.Forms.Timer(components);
+            label4 = new Label();
+            CafeteriaPriceLbl = new Label();
             panelHead.SuspendLayout();
             panelCafe.SuspendLayout();
             panel2.SuspendLayout();
@@ -66,6 +70,10 @@ namespace PlayStation.Presentation
             // 
             // panelHead
             // 
+            panelHead.Controls.Add(CafeteriaPriceLbl);
+            panelHead.Controls.Add(label4);
+            panelHead.Controls.Add(TotalHoursLbl);
+            panelHead.Controls.Add(label3);
             panelHead.Controls.Add(TotalPriceLbl);
             panelHead.Controls.Add(TimerLbl);
             panelHead.Controls.Add(label2);
@@ -76,6 +84,26 @@ namespace PlayStation.Presentation
             panelHead.Name = "panelHead";
             panelHead.Size = new Size(1186, 113);
             panelHead.TabIndex = 0;
+            // 
+            // TotalHoursLbl
+            // 
+            TotalHoursLbl.AutoSize = true;
+            TotalHoursLbl.Font = new Font("Arial", 18F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            TotalHoursLbl.Location = new Point(866, 61);
+            TotalHoursLbl.Name = "TotalHoursLbl";
+            TotalHoursLbl.Size = new Size(59, 29);
+            TotalHoursLbl.TabIndex = 4;
+            TotalHoursLbl.Text = "0.00";
+            // 
+            // label3
+            // 
+            label3.AutoSize = true;
+            label3.Font = new Font("Arial", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label3.Location = new Point(850, 23);
+            label3.Name = "label3";
+            label3.Size = new Size(89, 22);
+            label3.TabIndex = 3;
+            label3.Text = "عدد الساعات";
             // 
             // TotalPriceLbl
             // 
@@ -360,6 +388,26 @@ namespace PlayStation.Presentation
             timer.Interval = 1000;
             timer.Tick += timer_Tick;
             // 
+            // label4
+            // 
+            label4.AutoSize = true;
+            label4.Font = new Font("Arial", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label4.Location = new Point(717, 23);
+            label4.Name = "label4";
+            label4.Size = new Size(96, 22);
+            label4.TabIndex = 5;
+            label4.Text = "حساب الطلبات";
+            // 
+            // CafeteriaPriceLbl
+            // 
+            CafeteriaPriceLbl.AutoSize = true;
+            CafeteriaPriceLbl.Font = new Font("Arial", 18F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            CafeteriaPriceLbl.Location = new Point(741, 61);
+            CafeteriaPriceLbl.Name = "CafeteriaPriceLbl";
+            CafeteriaPriceLbl.Size = new Size(59, 29);
+            CafeteriaPriceLbl.TabIndex = 6;
+            CafeteriaPriceLbl.Text = "0.00";
+            // 
             // SingleDevice
             // 
             AutoScaleDimensions = new SizeF(8F, 17F);
@@ -415,5 +463,9 @@ namespace PlayStation.Presentation
         private Button ChangeSessionTypeBtn;
         private DataGridViewButtonColumn DeleteBtb;
         private Button ResetBtn;
+        private Label TotalHoursLbl;
+        private Label label3;
+        private Label CafeteriaPriceLbl;
+        private Label label4;
     }
 }

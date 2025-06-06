@@ -12,8 +12,8 @@ using PlayStation.Models;
 namespace PlayStation.Migrations
 {
     [DbContext(typeof(PSManagementDbContext))]
-    [Migration("20250314153118_add-loginSession")]
-    partial class addloginSession
+    [Migration("20250606013544_InitialCreate")]
+    partial class InitialCreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -236,6 +236,9 @@ namespace PlayStation.Migrations
 
                     b.Property<decimal>("TotalCost")
                         .HasColumnType("decimal(18, 0)");
+
+                    b.Property<int>("Type")
+                        .HasColumnType("int");
 
                     b.Property<int?>("UserId")
                         .HasColumnType("int");

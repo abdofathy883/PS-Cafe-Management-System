@@ -32,7 +32,8 @@ public partial class PSManagementDbContext : DbContext
     {
         if (!optionsBuilder.IsConfigured)
         {
-            optionsBuilder.UseSqlServer("DefaultSQLConnection");
+            optionsBuilder.UseSqlServer("Server=.\\SQLEXPRESS;Database=PSManagementSystem;Trusted_Connection=True;Encrypt=False;MultipleActiveResultSets=True;");
+            //optionsBuilder.UseSqlServer("DefaultSQLConnection");
         }
     }
 

@@ -30,8 +30,6 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Home));
             panel1 = new Panel();
-            panel3 = new Panel();
-            label2 = new Label();
             label1 = new Label();
             panel2 = new Panel();
             ReportsBtn = new Button();
@@ -42,29 +40,14 @@
             DeviceManagementBtn = new Button();
             MainContainer = new Panel();
             panel1.SuspendLayout();
-            panel3.SuspendLayout();
             panel2.SuspendLayout();
             SuspendLayout();
             // 
             // panel1
             // 
             resources.ApplyResources(panel1, "panel1");
-            panel1.Controls.Add(panel3);
             panel1.Controls.Add(label1);
             panel1.Name = "panel1";
-            // 
-            // panel3
-            // 
-            resources.ApplyResources(panel3, "panel3");
-            panel3.Controls.Add(label2);
-            panel3.Name = "panel3";
-            // 
-            // label2
-            // 
-            resources.ApplyResources(label2, "label2");
-            label2.ForeColor = Color.White;
-            label2.Name = "label2";
-            label2.Tag = "Styled";
             // 
             // label1
             // 
@@ -169,8 +152,6 @@
             Load += Home_Load;
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
-            panel3.ResumeLayout(false);
-            panel3.PerformLayout();
             panel2.ResumeLayout(false);
             ResumeLayout(false);
         }
@@ -183,13 +164,11 @@
         private Panel EmployeePanel;
         private Button UserManagementBtn;
         private Button DeviceManagementBtn;
-        private Label label2;
         private Button CafetriaBtn;
         private Button ExpensesBtn;
         private Panel MainContainer;
         private Button AllDevicesBtn;
         private Label label3;
-        private Panel panel3;
         private Button ReportsBtn;
     }
 }

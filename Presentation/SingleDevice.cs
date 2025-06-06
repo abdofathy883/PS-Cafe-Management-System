@@ -22,7 +22,7 @@ namespace PlayStation.Presentation
         Session? CurrentSession;
         private int elapsedSeconds;
         private bool isInputed = false;
-        private string CurrentSessionType = "";
+        private SessionType CurrentSessionType;
         public SingleDevice(int _CurrentDeviceId, CafeService _CafeService, SessionService _sessionService, DeviceService _deviceService, OrderDetailsService _orderDetailsService)
         {
             InitializeComponent();
@@ -42,31 +42,27 @@ namespace PlayStation.Presentation
             {
                 CurrentSession = CurrentDevice.Sessions.First(s => s.Status == "Active");
 
-                //CurrentSession.Duration = (decimal)(DateTime.Now - CurrentSession.StartTime).TotalMinutes;
+                if (CurrentSession.Type == SessionType.Multi)
+                {
+                    MultiRadio.Checked = true;
+                    SingleRadio.Checked = false;
+                    CurrentSessionType = SessionType.Multi;
+                }
+                else if (CurrentSession.Type == SessionType.Single)
+                {
+                    SingleRadio.Checked = true;
+                    MultiRadio.Checked = false;
+                    CurrentSessionType = SessionType.Single;
+                }
 
-                //decimal sessionCost = 0;
-                //if (MultiRadio.Checked)
-                //{
-                //    sessionCost = Math.Round((CurrentSession.Duration / 60) * CurrentDevice.HourlyRateForMulti, 2);
-                //}
-                //else if (SingleRadio.Checked)
-                //{
-                //    sessionCost = Math.Round((CurrentSession.Duration / 60) * CurrentDevice.HourlyRate, 2);
-                //}
-
-                //CurrentSession.TotalCost = sessionCost + CurrentSession.OrderDetails.Sum(od => od.Quantity * od.UnitPrice);
                 elapsedSeconds = ((int)(DateTime.Now - CurrentSession.StartTime).TotalSeconds);
                 timer.Start();
                 TotalPriceLbl.Text = CurrentSession.TotalCost.ToString();
                 StartBtn.Enabled = false;
             }
-            else
-            {
-                EndBtn.Enabled = false;
-            }
+
             DeviceNameLbl.Text = CurrentDevice.Name;
             PopulateOrderGrid();
-            //dateTimePickerEnd.Enabled = false;
         }
         private void PopulateOrderGrid()
         {
@@ -137,13 +133,11 @@ namespace PlayStation.Presentation
             }
             if (MultiRadio.Checked)
             {
-                CurrentSessionType = "Multi";
-                MessageBox.Show($"Session type set to Multi {CurrentSessionType}", "Debug");
+                CurrentSessionType = SessionType.Multi;
             }
             else if (SingleRadio.Checked)
             {
-                CurrentSessionType = "Single";
-                MessageBox.Show($"Session type set to Single {CurrentSessionType}", "Debug");
+                CurrentSessionType = SessionType.Single;
 
             }
 
@@ -171,34 +165,13 @@ namespace PlayStation.Presentation
                 Status = "Active",
                 TotalCost = 0,
                 Duration = 0,
+                Type = CurrentSessionType,
                 OrderDetails = new List<OrderDetail>()
             };
-            //if (MultiRadio.Checked)
-            //{
-            //    CurrentSession.TotalCost += Math.Round(((CurrentSession.Duration / 60) * CurrentDevice.HourlyRateForMulti), 2);
-            //}
-            //else if (SingleRadio.Checked)
-            //{
-            //    CurrentSession.TotalCost += Math.Round(((CurrentSession.Duration / 60) * CurrentDevice.HourlyRate), 2);
-            //}
-            //if (MultiRadio.Checked)
-            //{
-            //    CurrentSession.Device.Type = 
-            //}
-            //else if (SingleRadio.Checked)
-            //{
-            //    CurrentSession.TotalCost += Math.Round(((CurrentSession.Duration / 60) * CurrentDevice.HourlyRate), 2);
-            //}
+
             CurrentDevice.status = DevaisStatus.مشغول;
             sessionService.AddSessionFromService(CurrentSession);
             deviceService.UpdateDeviceFromService(CurrentDevice);
-            //StartBtn.Enabled = false;
-            //EndBtn.Enabled = true;
-            //dateTimePicker1.Enabled = false;
-            //MultiRadio.Enabled = false;
-            //SingleRadio.Enabled = false;
-            //ResetBtn.Enabled = false;
-            //dateTimePickerEnd.Enabled = true;
         }
 
         private void EndBtn_Click(object sender, EventArgs e)
@@ -245,37 +218,23 @@ namespace PlayStation.Presentation
 
             var currentDuration = CurrentSession.Duration;
             decimal sessionCost = 0;
-            MessageBox.Show($"Duration: {currentDuration} - Multi: {MultiRadio.Checked} - Single: {SingleRadio.Checked} - StoredType: {CurrentSessionType}, Debug Info");
-            if (CurrentSessionType == "Multi")
+            if (CurrentSession.Type == SessionType.Multi)
             {
                 sessionCost = Math.Round((currentDuration / 60) * CurrentDevice.HourlyRateForMulti, 2);
             }
-            else if (CurrentSessionType == "Single")
+            else if (CurrentSession.Type == SessionType.Single)
             {
                 sessionCost = Math.Round((currentDuration / 60) * CurrentDevice.HourlyRate, 2);
             }
 
-            MessageBox.Show($"Session Cost: {sessionCost}, Order Total: {CurrentSession.OrderDetails.Sum(od => od.Quantity * od.UnitPrice)}", "Cost Debug");
-            //if (MultiRadio.Checked)
-            //{
-            //    sessionCost = Math.Round((currentDuration / 60) * CurrentDevice.HourlyRateForMulti, 2);
-            //}
-            //else if (SingleRadio.Checked)
-            //{
-            //    sessionCost = Math.Round((currentDuration / 60) * CurrentDevice.HourlyRate, 2);
-            //}
             CurrentSession.TotalCost = sessionCost + CurrentSession.OrderDetails.Sum(od => od.Quantity * od.UnitPrice);
             sessionService.UpdateSessionFromService(CurrentSession);
             TotalPriceLbl.Text = CurrentSession.TotalCost.ToString();
+            TotalHoursLbl.Text = Math.Round((currentDuration / 60), 2).ToString();
+            CafeteriaPriceLbl.Text = Math.Round((CurrentSession.OrderDetails.Sum(od => od.Quantity * od.UnitPrice)), 2).ToString();
 
             CurrentDevice.status = DevaisStatus.متاح;
             deviceService.UpdateDeviceFromService(CurrentDevice);
-            //StartBtn.Enabled = true;
-            //EndBtn.Enabled = false;
-            //dateTimePicker1.Enabled = true;
-            //MultiRadio.Enabled = true;
-            //SingleRadio.Enabled = true;
-            //ResetBtn.Enabled = true;
         }
 
         private void panel1_Paint(object sender, PaintEventArgs e) { }
@@ -338,29 +297,25 @@ namespace PlayStation.Presentation
             var currentDuration = (decimal)(DateTime.Now - CurrentSession.StartTime).TotalMinutes;
 
             // Calculate the cost up to this point based on the current session type
-            if (MultiRadio.Checked)
+            if (CurrentSession.Type == SessionType.Multi)
             {
                 CurrentSession.TotalCost += Math.Round((currentDuration / 60) * CurrentDevice.HourlyRateForMulti, 2);
+                CurrentSession.Type = SessionType.Single;
+                CurrentSessionType = SessionType.Single;
+                SingleRadio.Checked = true;
+                MultiRadio.Checked = false;
             }
-            else if (SingleRadio.Checked)
+            else if (CurrentSession.Type == SessionType.Single)
             {
                 CurrentSession.TotalCost += Math.Round((currentDuration / 60) * CurrentDevice.HourlyRate, 2);
+                CurrentSession.Type = SessionType.Multi;
+                CurrentSessionType = SessionType.Multi;
+                SingleRadio.Checked = false;
+                MultiRadio.Checked = true;
             }
 
             // Update the session start time to now
             CurrentSession.StartTime = DateTime.Now;
-
-            // Change the session type
-            if (MultiRadio.Checked)
-            {
-                SingleRadio.Checked = true;
-                MultiRadio.Checked = false;
-            }
-            else if (SingleRadio.Checked)
-            {
-                MultiRadio.Checked = true;
-                SingleRadio.Checked = false;
-            }
 
             // Update the session in the database
             sessionService.UpdateSessionFromService(CurrentSession);
@@ -377,7 +332,9 @@ namespace PlayStation.Presentation
             CurrentSession = null;
             elapsedSeconds = 0;
             TimerLbl.Text = "00:00:00";
-            TotalPriceLbl.Text = "0";
+            TotalHoursLbl.Text = "0.00";
+            TotalPriceLbl.Text = "0.00";
+            CafeteriaPriceLbl.Text = "0.00";
             StartBtn.Enabled = true;
             EndBtn.Enabled = true;
             dateTimePicker1.Enabled = true;
