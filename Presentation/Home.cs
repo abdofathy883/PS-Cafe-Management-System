@@ -44,11 +44,6 @@ namespace PlayStation.Presentation
                 form.Location = new Point(y, 0);
                 form.Size = new Size(MainContainer.Width,
                          Math.Min(MainContainer.Height, form.Height));
-                //    int x = (MainContainer.Width - form.Width) / 2;
-                //    int y = (MainContainer.Height - form.Height) / 2;
-                //    form.Location = new Point(Math.Max(0, x), Math.Max(0, y));
-                //    form.Size = new Size(Math.Min(MainContainer.Width, form.Width),
-                //                         Math.Min(MainContainer.Height, form.Height));
             };
             MainContainer.Controls.Add(form);
             form.Show();

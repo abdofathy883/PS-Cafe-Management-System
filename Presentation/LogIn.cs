@@ -35,14 +35,6 @@ namespace PlayStation.Presentation
                 this.Show();
             }
         }
-        /// <summary>
-        /// Click Event Of Log In Button
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        /// Show MessageBox in Case Empty Input and Return
-        /// Show MessageBox in Case Wrong User and Return
-        /// Redirect To Home Form In Case Valid User
         private void LogInBtn_Click(object sender, EventArgs e)
         {
             if (string.IsNullOrWhiteSpace(NameInput.Text) || string.IsNullOrWhiteSpace(PasswordInput.Text))

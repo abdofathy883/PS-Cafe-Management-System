@@ -256,7 +256,6 @@ namespace PlayStation.Presentation
         private void dateTimePickerEnd_ValueChanged(object sender, EventArgs e)
         {
             ValidateDateTime();
-            //testing edit
             StartBtn.Enabled = true;
         }
         private void ValidateDateTime()

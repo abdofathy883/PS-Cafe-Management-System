@@ -27,7 +27,6 @@ namespace PlayStation.Application.Services
         {
             expensesService = _expensesService;
             userService = _userService;
-            // Note: I stopped with bug in connecting the user to the expenses, need to fix this bug first
             InitializeComponent();
             ApplyGlobalStyles(this);
             PopulateExpensesGrid();
@@ -72,10 +71,7 @@ namespace PlayStation.Application.Services
             if (CurrentPage < TotalPages())
             {
                 NextBtn.Enabled = true;
-
-            }
-            
-            
+            }            
         }
         private void AddExpensesBtn_Click(object sender, EventArgs e)
         {
@@ -84,11 +80,6 @@ namespace PlayStation.Application.Services
                 MessageBox.Show("لا يمكن اضافة قيم فارغة", "فشل اضافة مصروفات", MessageBoxButtons.OKCancel, MessageBoxIcon.Error);
                 return;
             }
-            //else if (ExpensesDateTime.Value > DateTime.Now)
-            //{
-            //    MessageBox.Show("لا يمكن اختيار تاريخ مسبق", "فشل اضافة مصروفات", MessageBoxButtons.OKCancel, MessageBoxIcon.Error);
-            //    return;
-            //}
             else
             {
                 Expense newExpenses = new Expense();
