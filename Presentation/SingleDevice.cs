@@ -18,12 +18,17 @@ namespace PlayStation.Presentation
         private readonly SessionService sessionService;
         private readonly DeviceService deviceService;
         private readonly OrderDetailsService orderDetailsService;
+        private readonly SessionTypeChangeService sessionTypeChangeService;
         Device CurrentDevice;
         Session? CurrentSession;
         private int elapsedSeconds;
         private bool isInputed = false;
         private SessionType CurrentSessionType;
-        public SingleDevice(int _CurrentDeviceId, CafeService _CafeService, SessionService _sessionService, DeviceService _deviceService, OrderDetailsService _orderDetailsService)
+        private decimal singleSessionCost = 0;
+        private decimal multiSessionCost = 0;
+        private DateTime? lastTypeChangeTime;
+
+        public SingleDevice(int _CurrentDeviceId, CafeService _CafeService, SessionService _sessionService, DeviceService _deviceService, OrderDetailsService _orderDetailsService, SessionTypeChangeService _sessionTypeChangeService)
         {
             InitializeComponent();
             ApplyGlobalStyles(this);
@@ -32,6 +37,7 @@ namespace PlayStation.Presentation
             sessionService = _sessionService;
             deviceService = _deviceService;
             orderDetailsService = _orderDetailsService;
+            sessionTypeChangeService = _sessionTypeChangeService;
 
             CurrentDevice = deviceService.GetDeviceByIdFromService(_CurrentDeviceId);
 
@@ -41,6 +47,16 @@ namespace PlayStation.Presentation
             if (CurrentDevice.status == DevaisStatus.مشغول)
             {
                 CurrentSession = CurrentDevice.Sessions.First(s => s.Status == "Active");
+
+                // Calculate costs from previous type changes
+                var typeChanges = sessionTypeChangeService.GetSessionTypeChanges(CurrentSession.Id);
+                foreach (var change in typeChanges)
+                {
+                    if (change.OldType == SessionType.Single)
+                        singleSessionCost += change.CostUntilChange;
+                    else
+                        multiSessionCost += change.CostUntilChange;
+                }
 
                 if (CurrentSession.Type == SessionType.Multi)
                 {
@@ -107,7 +123,7 @@ namespace PlayStation.Presentation
                     return;
                 }
                 var Itemsprice = cafeService.GetCafeItemByIdFromService((int)ItemsCombo.SelectedValue).Price;
-                OrderDetail orderDetail = new ()
+                OrderDetail orderDetail = new()
                 {
                     Id = 0,
                     ItemId = item.Id,
@@ -181,7 +197,7 @@ namespace PlayStation.Presentation
                 MessageBox.Show("يرجي بدا الجلسه قبل بدايتها", "فشل في انهاء الجلسه", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-            
+
             DateTime endTime;
             if (dateTimePickerEnd.Value == dateTimePickerEnd.MinDate || dateTimePickerEnd.Value == DateTimePicker.MinimumDateTime)
             {
@@ -205,8 +221,9 @@ namespace PlayStation.Presentation
             timer.Stop();
 
             CurrentSession.EndTime = endTime;
-            CurrentSession.Status = "Closed";
-            if (CurrentSession.EndTime.HasValue) 
+            //CurrentSession.Status = "مغلق";
+            CurrentSession.Status = DevaisStatus.مشغول.ToString();
+            if (CurrentSession.EndTime.HasValue)
             {
                 if (CurrentSession.EndTime < CurrentSession.StartTime)
                 {
@@ -216,22 +233,28 @@ namespace PlayStation.Presentation
                 CurrentSession.Duration = (decimal)(CurrentSession.EndTime.Value - CurrentSession.StartTime).TotalMinutes;
             }
 
-            var currentDuration = CurrentSession.Duration;
-            decimal sessionCost = 0;
+            // Calculate final session cost based on the current type
+            var finalDuration = (decimal)(endTime - (lastTypeChangeTime ?? CurrentSession.StartTime)).TotalMinutes;
             if (CurrentSession.Type == SessionType.Multi)
             {
-                sessionCost = Math.Round((currentDuration / 60) * CurrentDevice.HourlyRateForMulti, 2);
+                multiSessionCost += Math.Round((finalDuration / 60) * CurrentDevice.HourlyRateForMulti);
             }
-            else if (CurrentSession.Type == SessionType.Single)
+            else
             {
-                sessionCost = Math.Round((currentDuration / 60) * CurrentDevice.HourlyRate, 2);
+                singleSessionCost += Math.Round((finalDuration / 60) * CurrentDevice.HourlyRate);
             }
 
-            CurrentSession.TotalCost = sessionCost + CurrentSession.OrderDetails.Sum(od => od.Quantity * od.UnitPrice);
-            sessionService.UpdateSessionFromService(CurrentSession);
-            TotalPriceLbl.Text = CurrentSession.TotalCost.ToString();
-            TotalHoursLbl.Text = Math.Round((currentDuration / 60), 2).ToString();
-            CafeteriaPriceLbl.Text = Math.Round((CurrentSession.OrderDetails.Sum(od => od.Quantity * od.UnitPrice)), 2).ToString();
+            // Calculate total session cost
+            decimal totalSessionCost = singleSessionCost + multiSessionCost;
+            decimal cafeteriaCost = CurrentSession.OrderDetails.Sum(od => od.Quantity * od.UnitPrice);
+            var TotalSessionCost = totalSessionCost + cafeteriaCost;
+
+            // Update UI labels
+            TotalPriceLbl.Text = TotalSessionCost.ToString();
+            TotalHoursLbl.Text = Math.Round(finalDuration / 60, 2).ToString();
+            MultiPriceLbl.Text = Math.Round(multiSessionCost).ToString();
+            SinglePriceLbl.Text = Math.Round(singleSessionCost).ToString();
+            CafeteriaPriceLbl.Text = Math.Round(cafeteriaCost).ToString();
 
             CurrentDevice.status = DevaisStatus.متاح;
             deviceService.UpdateDeviceFromService(CurrentDevice);
@@ -292,13 +315,27 @@ namespace PlayStation.Presentation
                 return;
             }
 
-            // Calculate the duration up to this point
-            var currentDuration = (decimal)(DateTime.Now - CurrentSession.StartTime).TotalMinutes;
+            var currentTime = DateTime.Now;
+            var durationSinceLastChange = (decimal)(currentTime - (lastTypeChangeTime ?? CurrentSession.StartTime)).TotalMinutes;
+            var costForPeriod = 0m;
 
-            // Calculate the cost up to this point based on the current session type
+            // Calculate and add the cost for the current period
             if (CurrentSession.Type == SessionType.Multi)
             {
-                CurrentSession.TotalCost += Math.Round((currentDuration / 60) * CurrentDevice.HourlyRateForMulti, 2);
+                costForPeriod = Math.Round((durationSinceLastChange / 60) * CurrentDevice.HourlyRateForMulti, 2);
+                multiSessionCost += costForPeriod;
+
+                // Record the type change
+                var typeChange = new SessionTypeChanges
+                {
+                    SessionId = CurrentSession.Id,
+                    ChangeTime = currentTime,
+                    OldType = SessionType.Multi,
+                    NewType = SessionType.Single,
+                    CostUntilChange = costForPeriod
+                };
+                sessionTypeChangeService.AddTypeChange(typeChange);
+
                 CurrentSession.Type = SessionType.Single;
                 CurrentSessionType = SessionType.Single;
                 SingleRadio.Checked = true;
@@ -306,23 +343,45 @@ namespace PlayStation.Presentation
             }
             else if (CurrentSession.Type == SessionType.Single)
             {
-                CurrentSession.TotalCost += Math.Round((currentDuration / 60) * CurrentDevice.HourlyRate, 2);
+                costForPeriod = Math.Round((durationSinceLastChange / 60) * CurrentDevice.HourlyRate, 2);
+                singleSessionCost += costForPeriod;
+
+                // Record the type change
+                var typeChange = new SessionTypeChanges
+                {
+                    SessionId = CurrentSession.Id,
+                    ChangeTime = currentTime,
+                    OldType = SessionType.Single,
+                    NewType = SessionType.Multi,
+                    CostUntilChange = costForPeriod
+                };
+                sessionTypeChangeService.AddTypeChange(typeChange);
+
                 CurrentSession.Type = SessionType.Multi;
                 CurrentSessionType = SessionType.Multi;
                 SingleRadio.Checked = false;
                 MultiRadio.Checked = true;
             }
 
-            // Update the session start time to now
-            CurrentSession.StartTime = DateTime.Now;
+            lastTypeChangeTime = currentTime;
 
-            // Update the session in the database
+            // Update the total cost
+            CurrentSession.TotalCost = singleSessionCost + multiSessionCost +
+                CurrentSession.OrderDetails.Sum(od => od.Quantity * od.UnitPrice);
+
             sessionService.UpdateSessionFromService(CurrentSession);
 
-            // Update the total cost label
             TotalPriceLbl.Text = CurrentSession.TotalCost.ToString();
+            SinglePriceLbl.Text = singleSessionCost.ToString();
+            MultiPriceLbl.Text = multiSessionCost.ToString();
 
-            MessageBox.Show("تم تغيير نوع الجلسة بنجاح", "نجاح", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            MessageBox.Show(
+                $"تم تغيير نوع الجلسة بنجاح\n" +
+                $"تكلفة الجلسة الفردية حتى الآن: {singleSessionCost:F2}\n" +
+                $"تكلفة الجلسة المتعددة حتى الآن: {multiSessionCost:F2}",
+                "نجاح",
+                MessageBoxButtons.OK,
+                MessageBoxIcon.Information);
         }
 
         private void ResetBtn_Click(object sender, EventArgs e)
@@ -330,10 +389,15 @@ namespace PlayStation.Presentation
             OrderGrid.DataSource = null;
             CurrentSession = null;
             elapsedSeconds = 0;
+            singleSessionCost = 0;
+            multiSessionCost = 0;
+            lastTypeChangeTime = null;
             TimerLbl.Text = "00:00:00";
             TotalHoursLbl.Text = "0.00";
             TotalPriceLbl.Text = "0.00";
-            CafeteriaPriceLbl.Text = "0.00";
+            SinglePriceLbl.Text = "0";
+            MultiPriceLbl.Text = "0";
+            CafeteriaPriceLbl.Text = "0";
             StartBtn.Enabled = true;
             EndBtn.Enabled = true;
             dateTimePicker1.Enabled = true;
@@ -351,6 +415,58 @@ namespace PlayStation.Presentation
         private void dateTimePicker1_KeyPress(object sender, KeyPressEventArgs e)
         {
             isInputed = true;
+        }
+
+        private void TotalCostInput_ValueChanged(object sender, EventArgs e)
+        {
+            if (CurrentSession != null)
+            {
+                decimal totalCost = singleSessionCost + multiSessionCost +
+                    CurrentSession.OrderDetails.Sum(od => od.Quantity * od.UnitPrice);
+                decimal remainingBalance = totalCost - AmountPaidInput.Value;
+
+            }
+        }
+
+        private void ConfirmPaymentBtn_Click(object sender, EventArgs e)
+        {
+            if (CurrentSession is null)
+            {
+                MessageBox.Show("لا توجد جلسة نشطة", "خطا", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            decimal totalCost = singleSessionCost + multiSessionCost +
+                CurrentSession.OrderDetails.Sum(od => od.Quantity * od.UnitPrice);
+            decimal amountPaid = AmountPaidInput.Value;
+
+            if (IsCreditCheckBox.Checked && string.IsNullOrWhiteSpace(ClientNameInput.Text))
+            {
+                MessageBox.Show("يرجى إدخال اسم العميل للدفع بالأجل", "خطأ",
+                MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            CurrentSession.TotalCost = totalCost;
+            CurrentSession.AmountPaid = amountPaid;
+            CurrentSession.RemainingBalance = totalCost - amountPaid;
+            CurrentSession.IsCredit = IsCreditCheckBox.Checked;
+            CurrentSession.ClientName = IsCreditCheckBox.Checked ? ClientNameInput.Text : "نقدي";
+
+            sessionService.UpdateSessionFromService(CurrentSession);
+        }
+
+        private void IsCreditCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            ClientNameInput.Enabled = IsCreditCheckBox.Checked;
+            if (IsCreditCheckBox.Checked)
+            {
+                ClientNameInput.Text = string.Empty;
+            }
+            else
+            {
+                ClientNameInput.Text = "نقدي";
+            }
         }
     }
 }

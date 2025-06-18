@@ -10,6 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace PlayStation.Presentation
 {
@@ -33,7 +34,11 @@ namespace PlayStation.Presentation
             CurrentSessions = sessionService.GetDailySessions(date);
             DisplaySessions();
             TotalLbl.Visible = true;
-            TotalLbl.Text = "مجموع الايرادات هذا اليوم: " + CurrentSessions.Sum(s => s.TotalCost).ToString();
+            decimal cashTotal = CurrentSessions.Where(s => !s.IsCredit).Sum(s => s.TotalCost);
+            decimal creditTotal = CurrentSessions.Where(s => s.IsCredit).Sum(s => s.TotalCost);
+            TotalLbl.Text = $"مجموع الايرادات النقدية: {cashTotal}\n" +
+                    $"مجموع الايرادات الآجلة: {creditTotal}\n" +
+                    $"المجموع الكلي: {cashTotal + creditTotal}";
         }
 
         private void GenerateWeeklyReport(DateTime date)
@@ -41,7 +46,12 @@ namespace PlayStation.Presentation
             CurrentSessions = sessionService.GetWeeklySessions(date);
             DisplaySessions();
             TotalLbl.Visible = true;
-            TotalLbl.Text = "مجموع الايرادات هذا الاسبوع: " + CurrentSessions.Sum(s => s.TotalCost).ToString();
+            decimal cashTotal = CurrentSessions.Where(s => !s.IsCredit).Sum(s => s.TotalCost);
+            decimal creditTotal = CurrentSessions.Where(s => s.IsCredit).Sum(s => s.TotalCost);
+
+            TotalLbl.Text = $"مجموع الايرادات النقدية للأسبوع: {cashTotal}\n" +
+                            $"مجموع الايرادات الآجلة للأسبوع: {creditTotal}\n" +
+                            $"المجموع الكلي للأسبوع: {cashTotal + creditTotal}";
         }
 
         private void GenerateMonthlyReport(DateTime date)
@@ -49,7 +59,12 @@ namespace PlayStation.Presentation
             CurrentSessions = sessionService.GetMonthlySessions(date);
             DisplaySessions();
             TotalLbl.Visible = true;
-            TotalLbl.Text = "مجموع الايرادات هذا الشهر: " + CurrentSessions.Sum(s => s.TotalCost).ToString();
+            decimal cashTotal = CurrentSessions.Where(s => !s.IsCredit).Sum(s => s.TotalCost);
+            decimal creditTotal = CurrentSessions.Where(s => s.IsCredit).Sum(s => s.TotalCost);
+
+            TotalLbl.Text = $"مجموع الايرادات النقدية للشهر: {cashTotal}\n" +
+                            $"مجموع الايرادات الآجلة للشهر: {creditTotal}\n" +
+                            $"المجموع الكلي للشهر: {cashTotal + creditTotal}";
         }
 
         private void DisplaySessions()
@@ -71,7 +86,12 @@ namespace PlayStation.Presentation
                 s.EndTime,
                 s.Status,
                 s.TotalCost,
-                s.Duration,
+                IsCredit = s.IsCredit ? "اجل" : "نقدي",
+                s.AmountPaid,
+                s.ClientName,
+                s.RemainingBalance,
+                Duration = Math.Round(s.Duration / 60, 2).ToString(),
+                //s.Duration,
                 DeviceName = s.Device.Name
             }).Skip(startIndex)
                 .Take(PageSize)
@@ -82,7 +102,11 @@ namespace PlayStation.Presentation
             SessionsReportGrid.Columns["Status"].HeaderText = "الحاله";
             SessionsReportGrid.Columns["TotalCost"].HeaderText = "المجموع";
             SessionsReportGrid.Columns["Duration"].HeaderText = "المدة";
-            SessionsReportGrid.Columns["DeviceName"].HeaderText = "اسم الجهاز";
+            SessionsReportGrid.Columns["DeviceName"].HeaderText = "الجهاز";
+            SessionsReportGrid.Columns["IsCredit"].HeaderText = "بالاجل";
+            SessionsReportGrid.Columns["ClientName"].HeaderText = "العميل";
+            SessionsReportGrid.Columns["AmountPaid"].HeaderText = "المدفوع";
+            SessionsReportGrid.Columns["RemainingBalance"].HeaderText = "الباقي";
         }
 
         private void DailyReportBtn_Click(object sender, EventArgs e)
@@ -114,6 +138,11 @@ namespace PlayStation.Presentation
         {
             CurrentPage--;
             DisplaySessions();
+        }
+
+        private void SessionsReportGrid_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+           
         }
     }
 }

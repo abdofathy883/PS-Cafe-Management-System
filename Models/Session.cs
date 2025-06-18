@@ -20,10 +20,13 @@ public partial class Session : IDeletable
     public SessionType Type { get; set; }
     public bool IsDeleted { get; set; } = false;
     public int DeviceId { get; set; }
-
     public virtual Device Device { get; set; } = null!;
-
+    public decimal AmountPaid { get; set; }
+    public decimal RemainingBalance { get; set; }
+    public string? ClientName { get; set; }
+    public bool IsCredit { get; set; }
     public virtual ICollection<OrderDetail> OrderDetails { get; set; } = new List<OrderDetail>();
+    public virtual ICollection<SessionTypeChanges> SessionTypeChanges { get; set; } = new List<SessionTypeChanges>();
 }
 
 public enum SessionType

@@ -12,7 +12,7 @@ using PlayStation.Models;
 namespace PlayStation.Migrations
 {
     [DbContext(typeof(PSManagementDbContext))]
-    [Migration("20250606013544_InitialCreate")]
+    [Migration("20250609084422_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -253,6 +253,39 @@ namespace PlayStation.Migrations
                     b.ToTable("Session", (string)null);
                 });
 
+            modelBuilder.Entity("PlayStation.Models.SessionTypeChanges", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime>("ChangeTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<decimal>("CostUntilChange")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<int>("NewType")
+                        .HasColumnType("int");
+
+                    b.Property<int>("OldType")
+                        .HasColumnType("int");
+
+                    b.Property<int>("SessionId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("SessionId");
+
+                    b.ToTable("SessionTypeChanges");
+                });
+
             modelBuilder.Entity("PlayStation.Models.User", b =>
                 {
                     b.Property<int>("Id")
@@ -344,6 +377,17 @@ namespace PlayStation.Migrations
                     b.Navigation("Device");
                 });
 
+            modelBuilder.Entity("PlayStation.Models.SessionTypeChanges", b =>
+                {
+                    b.HasOne("PlayStation.Models.Session", "Session")
+                        .WithMany("SessionTypeChanges")
+                        .HasForeignKey("SessionId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Session");
+                });
+
             modelBuilder.Entity("PlayStation.Models.Device", b =>
                 {
                     b.Navigation("Sessions");
@@ -357,6 +401,8 @@ namespace PlayStation.Migrations
             modelBuilder.Entity("PlayStation.Models.Session", b =>
                 {
                     b.Navigation("OrderDetails");
+
+                    b.Navigation("SessionTypeChanges");
                 });
 
             modelBuilder.Entity("PlayStation.Models.User", b =>

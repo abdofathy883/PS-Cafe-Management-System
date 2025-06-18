@@ -165,6 +165,30 @@ namespace PlayStation.Migrations
                         principalColumn: "ID");
                 });
 
+            migrationBuilder.CreateTable(
+                name: "SessionTypeChanges",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    SessionId = table.Column<int>(type: "int", nullable: false),
+                    ChangeTime = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    OldType = table.Column<int>(type: "int", nullable: false),
+                    NewType = table.Column<int>(type: "int", nullable: false),
+                    CostUntilChange = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_SessionTypeChanges", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_SessionTypeChanges_Session_SessionId",
+                        column: x => x.SessionId,
+                        principalTable: "Session",
+                        principalColumn: "ID",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
             migrationBuilder.CreateIndex(
                 name: "UQ__Device__737584F6D3A3D3A3",
                 table: "Device",
@@ -208,6 +232,11 @@ namespace PlayStation.Migrations
                 column: "UserId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_SessionTypeChanges_SessionId",
+                table: "SessionTypeChanges",
+                column: "SessionId");
+
+            migrationBuilder.CreateIndex(
                 name: "UQ__User__737584F6D3A3D3A3",
                 table: "User",
                 column: "Name",
@@ -225,6 +254,9 @@ namespace PlayStation.Migrations
 
             migrationBuilder.DropTable(
                 name: "OrderDetail");
+
+            migrationBuilder.DropTable(
+                name: "SessionTypeChanges");
 
             migrationBuilder.DropTable(
                 name: "Items");

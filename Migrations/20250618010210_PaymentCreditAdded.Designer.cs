@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PlayStation.Models;
 
@@ -11,9 +12,11 @@ using PlayStation.Models;
 namespace PlayStation.Migrations
 {
     [DbContext(typeof(PSManagementDbContext))]
-    partial class PSManagementDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250618010210_PaymentCreditAdded")]
+    partial class PaymentCreditAdded
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -213,6 +216,7 @@ namespace PlayStation.Migrations
                         .HasColumnType("decimal(18,2)");
 
                     b.Property<string>("ClientName")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("DeviceId")

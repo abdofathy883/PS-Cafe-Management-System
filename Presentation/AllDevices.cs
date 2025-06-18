@@ -20,8 +20,16 @@ namespace PlayStation.Presentation
         private  readonly SessionService sessionService;
         private readonly DeviceService deviceService;
         private readonly OrderDetailsService orderDetailsService;
-        public AllDevices(CafeService _cafeService,SessionService _sessionService, DeviceService _deviceService, OrderDetailsService _orderDetailsService)
+        private readonly SessionTypeChangeService sessionTypeChangeService;
+        public AllDevices(
+            CafeService _cafeService,
+            SessionService _sessionService, 
+            DeviceService _deviceService, 
+            OrderDetailsService _orderDetailsService,
+            SessionTypeChangeService typeChangeService
+            )
         {
+            sessionTypeChangeService = typeChangeService;
             cafeService = _cafeService;
             sessionService = _sessionService;
             deviceService = _deviceService;
@@ -97,7 +105,13 @@ namespace PlayStation.Presentation
             };
             ManageBtn.Click += (s, e) =>
             {
-                SingleDevice singleDevice = new SingleDevice(device.Id,cafeService,sessionService,deviceService,orderDetailsService);
+                SingleDevice singleDevice = new SingleDevice(
+                    device.Id,
+                    cafeService,sessionService,
+                    deviceService,
+                    orderDetailsService,
+                    sessionTypeChangeService
+                    );
                 singleDevice.ShowDialog();
                 DeviceStatus.Text = deviceService.GetDeviceByIdFromService(device.Id).status.ToString();
             };

@@ -42,10 +42,11 @@
             // SessionsReportGrid
             // 
             SessionsReportGrid.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            SessionsReportGrid.Location = new Point(153, 99);
+            SessionsReportGrid.Location = new Point(-1, 99);
             SessionsReportGrid.Name = "SessionsReportGrid";
-            SessionsReportGrid.Size = new Size(688, 438);
+            SessionsReportGrid.Size = new Size(1026, 438);
             SessionsReportGrid.TabIndex = 0;
+            SessionsReportGrid.CellFormatting += SessionsReportGrid_CellFormatting;
             // 
             // DailyReportBtn
             // 
@@ -106,7 +107,7 @@
             NextBtn.FlatStyle = FlatStyle.Flat;
             NextBtn.Font = new Font("Arial", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             NextBtn.ForeColor = Color.White;
-            NextBtn.Location = new Point(723, 543);
+            NextBtn.Location = new Point(907, 543);
             NextBtn.Name = "NextBtn";
             NextBtn.Size = new Size(118, 33);
             NextBtn.TabIndex = 5;
@@ -121,7 +122,7 @@
             PreviousBtn.FlatStyle = FlatStyle.Flat;
             PreviousBtn.Font = new Font("Arial", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             PreviousBtn.ForeColor = Color.White;
-            PreviousBtn.Location = new Point(153, 543);
+            PreviousBtn.Location = new Point(-1, 543);
             PreviousBtn.Name = "PreviousBtn";
             PreviousBtn.Size = new Size(130, 33);
             PreviousBtn.TabIndex = 6;

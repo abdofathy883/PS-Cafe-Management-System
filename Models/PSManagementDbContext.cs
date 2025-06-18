@@ -27,6 +27,7 @@ public partial class PSManagementDbContext : DbContext
     public virtual DbSet<LoginSession> LoginSessions { get; set; }
 
     public virtual DbSet<User> Users { get; set; }
+    public virtual DbSet<SessionTypeChanges> SessionTypeChanges { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {

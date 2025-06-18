@@ -32,6 +32,16 @@ namespace PlayStation.Presentation
         {
             components = new System.ComponentModel.Container();
             panelHead = new Panel();
+            ClientNameInput = new TextBox();
+            IsCreditCheckBox = new CheckBox();
+            ConfirmPaymentBtn = new Button();
+            AmountPaidInput = new NumericUpDown();
+            MultiPriceLbl = new Label();
+            label7 = new Label();
+            SinglePriceLbl = new Label();
+            label5 = new Label();
+            CafeteriaPriceLbl = new Label();
+            label4 = new Label();
             TotalHoursLbl = new Label();
             label3 = new Label();
             TotalPriceLbl = new Label();
@@ -57,9 +67,8 @@ namespace PlayStation.Presentation
             dateTimePicker1 = new DateTimePicker();
             StartBtn = new Button();
             timer = new System.Windows.Forms.Timer(components);
-            label4 = new Label();
-            CafeteriaPriceLbl = new Label();
             panelHead.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)AmountPaidInput).BeginInit();
             panelCafe.SuspendLayout();
             panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)ItemsCounter).BeginInit();
@@ -70,6 +79,14 @@ namespace PlayStation.Presentation
             // 
             // panelHead
             // 
+            panelHead.Controls.Add(ClientNameInput);
+            panelHead.Controls.Add(IsCreditCheckBox);
+            panelHead.Controls.Add(ConfirmPaymentBtn);
+            panelHead.Controls.Add(AmountPaidInput);
+            panelHead.Controls.Add(MultiPriceLbl);
+            panelHead.Controls.Add(label7);
+            panelHead.Controls.Add(SinglePriceLbl);
+            panelHead.Controls.Add(label5);
             panelHead.Controls.Add(CafeteriaPriceLbl);
             panelHead.Controls.Add(label4);
             panelHead.Controls.Add(TotalHoursLbl);
@@ -85,11 +102,111 @@ namespace PlayStation.Presentation
             panelHead.Size = new Size(1186, 113);
             panelHead.TabIndex = 0;
             // 
+            // ClientNameInput
+            // 
+            ClientNameInput.Location = new Point(964, 22);
+            ClientNameInput.Name = "ClientNameInput";
+            ClientNameInput.PlaceholderText = "اسم العميل";
+            ClientNameInput.RightToLeft = RightToLeft.Yes;
+            ClientNameInput.Size = new Size(197, 25);
+            ClientNameInput.TabIndex = 14;
+            // 
+            // IsCreditCheckBox
+            // 
+            IsCreditCheckBox.AutoSize = true;
+            IsCreditCheckBox.Location = new Point(1077, 60);
+            IsCreditCheckBox.Name = "IsCreditCheckBox";
+            IsCreditCheckBox.RightToLeft = RightToLeft.Yes;
+            IsCreditCheckBox.Size = new Size(84, 21);
+            IsCreditCheckBox.TabIndex = 13;
+            IsCreditCheckBox.Text = "دفع بالاجل";
+            IsCreditCheckBox.UseVisualStyleBackColor = true;
+            IsCreditCheckBox.CheckedChanged += IsCreditCheckBox_CheckedChanged;
+            // 
+            // ConfirmPaymentBtn
+            // 
+            ConfirmPaymentBtn.Location = new Point(884, 53);
+            ConfirmPaymentBtn.Name = "ConfirmPaymentBtn";
+            ConfirmPaymentBtn.Size = new Size(187, 32);
+            ConfirmPaymentBtn.TabIndex = 12;
+            ConfirmPaymentBtn.Text = "انهاء";
+            ConfirmPaymentBtn.UseVisualStyleBackColor = true;
+            ConfirmPaymentBtn.Click += ConfirmPaymentBtn_Click;
+            // 
+            // AmountPaidInput
+            // 
+            AmountPaidInput.Location = new Point(884, 22);
+            AmountPaidInput.Maximum = new decimal(new int[] { 1000, 0, 0, 0 });
+            AmountPaidInput.Name = "AmountPaidInput";
+            AmountPaidInput.Size = new Size(74, 25);
+            AmountPaidInput.TabIndex = 11;
+            AmountPaidInput.ValueChanged += TotalCostInput_ValueChanged;
+            // 
+            // MultiPriceLbl
+            // 
+            MultiPriceLbl.AutoSize = true;
+            MultiPriceLbl.Font = new Font("Segoe UI", 18F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            MultiPriceLbl.Location = new Point(202, 58);
+            MultiPriceLbl.Name = "MultiPriceLbl";
+            MultiPriceLbl.Size = new Size(63, 32);
+            MultiPriceLbl.TabIndex = 10;
+            MultiPriceLbl.Text = "0.00";
+            // 
+            // label7
+            // 
+            label7.AutoSize = true;
+            label7.Font = new Font("Arial", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label7.Location = new Point(192, 23);
+            label7.Name = "label7";
+            label7.Size = new Size(93, 22);
+            label7.TabIndex = 9;
+            label7.Text = "حساب المالتي";
+            // 
+            // SinglePriceLbl
+            // 
+            SinglePriceLbl.AutoSize = true;
+            SinglePriceLbl.Font = new Font("Segoe UI", 18F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            SinglePriceLbl.Location = new Point(331, 58);
+            SinglePriceLbl.Name = "SinglePriceLbl";
+            SinglePriceLbl.Size = new Size(63, 32);
+            SinglePriceLbl.TabIndex = 8;
+            SinglePriceLbl.Text = "0.00";
+            // 
+            // label5
+            // 
+            label5.AutoSize = true;
+            label5.Font = new Font("Arial", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label5.Location = new Point(315, 23);
+            label5.Name = "label5";
+            label5.Size = new Size(97, 22);
+            label5.TabIndex = 7;
+            label5.Text = "حساب السنجل";
+            // 
+            // CafeteriaPriceLbl
+            // 
+            CafeteriaPriceLbl.AutoSize = true;
+            CafeteriaPriceLbl.Font = new Font("Arial", 18F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            CafeteriaPriceLbl.Location = new Point(459, 61);
+            CafeteriaPriceLbl.Name = "CafeteriaPriceLbl";
+            CafeteriaPriceLbl.Size = new Size(59, 29);
+            CafeteriaPriceLbl.TabIndex = 6;
+            CafeteriaPriceLbl.Text = "0.00";
+            // 
+            // label4
+            // 
+            label4.AutoSize = true;
+            label4.Font = new Font("Arial", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label4.Location = new Point(435, 23);
+            label4.Name = "label4";
+            label4.Size = new Size(96, 22);
+            label4.TabIndex = 5;
+            label4.Text = "حساب الطلبات";
+            // 
             // TotalHoursLbl
             // 
             TotalHoursLbl.AutoSize = true;
             TotalHoursLbl.Font = new Font("Arial", 18F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            TotalHoursLbl.Location = new Point(866, 61);
+            TotalHoursLbl.Location = new Point(584, 61);
             TotalHoursLbl.Name = "TotalHoursLbl";
             TotalHoursLbl.Size = new Size(59, 29);
             TotalHoursLbl.TabIndex = 4;
@@ -99,7 +216,7 @@ namespace PlayStation.Presentation
             // 
             label3.AutoSize = true;
             label3.Font = new Font("Arial", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label3.Location = new Point(850, 23);
+            label3.Location = new Point(568, 23);
             label3.Name = "label3";
             label3.Size = new Size(89, 22);
             label3.TabIndex = 3;
@@ -110,7 +227,7 @@ namespace PlayStation.Presentation
             TotalPriceLbl.AutoSize = true;
             TotalPriceLbl.Font = new Font("Arial", 18F, FontStyle.Bold, GraphicsUnit.Point, 0);
             TotalPriceLbl.ForeColor = Color.White;
-            TotalPriceLbl.Location = new Point(985, 61);
+            TotalPriceLbl.Location = new Point(703, 61);
             TotalPriceLbl.Margin = new Padding(4, 0, 4, 0);
             TotalPriceLbl.Name = "TotalPriceLbl";
             TotalPriceLbl.Size = new Size(59, 29);
@@ -134,7 +251,7 @@ namespace PlayStation.Presentation
             label2.AutoSize = true;
             label2.Font = new Font("Arial", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
             label2.ForeColor = Color.White;
-            label2.Location = new Point(964, 25);
+            label2.Location = new Point(682, 25);
             label2.Margin = new Padding(4, 0, 4, 0);
             label2.Name = "label2";
             label2.Size = new Size(102, 22);
@@ -388,26 +505,6 @@ namespace PlayStation.Presentation
             timer.Interval = 1000;
             timer.Tick += timer_Tick;
             // 
-            // label4
-            // 
-            label4.AutoSize = true;
-            label4.Font = new Font("Arial", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label4.Location = new Point(717, 23);
-            label4.Name = "label4";
-            label4.Size = new Size(96, 22);
-            label4.TabIndex = 5;
-            label4.Text = "حساب الطلبات";
-            // 
-            // CafeteriaPriceLbl
-            // 
-            CafeteriaPriceLbl.AutoSize = true;
-            CafeteriaPriceLbl.Font = new Font("Arial", 18F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            CafeteriaPriceLbl.Location = new Point(741, 61);
-            CafeteriaPriceLbl.Name = "CafeteriaPriceLbl";
-            CafeteriaPriceLbl.Size = new Size(59, 29);
-            CafeteriaPriceLbl.TabIndex = 6;
-            CafeteriaPriceLbl.Text = "0.00";
-            // 
             // SingleDevice
             // 
             AutoScaleDimensions = new SizeF(8F, 17F);
@@ -425,6 +522,7 @@ namespace PlayStation.Presentation
             Text = "ادارة الجهاز";
             panelHead.ResumeLayout(false);
             panelHead.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)AmountPaidInput).EndInit();
             panelCafe.ResumeLayout(false);
             panel2.ResumeLayout(false);
             panel2.PerformLayout();
@@ -467,5 +565,13 @@ namespace PlayStation.Presentation
         private Label label3;
         private Label CafeteriaPriceLbl;
         private Label label4;
+        private Label MultiPriceLbl;
+        private Label label7;
+        private Label SinglePriceLbl;
+        private Label label5;
+        private NumericUpDown AmountPaidInput;
+        private Button ConfirmPaymentBtn;
+        private CheckBox IsCreditCheckBox;
+        private TextBox ClientNameInput;
     }
 }

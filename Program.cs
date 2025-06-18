@@ -40,6 +40,7 @@ namespace PlayStation
             services.AddTransient<SessionService>();
             services.AddTransient<OrderDetailsService>();
             services.AddTransient<UserService>();
+            services.AddTransient<SessionTypeChangeService>();
 
             // Register Presentation
             services.AddTransient<AllDevices>();
